@@ -1,0 +1,14 @@
+
+.footerClass{
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    background-color: blue;
+     min-height: 850px;
+     border-radius: 12px;
+     margin-top: -8px;
+    bottom: 0;
+}
+/* .footerClass.close{
+    visibility: hidden;
+} */

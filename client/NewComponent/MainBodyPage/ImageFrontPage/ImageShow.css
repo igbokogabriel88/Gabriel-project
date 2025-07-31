@@ -1,0 +1,102 @@
+
+.image-view{
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    position: relative;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    /* overflow-y: scroll; */
+    overflow-x: hidden; 
+    padding-left: 8px ;
+    padding-right: 8px;
+    padding-top: 6px;
+    padding-bottom: 8px;
+
+}
+.general{
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    position: relative;
+    height: 300px;
+    
+}
+.image-view::-webkit-scrollbar{
+    display: none; 
+}
+/* .image-group.one{
+    height: 0px;
+} */
+.imageGroups::-webkit-scrollbar{
+    display: none; 
+}
+.imageGroups{
+    height: inherit;
+    width: 30.5%;
+    overflow: hidden;
+    margin-right: 6px;
+    
+}
+.image-group{
+    width: 100%;
+     background-color: white; 
+     /* overflow-y: scroll; */
+    padding-bottom: 12px; 
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    /* object-fit: cover; */
+     /* height: 450px; */
+    
+}
+.imageClass{
+    margin-bottom: 5px;
+    border-radius: 8px;
+    /* height: 200px;
+}
+.image-group.one{
+   margin-top: -320px; 
+}
+.image-group.three{
+ margin-top: -320px;
+}  
+.image-group.two{
+    /* margin-top: 0px; */
+}
+.image-group.one{
+    margin-top: -195px;
+}
+.image-group.three{
+    margin-top: -195px;
+}
+.image-group.two{
+    margin-top: -200px;
+}
+.display-container{
+    width: 90%;
+    padding-left:15px;
+    padding-right:10px;
+    background-color: transparent;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position: absolute;
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 8;
+     margin-left: -10px;
+}
+.pipe{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    animation: blink 1s infinite;
+    margin-left: 2px;
+}
+@keyframes blink {
+0% {opacity: 1;}
+50% {opacity: 0;}
+100% {opacity: 1}
+}

@@ -1,0 +1,415 @@
+
+.withdrawalClass{
+    width: 340px;
+    height: 595px;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+
+}
+
+.withdrawal-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color:  white;
+    height: 50px;
+    position: absolute;
+    top: 0%;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    padding: 8px;
+}
+.withdrawal-wrapper::-webkit-scrollbar{
+    display: none;
+}
+.withdrawal-form{
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        border: 1px solid rgba(0, 0, 0, 0.6);
+        background-color: white;
+        border-radius: 12px;
+        width: 94%;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+        /* height: 95%; */
+    }
+   .withdrawal-title{
+        font-weight: bold;
+        margin-bottom: 12px;
+        margin-top: 8px;
+    
+    }
+
+
+    /* .nfts-withdrawal{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+        width: inherit;
+        gap: 12px;
+        justify-content: space-between;
+    } */
+    .nfts-withdrawal div{
+        flex-direction: row;
+        width: 89%;
+        background-color: green;
+        align-items: center;
+        position: relative;
+        background-color: rgba(0, 0, 0, 0.2);
+         padding: 2px;
+         margin: 18px 14px 6px;
+
+        display: flex;
+        gap: 8px;
+    
+    }
+    .nfts-withdrawal div span{
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .nfts-withdrawal.yes div span:first-child{
+        background-color: white;
+        padding: 6px;
+         }
+         .nfts-withdrawal:not(.yes) div span:last-child{
+            background-color: white;
+            padding: 6px;
+             }
+    .chainClass{
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin-top: 6px;
+        margin-left: 14px;
+    }
+    .chainClass span:first-child{
+        font-size: 20px;
+        margin-bottom: 6px;
+    }
+
+    .withdrawal-address{
+    display: flex;
+     flex-direction: column;
+    justify-content: center;
+     position: relative;
+    margin-top: 34px;
+    width: 100%;
+    padding-left: 2px;
+   }
+.withdrawal-address label{
+ margin-bottom: 10px;
+}
+            .withdrawal-input input{
+                outline: none;
+                /* width: 0%;  */
+                padding: 8px;
+                font-size: 16px;
+                /* padding-bottom: 10px; */
+                border: none;
+                background-color: transparent; 
+            }
+            .withdrawal-input{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                width: 98%;
+                position: relative;
+                background-color: rgba(0, 0, 0, 0.1); 
+            }
+            .withdrawal-input span{
+                position: absolute;
+                top: 0;
+                left: 78%;
+                color: rgba(0, 0, 0, 0.8);
+                display: flex;
+                gap: 6px;
+                align-items: center;
+                flex-direction: row;
+                margin-top: 8px;
+            }
+       
+
+  .withdrawal-network{
+    display: flex;
+     flex-direction: column;
+    justify-content: center;
+     position: relative;
+    margin-top: 34px;
+    width: 100%;
+    padding-left: 2px;
+    }
+  .withdrawal-network label{
+  margin-bottom: 6px;
+  }
+  .withdrawal-network input{
+   outline: none;
+  /* width: 85%; */
+  padding: 8px;
+  font-size: 16px;
+                /* padding-bottom: 10px; */
+  border: none;
+  background-color: transparent;
+}
+.network-input{
+display: flex;
+flex-direction: row;
+align-items: center;
+width: 98%;
+position: relative;
+background-color: rgba(0, 0, 0, 0.1);
+}
+.network-input span{
+position: absolute;
+top: 0;
+left: 2%;
+color: rgba(0, 0, 0, 0.8);
+margin-top: 8px;
+font-weight: bold;
+ }
+
+ .withdrawal-amount{
+    display: flex;
+     flex-direction: column;
+    justify-content: center;
+     position: relative;
+    margin-top: 34px;
+    margin-left: 14px;
+    width: 90%;
+    padding-left: 2px;
+   }
+.withdrawal-amount label{
+ margin-bottom: 10px;
+}
+
+.withdrawal-amount input{
+    outline: none;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.1); 
+}
+
+.withdrawal-amount small{
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+.mint-submit.amount span{
+    width: 83.5%;
+    margin-left: -2px;
+}
+.mint-submit.amount small{
+   margin-top: 12px;
+   width: 86%;
+   padding: 2px 8px;
+
+}
+/* .internal-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    position: relative;
+} */
+
+.internal-withdrawal {
+    flex-direction: row;
+        width: 50%;
+        background-color: blue;
+        align-items: center;
+        position: relative;
+        background-color: rgba(0, 0, 0, 0.2);
+         padding: 2px !important;
+         margin: 18px 2px 6px;
+         justify-content: center;
+        display: flex;
+        gap: 8px;
+        height: 30px;
+}
+
+.internal-withdrawal  span{
+    width: 50%;
+    display: flex;
+    /* text-align: center; */
+    align-items: center;
+    justify-content: center; 
+    /* background-color:blue; */
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+.internal-withdrawal  span:first-child{
+    font-size: 16px !important;
+     margin-top: 6px;
+}
+
+.internal-withdrawal.yes  span:first-child{
+    /* background-color: white ; */
+     padding: 6px; 
+     }
+     .internal-withdrawal:not(.yes)  span:last-child{
+     /* background-color: white; */
+      padding: 6px; 
+         }
+         
+         .internalClass{
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            margin-top: 6px;
+            margin-left: 14px;
+        }
+        .internalClass div span:first-child{
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+         .internalClass div:first-child{
+            width: inherit;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+         }
+     
+
+        .internal-class{
+            display: flex;
+             flex-direction: column;
+            justify-content: center;
+             position: relative;
+            margin-top: 34px;
+            width: 100%;
+            padding-left: 2px;
+           }
+           .internal-class label{
+         margin-bottom: 10px;
+        }
+                    .internal-input input{
+                        outline: none;
+                        /* width: 0%;  */
+                        padding: 8px;
+                        font-size: 16px;
+                        /* padding-bottom: 10px; */
+                        border: none;
+                        background-color: transparent; 
+                    }
+                    .internal-input{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        width: 100%;
+                        position: relative;
+                        border-radius: 4px;
+                        background-color: rgba(0, 0, 0, 0.1); 
+                    }
+                    .internal-input span{
+                        position: absolute;
+                        top: 0;
+                        left: 77%;
+                        color: rgba(0, 0, 0, 0.8);
+                        display: flex;
+                        gap: 6px;
+                        align-items: center;
+                        flex-direction: row;
+                        margin-top: 8px;
+                    }
+             .internal-input.yes span{
+                left: 90%;
+             }
+             .internal-networks{
+                display: flex;
+                 flex-direction: column;
+                justify-content: center;
+                 position: relative;
+                margin-top: 34px;
+                width: 100%;
+                padding-left: 2px;
+                }
+              .internal-networks label{
+              margin-bottom: 6px;
+              }
+              .internal-networks input{
+               outline: none;
+              /* width: 85%; */
+              padding: 8px;
+              font-size: 16px;
+              border: none;
+              background-color: transparent;
+            }
+            .network-inputs{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border-radius: 4px;
+            width: 100%;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.1);
+            }
+            .network-inputs span{
+            position: absolute;
+            top: 0;
+            left: 90%;
+            color: rgba(0, 0, 0, 0.8);
+            margin-top: 8px;
+            font-weight: bold;
+             }  
+        .mini-modal{
+            display: flex;
+            position: absolute;
+            left: 4%;
+            width: 92%;
+            top: 42%;
+            background-color: silver;
+            height: 100px;
+            flex-direction: column;
+            padding-top: 12px;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+        .mini-modal span{
+            width: 96%;
+            border: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+            padding-bottom: 26px;
+            margin-left: 4px;
+        }
+        .mini-modal span:last-child{
+            border-bottom: 0px;
+            margin-top: -12px;
+        }
+        .mini-modal span:first-child{
+            padding-bottom: 0px;
+            margin-top: 18px;
+            padding-bottom: 18px;
+        }
+        .mini-modal span label{
+            font-size: 18px;
+            display: flex;
+            font-weight: bold;
+            margin-left: 2px;
+            width: 20%;
+            margin-right: 20px;
+            opacity: 0.8;
+        }
+        .mini-modal span input[type= 'radio']{
+            transform: scale(1.6);
+        }
+        .mini-modal span input{
+            /* padding: 14px 8px; */
+            position: absolute;
+            left: 80%;
+            outline: none;
+            border: none;
+        }

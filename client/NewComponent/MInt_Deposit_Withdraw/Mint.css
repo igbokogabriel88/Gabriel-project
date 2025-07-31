@@ -1,0 +1,278 @@
+
+.mint-wrapper{
+    width: 340px;
+    height: 595px;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+
+}
+.mint-sub-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color:  white;
+    height: 50px;
+    position: absolute;
+    top: 0%;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    padding: 8px;
+}
+.mint-sub-wrapper::-webkit-scrollbar{
+    display: none;
+}
+.mint-form{
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        border: 1px solid rgba(0, 0, 0, 0.6);
+        background-color: white;
+        border-radius: 12px;
+        width: 94%;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+        /* height: 95%; */
+    }
+    .mint-title{
+        font-weight: bold;
+    margin-bottom: 12px;
+    margin-top: 8px;
+    }
+
+
+    .mint-profile-wrapper{
+        width: 50%;
+        height: 130px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        left: 25%;
+        top: 3%;
+        cursor: pointer;
+        position: relative;
+        background-color: white;
+    } 
+
+    .mint-profile-wrapper.yes{
+        height: 210px;
+        margin-bottom: 10px;
+        
+    }
+    .mint-group{
+        width: 96%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.1);
+        height: 94%;
+        margin-top: 12px;
+    }  
+    .image-mint{
+        width: 96%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.1);
+        height: 100%;
+        position: relative;
+        margin-top: 12px;
+        background-color: white;
+    }
+    .image-mint .imageWrapMint{
+        width: inherit;
+        height: 96%;
+        border: 1px solid black;
+        margin-bottom: 6px;
+        /* margin-top: -1px; */
+        top: 0;
+        left: 0;
+    }
+    .imageWrapMint image{
+        width: inherit;
+        height: inherit;
+        object-fit: cover;
+    }
+    .icon-exhibits{
+        color: white;
+        font-size: 34px;
+        border: 1px soild black;
+    } 
+    .mint-group span{
+        color: rgba(0, 0, 0, 0.7);
+        margin-top: 24px;
+        margin-bottom: 12px;
+    }
+
+    .mint-name{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        margin-top: 44px;
+        width: inherit;
+        padding-left: 18px;
+    }
+    .mint-name label{
+        margin-bottom: 6px;
+    }
+    .mint-name input{
+        outline: none;
+        width: 85%;
+        padding: 8px;
+        font-size: 16px;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .mint-desc{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        margin-top: 24px;
+        width: inherit;
+        padding-left: 18px;
+    }
+    .mint-desc label{
+        margin-bottom: 6px;
+    }
+
+    .mint-desc textarea{
+        outline: none;
+        width: 85%;
+        padding: 8px;
+        height: 90px;
+        border: none;
+        font-size: 16px;
+        background-color: rgba(0, 0, 0, 0.1);
+        vertical-align: top;
+        text-align: left;
+    }
+
+    .mint-price{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        margin-top: 34px;
+        width: inherit;
+        padding-left: 18px;
+    }
+    .mint-price label{
+        margin-bottom: 6px;
+    }
+    .mint-price input{
+        outline: none;
+        width: 85%;
+        padding: 8px;
+        font-size: 16px;
+        /* padding-bottom: 10px; */
+        border: none;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    .mint-input{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        /* justify-content: center; */
+        width: inherit;
+        position: relative;
+    }
+    .mint-input span{
+        position: absolute;
+        top: 0;
+        left: 75%;
+        color: rgba(0, 0, 0, 0.8);
+        margin-top: 8px;
+    }
+    .mint-price small{
+        margin-top: 2px;
+    }
+    .mint-submit{
+        display: flex;
+        flex-direction: column;
+        width: 96%;
+        margin-top: 30px;
+        padding-left: 18px;
+    }
+    .mint-submit span{
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        background-color: blue;
+        color: white;
+        font-size: 18px;
+        width: 81%;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+    .mint-submit small{
+        margin-top: 8px;
+    }
+.mint-select{
+    display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        margin-top: 34px;
+        width: inherit;
+        padding-left: 18px;    
+}
+.mint-select span{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 6px 10px;
+    gap: 12px;
+    cursor: pointer;
+    border: 1px solid black;
+    width: 35%;
+    justify-content: space-between;
+}
+.modal-show{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 4%;
+    top: -450%;
+    background-color: silver;
+    width: 92%;
+    z-index: 1;
+}
+.modal-show span{
+    width: 93%;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    padding: 17px 10px;
+}
+.modal-show span:last-child{
+    border-bottom: 0px;
+}
+.modal-show span label{
+    font-size: 20px;
+    display: flex;
+    font-weight: bold;
+    margin-left: 4px;
+    width: 20%;
+    margin-right: 20px;
+    opacity: 0.8;
+}
+.modal-show span input[type= 'radio']{
+    transform: scale(1.6);
+}
+.modal-show span input{
+    /* padding: 14px 8px; */
+    position: absolute;
+    left: 82%;
+    outline: none;
+    border: none;
+}

@@ -1,0 +1,29 @@
+.companyClass{
+    display: flex;
+    color: white;
+    /* margin: 8px 16px; */
+    flex-direction: column;
+    width: 100%;
+  }
+  .companyClass span{
+     font-size: 24px;
+     margin-top: 20px;
+     margin-left: 10px;
+     margin-bottom: 6px;
+  }
+  .companyClass:hover{
+      background-color: rgba(10, 20, 30, 0.1);
+      border-radius: 12px;
+      margin-top: 8px;
+  }
+  .companyArrayClass{
+      display: flex;
+      flex-direction: column;
+      margin-top: 2px;
+  }
+  .companyArrayClass span{
+      margin: 6px;
+      cursor: pointer;
+      font-size: 18px;
+      margin-left: 16px;
+  }

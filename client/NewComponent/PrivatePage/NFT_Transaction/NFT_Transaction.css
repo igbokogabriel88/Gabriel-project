@@ -1,0 +1,119 @@
+
+.nfts-transaction-main{
+    display: flex;
+    width: 95%;
+    background-color: white;
+    position: relative;
+    margin-top: 15px;
+    flex-direction: column;
+    padding-left: 2px;
+     margin-bottom: 6px;
+     overflow: hidden;
+}
+.nfts-transaction-wrapper{
+    /* display: flex; */
+    width: 100%;
+    background-color: white;
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none; 
+    -webkit-overflow-scrolling: touch;
+    /* overflow: hidden; */
+    flex-direction: column;
+     /* padding-left: 2px;
+     margin-bottom: 6px; */
+}
+.nfts-transaction-wrapper::-webkit-scrollbar{
+    display: none;
+} 
+
+.nfts-transaction-scroll{
+    /* min-width: 150%; */
+    width: 800px;
+    height: 150px;
+    background-color: white;
+    padding: 10px 2px;
+    }
+    .nfts-transaction-scroll.yes{
+        width: 600px;
+    }
+.nfts-transaction-row{
+    width: 98%;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    /* -justify-content: center; */
+    /* align-items: center; */
+     justify-content: space-between; 
+}
+.nfts-transaction-row.yes span{
+    width: 32%;
+    display: flex;
+    
+}
+.nfts-transaction-row span{
+     width:25%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nfts-transaction-title{
+    display: flex;
+    margin-left: 0px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.nfts-transaction-indicator{
+    width: 120px;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: block;
+}
+.nfts-transaction{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    width: inherit;
+    gap: 12px;
+    justify-content: space-between;
+}
+.nfts-transaction div{
+    width: 42%;
+    background-color: rgba(0, 0, 0, 0.2);
+     padding: 2px;
+    display: flex;
+    gap: 8px;
+
+}
+.nfts-transaction div span{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+.nfts-transaction.yes div span:first-child{
+    background-color: white;
+    padding: 6px;
+     }
+     .nfts-transaction:not(.yes) div span:last-child{
+        background-color: white;
+        padding: 6px;
+         }
+
+         .nfts-transaction-row{
+            width: 98%;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            justify-content: center;
+        } 
+    

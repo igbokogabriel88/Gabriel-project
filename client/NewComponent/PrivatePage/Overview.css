@@ -1,0 +1,364 @@
+
+.overviewPage{
+    width: 340px;
+    height: 595px;
+    display: flex;
+    flex-direction: column;
+    top: 0%;
+    left: 0;
+    position: relative;
+}
+.overview {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: inherit;
+    height: 96%;
+    background-color: lightblue;
+    top:  0%;
+    left: 0%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 8px;
+}
+.overview::-webkit-scrollbar{
+    display: none;
+}
+  .vertical-scrollbar{
+    position: absolute;
+    top: 0%;
+    left: 101%;
+    width: 2px;
+    height: 100px;
+    display: block;
+     z-index: 1; 
+    margin-top: 2px;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+.overview1{
+        width: 88%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        justify-content: center;
+        border-radius: 7px;
+        gap: 15px;
+
+}
+.overviewClass{
+     width: 70%;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    background-color: azure;
+    padding-left: 18px;
+    gap: 10px;
+    justify-content: center;
+    border-radius: 7px;
+
+}
+.overviewClass span:first-child{
+    color: rgba(0, 0, 0, 0.7);
+}
+.overviewClass span:last-child{
+    color: rgba(0, 0, 0, 1);
+    font-size: 22px;
+    font-weight: bold;
+}
+.amountClass{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: inherit;
+    background-color: white;
+     width: 100%;
+     padding: 12px;
+}
+.amount1{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    margin-top: 6px;
+}
+.amount1 span:first-child img{
+    width: 35px;
+    height: 40px;
+    border-radius: 4px;
+}
+.amount2 span:first-child img{
+    width: 35px;
+    height: 40px;
+    border-radius: 4px;
+}
+.amount2{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+.amount1 span:nth-child(2){
+    width: 23%;
+    height: 50px;
+    margin-left: -2px;
+
+}
+.amount1 span:last-child p{
+      padding-top: 0px; 
+}
+.amount1 span:nth-child(2) div{
+     margin-bottom: -12px; 
+     font-weight: bold;
+     position: relative;
+}
+.amount1 span:nth-child(2) div small{
+    color: blue;
+    position: absolute;
+    top: 0;
+    left: 55%;
+    opacity: 0.5;
+    text-wrap: nowrap;
+}
+.amount2 span:nth-child(2) div small{
+    color: blue;
+    position: absolute;
+    top: 0;
+    left: 76%;
+    opacity: 0.5;
+    text-wrap: nowrap;
+}
+.amount1 span:nth-child(4) div{
+    margin-bottom: -12px; 
+    font-weight: bold;
+    
+}
+.amount1 span:nth-child(4){
+    margin-left: 10px;
+    width: 8%;
+    text-align: end;
+}
+.amount1 span:nth-child(3){
+    margin-left: 12px;
+    margin-top: 16px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+.amount2 span:nth-child(2){
+    width: 23%;
+    height: 50px;
+    margin-left: -2px;
+
+}
+.amount2 span:last-child p{
+      padding-top: 0px; 
+}
+.amount2 span:nth-child(2) div{
+     margin-bottom: -12px; 
+     font-weight: bold;
+     position: relative;
+
+     
+}
+.amount2 span:nth-child(4) div{
+    margin-bottom: -12px; 
+    font-weight: bold;
+    
+}
+.amount2 span:nth-child(4){
+    margin-left: 10px;
+    width: 8%;
+    text-align: end;
+}
+.amount2 span:nth-child(3){
+    margin-left: 12px;
+    margin-top: 16px;
+    color: rgba(0, 0, 0, 0.5);
+}
+.buttonClass{
+    display: flex;
+    flex-direction: row;
+    width: 96%;
+    gap: 6px;
+    margin-top: 10px;
+    background-color: white;
+
+}
+.buttonClass span{
+     width: 26%;
+     border: 1px solid rgba(0, 0, 0, 0.5);
+     padding: 10px;
+     align-items: center;
+     justify-content: center;
+     display: flex;
+     border-radius: 8px;
+     cursor: pointer;
+}
+.buttonClass span:first-child{
+    background-color: blue;
+    color: white;
+    border: none
+}
+.nft-wrapper{
+    width: 95%;
+    background-color: white;
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    padding-top: 20px;
+}
+.nft-wrapper-inner{
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    height: 150px;
+    background-color: white;
+
+}
+.nft-wrapper-row{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   width: 104%;
+}
+.nft-wrapper-row span:first-child{
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 6px;
+}
+.nft-wrapper-row span:nth-child(2){
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 6px 14px;
+    margin-right: 9px;
+
+}
+.exhibit{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+}
+.transaction-main{
+    display: flex;
+    width: 94.5%;
+    background-color: white;
+    position: relative;
+    margin-top: 15px;
+    flex-direction: column;
+    padding-left: 2px;
+     margin-bottom: 6px;
+     overflow: hidden;
+}
+.transaction-wrapper{
+    /* display: flex; */
+    width: 100%;
+    background-color: white;
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none; 
+    -webkit-overflow-scrolling: touch;
+    /* overflow: hidden; */
+    flex-direction: column;
+     /* padding-left: 2px;
+     margin-bottom: 6px; */
+}
+.transaction-wrapper::-webkit-scrollbar{
+    display: none;
+} 
+
+.transaction-scroll{
+    /* min-width: 150%; */
+    width: 800px;
+    height: 150px;
+    background-color: white;
+    padding: 10px 2px;
+    }
+.transaction-row{
+    width: 98%;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    justify-content: center;
+}
+.transaction-title{
+    display: flex;
+    margin-left: 0px;
+    padding: 10px;
+    font-weight: bold;
+}
+.transaction-row span{
+    width: 20%;
+}
+.transaction-indicator{
+    width: 120px;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: block;
+}
+/* .exhibit-wrapper{
+    display: flex;
+    width: 95%;
+    background-color: white;
+    margin-top: 15px;
+    position: relative;
+    height: 120px;
+    margin-bottom: 16px;
+} */
+
+
+.exhibit-wrapper{
+    width: 95%;
+    background-color: white;
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    padding-top: 20px;
+}
+.exhibit-wrapper-inner{
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    height: 150px;
+    background-color: white;
+
+}
+.exhibit-wrapper-row{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   width: 104%;
+}
+
+
+.exhibit-wrapper-row span:first-child{
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 6px;
+}
+.exhibit-wrapper-row span:nth-child(2){
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 6px 14px;
+    margin-right: 9px;
+    cursor: pointer;
+}
+.exhibits{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+}

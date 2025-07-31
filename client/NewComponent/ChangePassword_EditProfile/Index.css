@@ -1,0 +1,336 @@
+
+.passwordsClass{
+    width: 340px;
+    height: 600px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    /* padding-top: 12px; */
+}
+
+.password-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color:  white;
+    height: 50px;
+    position: absolute;
+    top: 0%;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    padding: 8px;
+}
+.password-wrapper::-webkit-scrollbar{
+    display: none;
+}
+.password-form{
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        border: 1px solid rgba(0, 0, 0, 0.6);
+        background-color: white;
+        border-radius: 12px;
+        width: 94%;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+        /* height: 95%; */
+    }
+   .password-title{
+        font-weight: bold;
+        margin-bottom: 10px;
+        margin-top: 16px;
+    
+    }
+    .old-password{
+        display: flex;
+         flex-direction: column;
+        justify-content: center;
+         position: relative;
+        margin-top: 34px;
+        margin-left: 32px;
+        width: 85%;
+        padding-left: 2px;
+       }
+    .old-password label{
+     margin-bottom: 10px;
+    }
+    
+    .old-password input{
+        outline: none;
+        padding: 8px;
+        border-radius: 6px;
+        font-size: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        background-color: white; 
+        width: inherit;
+        font-size: 14px;
+    }
+    .old-password input:focus{
+      border: 1px solid blue;
+    }
+    .new-password{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-bottom: 20px;
+        width: 78%;
+        margin-top: 24px;
+        margin-left: 32px;
+      }
+     
+      .new-password .icon{
+        position: absolute;
+        top: 57%;
+        left: 90%;
+        color: rgba(0, 0, 0, 0.7);
+        cursor: pointer;
+      }
+      .new-password label{
+        margin-bottom: 8px;
+      }
+      .new-password input{
+        padding: 10px;
+        border-radius: 4px;
+        outline: none;
+        border: none;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        color: rgba(0, 0, 0, 0.7);
+      }
+      .new-password input:focus{
+        border: 1px solid blue;
+      }
+      .new-password.change{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-bottom: 20px;
+        width: 78%;
+        margin-top: 24px;
+        margin-left: 32px;
+      }
+     
+      .new-password.change .icon{
+        position: absolute;
+        top: 57%;
+        left: 90%;
+        color: rgba(0, 0, 0, 0.7);
+        cursor: pointer;
+      }
+      .new-password.change label{
+        margin-bottom: 8px;
+      }
+      .new-password.change input{
+        padding: 10px;
+        border-radius: 4px;
+        outline: none;
+        border: none;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        color: rgba(0, 0, 0, 0.7);
+      }
+      .new-password.change input:focus{
+        border: 1px solid blue;
+      }
+
+      .passwordClass.change .submitClass{
+        width: 78%;
+        padding: 8px;
+        background-color: blue;
+        color: white;
+        margin-top: 25px;
+        border-radius: 6px;
+        border: 1px solid white;
+        margin-left: 32px;
+      }
+      
+
+      .profileClass{
+        width: 340px;
+        height: 600px;
+        background-color: lightblue;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+    
+    }
+    .profile-wrapper{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color:  white;
+        height: 50px;
+        position: absolute;
+        top: 0%;
+        left: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 100%;
+        padding: 8px;
+    }
+    .profile-wrapper::-webkit-scrollbar{
+        display: none;
+    }
+    .profile-form{
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            border: 1px solid rgba(0, 0, 0, 0.6);
+            background-color: white;
+            border-radius: 12px;
+            width: 94%;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            /* height: 95%; */
+        }
+        .profile-title{
+            font-weight: bold;
+        margin-bottom: 12px;
+        margin-top: 8px;
+        }
+    
+    
+        .profiles-wrapper{
+            width: 89%;
+            height: 130px;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            left: 5%;
+            top: 3%;
+            cursor: pointer;
+            position: relative;
+            background-color: white;
+        } 
+    
+        .profiles-wrapper.yes{
+            height: 210px;
+            margin-bottom: 10px;
+            
+        }
+        .profile-group{
+            width: 96%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.1);
+            height: 94%;
+            margin-top: 12px;
+        }
+        .image-profiles{
+          width: 96%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background-color: rgba(0, 0, 0, 0.1);
+          height: 100%;
+          position: relative;
+          margin-top: 12px;
+          background-color: white;
+         
+      }
+         .image-profiles .imageWrapProfile{
+          width: 60%;
+          height: 96%;
+          border: 1px solid black;
+          background-color: white;
+          margin-bottom: 6px;
+          /* margin-top: -1px; */
+          top: 0;
+          left: 0;
+      }
+      .imageWrapProfile image{
+          width: inherit;
+          height: inherit;
+          object-fit: cover;
+      }
+      .icon-exhibits{
+          color: white;
+          font-size: 34px;
+          border: 1px soild black;
+      } 
+      .profile-group span{
+          color: rgba(0, 0, 0, 0.7);
+          margin-top: 24px;
+          margin-bottom: 12px;
+      }
+
+      .profile-bio{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        margin-top: 48px;
+        width: 94%;
+        padding-left: 20px;
+    }
+    .profile-bio.true{
+      margin-top: 24px;
+    }
+    .profile-bio label{
+        margin-bottom: 6px;
+    }
+    .profile-bio textarea{
+        outline: none;
+        width: 85%;
+        padding: 8px;
+        height: 90px;
+        border: none;
+        font-size: 16px;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    .profile-visible{
+      display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+        margin-top: 44px;
+        width: 82%;
+        padding-left: 10px;
+        background-color: rgba(0, 0, 0, 0.1);
+        text-wrap: nowrap;
+        margin-left: 20px;
+        border-radius: 6px;
+    }
+    .submitClass.edit{
+      width: 88%;
+      padding: 8px;
+      background-color: blue;
+      color: white;
+      margin-top: 25px;
+      border-radius: 6px;
+      border: 1px solid white;
+      margin-left: 19px;
+    }
+    .profile-visible span:first-child{
+      padding: 12px 0px;
+    }
+    .edit-social{
+      display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+        margin-top: 34px;
+        width: 82%;
+        padding-left: 10px;
+        background-color: rgba(0, 0, 0, 0.1);
+        /* text-wrap: nowrap; */
+        margin-left: 20px;
+        border-radius: 6px;
+    }
+    .edit-social input{
+      padding: 10px;
+        border-radius: 4px;
+        outline: none;
+        border: none;
+        /* border: 1px solid rgba(0, 0, 0, 0.4); */
+        color: rgba(0, 0, 0, 0.7);
+        background-color: transparent 
+    }
+    .edit-social span .fa-icon{
+      font-size: 24px;
+     margin-top: 2px;
+    }

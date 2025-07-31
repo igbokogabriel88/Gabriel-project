@@ -1,0 +1,3 @@
+
+// sepoliawalletaddress = 0xE480AF7EE16d04A0F3Ea1dc01977269faD087E4B
+// sepoliaPrivateKey = '2c7a0b6cb703aa58f0fe9e1b33341a51917c519b04bd0dc215f16510aa0f869a'

@@ -1,0 +1,15 @@
+export const SET_ALERT = 'SET_ALERT'
+export const REMOVE_ALERT = 'REMOVE_ALERT'
+export const GET_CATEGORY = 'GET_CATEGORY'
+export const OPEN_SEARCH = 'OPEN_SEARCH'
+export const SET_ERROR = 'SET_ERROR'
+export const REMOVE_ERROR = 'REMOVE_ERROR'
+export const USER_LOADED = 'USERLOADED'
+export const AUTH_ERROR = 'AUTH_ERROR'
+export const LOGOUT = 'LOGOUT'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAIL = 'LOGIN_FAIL'
+export const SET_PHOTO = 'SET_PHOTO'
+export const CLEAR_PHOTO = 'CLEAR_PHOTO'
+
+

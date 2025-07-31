@@ -1,0 +1,39 @@
+
+.page-wrapper{
+  display: flex;
+  position: relative;
+  margin: 12px 0px;
+  width: 96%;
+  height: 40px;
+  padding: 2px;
+  background-color: inherit;
+  align-items: center;
+  justify-content: center;
+}
+.page-row{
+  display: flex;
+  position: absolute;
+  flex-direction: row;
+  gap: 4px;
+   width: 100%;
+   background-color: white;
+   height: 90%;
+   align-items: center;
+   justify-content: center;
+   padding: 0px 2px;
+}
+.page-wrapper .page-row span{
+  width: 14%;
+  height: 90%;
+  background-color:gray;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.page-wrapper .page-row .btn-span{
+width: 22%;
+background-color: rgba(0, 0, 0, 0.7);
+}
