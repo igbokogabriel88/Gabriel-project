@@ -9,7 +9,9 @@ import RectangularLoader from "../LoadingSpinner/RectangularLoader";
 import { Classic_Spinner } from "../LoadingSpinner/CircularSpinner/ClassicSpinner";
 import { Spinner } from "../LoadingSpinner/CircularSpinner/Spinner";
 import Load_User from "../Helper/loadUser";
-import { loginValidate } from "./LoginErrors";
+import { RouteLoadingPage } from "../RouteGuard/RouteLoading";
+import { ErrorLoginValidation } from "./LoginErrors";
+ 
 
 import { FaEnvelope, FaUser, FaLockOpen, FaLock, FaTimes } from "react-icons/fa";
 import { nftLogin } from "../helperFunc";
@@ -23,6 +25,7 @@ const LoginPage = ({handleSignUp, forgot,
     const [passwordVisible, setPasswordVisible] = useState(true);
     const [userLoggedIn, setUserLoggedIn] = useState(false);
       const [isLoad, setIsLoad] = useState(false);
+      // const [errorState, setErrorState] = useState
      const dispatch = useDispatch();
      const navigate = useNavigate();
      const location = useLocation();
@@ -30,16 +33,22 @@ const LoginPage = ({handleSignUp, forgot,
       console.log('reduxError:', errors)
      const alerts = useSelector(state => state.Alert);
      const {isAuthenticated, loading} = useSelector(state => state.Auths);
-     const error = {};     
+     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+     const Errors = {};     
      const Error = {};
 
          useEffect(()=> {
          if(!forgot && isLoad){
             setIsLoad(false)
          };
-        //  console.log('loading&&forgot:', loading)
+        console.log('loading&&forgot:', loading)
       },[forgot, isLoad]);
-
+       
+      // useEffect(() => {
+      //     if (loading){
+      //       navigate('/loading')
+      //     }
+      // },[loading])
       useEffect(()=>{
          if (isAuthenticated && !loading){
             navigate('/overview')
@@ -48,7 +57,8 @@ const LoginPage = ({handleSignUp, forgot,
 
        useEffect(()=>{
          onLoggedIn(userLoggedIn)
-       },[userLoggedIn])
+       },[userLoggedIn]);
+
        useEffect(()=>{
            onLoading(isLoad);
        },[isLoad])   
@@ -56,8 +66,8 @@ const LoginPage = ({handleSignUp, forgot,
         const {name, value} = e.target;
         setUserData({...userData, [name]: value});
 
-        loginValidate(name, value, error, emailRegex)
-        dispatch(set_Error(error))     
+        ErrorLoginValidation(name, value, emailRegex, dispatch)
+            
          }  
            
          const handlePasswordChange = () => {
@@ -66,11 +76,12 @@ const LoginPage = ({handleSignUp, forgot,
          }    
          const handleForgot = ()=> {
             onPassword()
-            setLoading(true);
+            setIsLoad(true);
        }   
        const handleSubmit = async (e)=>{
         e.preventDefault()
         dispatch(removeError());
+        console.log('REDUX_ERROR_REMOVE:', errors)
         const data = userData;
         // console.log('LOGIN DATA:', data)
           const error = {};
@@ -87,28 +98,33 @@ const LoginPage = ({handleSignUp, forgot,
                 error.email = 'Email is required';
               } else if (!emailRegex.test(email)){
                 error.email = 'Invalid email address';
+                } else {
+                  error.email = '';
                 };
         
     if ( !password || password?.trim() === ''){
             error.password = 'Password is required';    
               } else if (!passwordRegex.test(password)) {
                 error.password = 'Password must be valid';
+                 } else {
+                  error.password = '';
                  };
           
         //  console.log('LOGIN_ERROR:', error)
           dispatch(set_Error(error))
- 
+    
+    const hasErrors = Object.values(error).some(err => err !== '');
+    if (hasErrors) {
+        console.log('BLOCKING SUBMIT DUE TO ERRORS')
+        dispatch(set_Error(error))
+        return;
+    }
           
-       if (Object.keys(error).length > 0) {
-        // console.log('ANOTHER LOGIN ERROR:', error)
-         return ;
-       }
        dispatch(removeError());
-      //  console.log('ANOTHER LOGIN ERROR:', error)
-      
+            
        await nftLogin({email, password}, Error, dispatch, navigate, location )      
        }; 
-      
+      // if (loading) return <RouteLoadingPage/>
                    
     return (
      <div className="containerReg signIn">

@@ -3,19 +3,23 @@ import { FaTimes, FaEnvelope } from "react-icons/fa";
 import { resetPassword } from "../../helperFunc"; 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ErrorResetPassword } from "../LoginErrors";
 import { set_Error, removeError } from "../../Redux/Action/Action";
 
 const ForgotPasswordPage = ({passwordFunc}) => {
     const [data, setData] = useState({ email: ''
  }); 
       const navigate = useNavigate();
-      const Error = {};
       const dispatch = useDispatch();
       const errors = useSelector(state => state.Error);
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
 
      const handleChange = (e) => {
       const {name, value} = e.target;
-      setData({...data, [name]: value})
+      setData({...data, [name]: value});
+      
+      ErrorResetPassword(name, value, emailRegex, dispatch )
          };
      console.log('RESET_DATA:', data)
     const handleReset = async (e) => {
@@ -34,15 +38,22 @@ const ForgotPasswordPage = ({passwordFunc}) => {
       console.log('RESET_ERROR:', error)
         dispatch(set_Error(error))
               
-                       
-         if (Object.keys(error).length > 0) {
-         console.log(' RESET ERROR:', error)
-            return ;
-            }
+        const hasErrors = Object.values(error).some(err => err !== '');
+        if (hasErrors) {
+            console.log('BLOCKING SUBMIT DUE TO ERRORS')
+            dispatch(set_Error(error))
+            return;
+        }                
+       
          dispatch(removeError());
          console.log('ANOTHER RESET  ERROR:', error)
-                   
-           await resetPassword({email}, Error, dispatch, navigate);      
+            const newData = {email}    
+           await resetPassword(newData, dispatch, navigate);    
+           
+           setData({...data,
+                     email: ''
+            });
+        //  console.log('ERRORS_ERROR:', errors)
          }; 
                               
            

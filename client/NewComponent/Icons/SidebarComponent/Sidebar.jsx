@@ -21,29 +21,37 @@ const SidebarComponent = ({open, sidebarClose})=> {
       
  };
    const handleAccountView = () => {
-
+          sidebarClose();
+          navigate('/overview', {state: {focusOverviewPage: true}})
    };
    const handleChangePassword = () => {
-
+          sidebarClose();
+          navigate('/change-password')
    };
    const handleEditProfile = () => {
           sidebarClose()
           navigate('/edit-profile')
    };
    const handleMarketPlace = () => {
+        sidebarClose()
+        navigate('/')
 
    };
     const handleNftProfile = () => {
+      sidebarClose()
 
     };
     const handleNftTransaction = () => {
-
+      sidebarClose();
+      navigate('/overview', {state: {focusNftTransactionPage: true}})
     };
     const handleTransaction = () => {
-
+      sidebarClose();
+      navigate('/overview', {state: {focusTransactionPage: true}})
     };
     const handleMint = () => {
-
+      sidebarClose();
+      navigate('/mint')
     };
 
    const SidebarData = [

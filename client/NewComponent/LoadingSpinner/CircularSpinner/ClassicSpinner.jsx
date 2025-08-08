@@ -7,3 +7,10 @@ export const Classic_Spinner = () => {
                    </div>
     )
 }
+
+export const Classic_Loader = () => {
+    return (
+        <div className="loaderClass">
+                   </div>
+    )
+}

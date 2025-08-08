@@ -1,6 +1,7 @@
 
 export const getCurrentPage = (currentPage, totalPage, pagesPerPageGroup) => {
-
+        if (totalPage === 0) return;
+        
         if (currentPage < 1){
                 currentPage = 1;
         }

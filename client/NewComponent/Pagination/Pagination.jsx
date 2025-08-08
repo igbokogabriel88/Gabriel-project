@@ -11,7 +11,7 @@ export const Pagination = (props) => {
             handleNextButtonClick,
             handlePageChangeButtonClick,
             handlePreviousPageGroupButtonClick,
-            handleNextPageGroupButtonClick
+            handleNextPageGroupButtonClick,
       } = props;
 
       const currentPageGroup = useMemo(() => {
@@ -44,20 +44,27 @@ export const Pagination = (props) => {
       console.log('CURRENT_PAGE_GROUP:', currentPageGroup)
       
       return(
-        <div className="page-wrapper">
-        <div className="page-row">
-        <span
-        className="btn-span"
-        onClick={_handlePreviousButtonClick}
-        > Prev</span>
-        {
-         currentPageGroup[0] > 1 && 
+        <div className={`page-wrapper ${totalPage === 0 ? 'show': 
+          currentPageGroup.length < 5 ? 'hide' : ''
+        }`}>
+        <div className={`page-row ${totalPage === 0 ? 'show': 
+          currentPageGroup.length < 5 ? 'hide' : ''
+        }`}>
+          { totalPage === 0 ? '' :
+            <span
+            className="btn-span"
+            onClick={_handlePreviousButtonClick}
+            > Prev</span>
+          }
+        
+        { totalPage === 0 ? '' :
+         currentPageGroup[0] > 1 ?
             <span
             className="span-btn hellip"
             onClick={_handlePreviousPageGroupButtonClick}
-            >&hellip;</span> 
+            >&hellip;</span> : ''
         }
-        {currentPageGroup.map((pageNumber) => {
+        {currentPageGroup?.map((pageNumber) => {
         
             return(
                 <span
@@ -71,20 +78,21 @@ export const Pagination = (props) => {
                 }}> {pageNumber}</span>
             )
         })}
-        {
-        currentPageGroup[currentPageGroup.length - 1] < totalPage && 
+        { totalPage === 0 ? '' : 
+        currentPageGroup[currentPageGroup.length - 1] < totalPage ?
             <span
             className="span-btn hellip"
             onClick={_handleNextPageGroupButtonClick}
-            >&hellip;</span>
+            >&hellip;</span> : ''
         
         }
-        <span
-         className="btn-span"
-         onClick={_handleNextButtonClick}
-        > Next</span>
-
-
+        { totalPage === 0 ? '' :
+          <span
+          className="btn-span"
+          onClick={_handleNextButtonClick}
+         > Next</span>
+ 
+        }
             </div>
 
         </div>

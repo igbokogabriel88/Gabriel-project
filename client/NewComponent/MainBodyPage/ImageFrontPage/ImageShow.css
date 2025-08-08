@@ -3,7 +3,7 @@
     width: 100%;
     background-color: rgba(255, 255, 255, 0.7);
     position: relative;
-    height: 250px;
+    height: 255px;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -20,7 +20,7 @@
     flex-direction: column;
     width: inherit;
     position: relative;
-    height: 300px;
+    height: 300px; 
     
 }
 .image-view::-webkit-scrollbar{
@@ -33,9 +33,9 @@
     display: none; 
 }
 .imageGroups{
-    height: inherit;
+    height: 90%;
     width: 30.5%;
-    overflow: hidden;
+    overflow: hidden; 
     margin-right: 6px;
     
 }
@@ -48,23 +48,38 @@
     flex-direction: column;
     padding-bottom: 10px;
     /* object-fit: cover; */
-     /* height: 450px; */
+      /* height: 450px;  */
     
 }
 .imageClass{
     margin-bottom: 5px;
     border-radius: 8px;
-    /* height: 200px;
-}
-.image-group.one{
-   margin-top: -320px; 
-}
-.image-group.three{
- margin-top: -320px;
-}  
-.image-group.two{
-    /* margin-top: 0px; */
-}
+    }
+    .imageNone{
+    margin-bottom: 5px;
+    border-radius: 8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(30,30,30,0.9), rgba(60,60,60, 0.8), rgba(90,90,90, 0.7));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 3s ease-in-out infinte;
+    z-index: 20;
+  }
+  @keyframes fadeIn {
+    0%, 100% {
+      background: linear-gradient(135deg, rgba(30,30,30, 0.9), rgba(60,60,60, 0.8), rgba(90,90,90, 0.7));
+    }
+    50% {
+      background: linear-gradient(135deg, rgba(30,30,30, 0.5), rgba(60,60,60, 0.4), rgba(90,90,90, 0.3));
+    }
+
+ 
+    }
 .image-group.one{
     margin-top: -195px;
 }

@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 
- const Transaction = ()=> {
+ const Transaction = ({userRef})=> {
     const transactionData = [{label: 'Type', value: 'type'},
         {label: 'Amount', value: 'amount'},
         {label: 'Date', value: 'date'},
@@ -22,7 +22,7 @@ import React, {useEffect, useState, useRef} from 'react';
          },[])
     
     return(
-        <div className='transaction-main'>
+        <div className='transaction-main' ref={userRef}>
             <div className='transaction-title'>Transaction</div>
         <div className='transaction-wrapper' ref={scrollRefTax}>
             <div className='transaction-scroll'>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AccountPage } from "./AccountPage";
 import NFT_Page from "./NFT_Page";
@@ -8,6 +8,7 @@ import Exhibitions from "./Add_Exhibition/Exhibition";
 import Transaction from "./Transaction";
 import { useSelector } from "react-redux";
 import { RouteLoadingPage } from "../RouteGuard/RouteLoading";
+import { useLocation } from "react-router-dom";
 import './Overview.css'
 
 export const Account_Overview = () => {
@@ -15,6 +16,45 @@ export const Account_Overview = () => {
         const navigate = useNavigate();
         const {user , loading} = useSelector(state => state.Auths);
 
+        const location = useLocation();
+        const overviewRef = useRef(null);
+        const nftTransactionRef = useRef();
+        const transactionRef = useRef(null);
+
+        useEffect(()=> {
+          let didScroll = false;
+          if (location.state?.focusNftTransactionPage){
+             nftTransactionRef.current?.scrollIntoView({behavior: 'smooth'});
+             didScroll = true;
+             if (didScroll){
+              navigate(location.pathname, {replace: true, state: {}});
+            }
+              }
+            },[location, navigate]);
+  
+        useEffect(()=> {
+             let didScroll = false;
+          if (location.state?.focusOverviewPage){
+             overviewRef.current?.scrollIntoView({behavior: 'smooth'});
+            didScroll = true;
+            if (didScroll){
+              navigate(location.pathname, {replace: true, state: {}});
+              }
+          }
+      },[location, navigate]);
+
+      useEffect(()=> {
+        let didScroll = false;
+        if (location.state?.focusTransactionPage){
+            transactionRef.current?.scrollIntoView({behavior: 'smooth'});
+            didScroll = true;
+            if (didScroll){
+              navigate(location.pathname, {replace: true, state: {}});
+            }
+        }
+    },[location, navigate]);
+
+  
         if (loading || !user) {
           return <RouteLoadingPage/>
         }
@@ -35,7 +75,7 @@ export const Account_Overview = () => {
 
         console.log('handleExhibit:', addExhibit)
   return (
-    <div>
+    <div style={{marginLeft: '10px'}} ref= {overviewRef}>
         <h2> Account Overview</h2>
         
         <AccountPage/>
@@ -45,9 +85,9 @@ export const Account_Overview = () => {
           <span onClick= {handleWithdrawalClick}>Withdrawal</span>
         </div>
         <NFT_Page/>
-        <Transaction/>
+        <Transaction userRef={transactionRef}/>
          <Exhibition/> 
-         <NFT_Transaction/>
+         <NFT_Transaction userRef = {nftTransactionRef}/>
          {/* <Exhibitions exist = {addExhibit}/> */}
     </div>
   )

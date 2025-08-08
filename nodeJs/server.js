@@ -16,6 +16,8 @@ const authLogin = require('./routes/loginRoute.js')
 const editProfile = require('./routes/editProfile.js')
 const userImage = require('./routes/ImageRoute.js');
 const changePassword = require('./routes/changePassword.js');
+const subscribeEmail = require('./routes/subscribe.js');
+const getDummyNFTs = require('./routes/dummyRoutes.js')
 const Connection = require('./MongoDB/Connection.js')
 const {upload} = require('./Multer/Multer.js')
 const bodyParser = require('body-parser')
@@ -41,10 +43,12 @@ app.use(express.static('public'))
  app.use('/api/auth/nft', nftAuthLogin)
  app.use('/api/auth', authLogin)
  app.use('/api/auth', resetPassword)
- app.use('/api/auth/reset', passwordReset)
+ app.use('/api/auth', passwordReset)
  app.use('/api/auth', newPassword)
  app.use('/api/auth/edit', editProfile)
  app.use('/api/auth', changePassword)
+ app.use('/api/user', subscribeEmail)
+ app.use('/api/get', getDummyNFTs)
 //  app.use('/api, userBackend')
  app.use('/images', express.static(path.join(__dirname, "/wrapper")))
   

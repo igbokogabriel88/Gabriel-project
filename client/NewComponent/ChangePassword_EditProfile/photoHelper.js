@@ -1,9 +1,9 @@
-import { setAlert, setPhoto } from "../Redux/Action/Action";;
+import { setAlert, setPhoto, setLoading,clearLoading } from "../Redux/Action/Action";;
 import axios from "axios";
 
 export const  handleProfile = async (file, filename = 'avatar', dispatch)  => {
     
-
+   dispatch(setLoading(true))
    try{
      console.log('FORMDATA EDIT PROFILE:', file)
    const formData = new FormData();
@@ -26,5 +26,7 @@ export const  handleProfile = async (file, filename = 'avatar', dispatch)  => {
      console.error('FORMDATA ERROR:', err)
      dispatch(setAlert(err.response?.data.error, 'danger'));
         return null;
+   } finally {
+        dispatch(clearLoading(false))
    }
    }

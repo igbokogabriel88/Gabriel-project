@@ -13,13 +13,13 @@ export const ProtectedRoute = ({children}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
-    useEffect(() => {
-      if(localStorage.token){
-        Load_User(dispatch, navigate);
-      } else {
-        dispatch(authError());
-      }
-    },[dispatch, navigate]);
+    // useEffect(() => {
+    //   if(localStorage.token){
+    //     Load_User(dispatch, navigate);
+    //   } else {
+    //     dispatch(authError());
+    //   }
+    // },[dispatch, navigate]);
      
     useEffect(() => {
       if (!loading && isAuthenticated) {

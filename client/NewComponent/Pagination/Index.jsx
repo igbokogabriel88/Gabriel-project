@@ -3,7 +3,7 @@ import { Pagination } from "./Pagination";
 import { getCurrentPage } from "./CurrentPage";
 import { prefix } from "@fortawesome/free-solid-svg-icons";
 
-export const PaginationView = ({currentPage, totalPage,
+export const PaginationView = ({currentPage, totalPage, selected,
     setCurrentPage}) => {
     
     const handlePreviousPage = (event, currentPageGroup) => {
@@ -52,6 +52,7 @@ export const PaginationView = ({currentPage, totalPage,
         handlePageChangeButtonClick = {handleCurrentPage}
         handlePreviousPageGroupButtonClick = {handlePreviousPageGroup}
         handleNextPageGroupButtonClick = {handleNextPageGroup}
+        selected = {selected}
         />
         </div>
         

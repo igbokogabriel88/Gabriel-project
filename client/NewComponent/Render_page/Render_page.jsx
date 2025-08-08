@@ -1,7 +1,7 @@
 import FrontPage from "../Child_Page_Ul/Front_page";
  import { useState, useEffect, useRef } from "react";
  import { useSelector } from "react-redux";
- import { useNavigate } from "react-router-dom";
+ import { useLocation, useNavigate } from "react-router-dom";
 import { FooterPage } from "../FooterPage/FooterPage";
 import { TopBar } from "../Child_Page_Ul/TopBar";
 import { Triangle_Rectangle } from "../Icons/TriangleRectangle";
@@ -15,7 +15,8 @@ const RenderPage = () =>{
     const [scrollPosition, setScrollPosition] = useState(0);
     const [showScrollbar, setShowScrollbar] = useState(false)
     const [showModal, setShowModal] = useState()
-    const scrollRef = useRef()
+    const scrollRef = useRef();
+    const location = useLocation();
     const timeoutRef = useRef(null);
     const navigate = useNavigate();
     const category = useSelector(state => state.Category);
@@ -33,8 +34,49 @@ const RenderPage = () =>{
       } else {
         navigate(`/home/${selected}`)
       }
-    },[selected])
-    useEffect(()=>{
+    },[selected]);
+
+    useEffect(()=> {
+      let didScroll = false;
+
+      if (location.state?.scrollTo === 'terms'){
+          // window.scrollTo({top: 0, behavior: 'smooth'})
+          scrollRef.current?.scrollTo({top: 0, behavior: 'smooth'});
+          didScroll = true;
+          }
+          if (didScroll){
+            navigate(location.pathname, {replace: true, state: {}});
+          }
+      },[location, navigate]);
+
+      useEffect(()=> {
+        let didScroll = false;
+  
+        if (location.state?.scrollTo === 'term'){
+            // window.scrollTo({top: 0, behavior: 'smooth'})
+            scrollRef.current?.scrollTo({top: 0, behavior: 'smooth'});
+            didScroll = true;
+            }
+            if (didScroll){
+              navigate(location.pathname, {replace: true, state: {}});
+            }
+        },[location, navigate]);
+
+      useEffect(()=> {
+        let didScroll = false;
+        if (location.state?.scrollTo === 'top'){
+            scrollRef.current?.scrollTo({top: 0, behavior: 'smooth'});
+            didScroll = true;
+        }
+        if (didScroll){
+          navigate(location.pathname, {replace: true, state: {}});
+        }
+
+    },[location, navigate]);
+  
+  
+
+        useEffect(()=>{
         // console.log('showbar:', setShowScrollbar);
         const showScrollBar = ()=>{
                 setShowScrollbar(true);

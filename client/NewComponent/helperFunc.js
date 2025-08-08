@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
-import {removeError, setAlert, loginSuccess, loginFail, loadUser
+import {removeError, setAlert, loginSuccess, loginFail, loadUser,
+  setLoading, clearLoading
   } from "./Redux/Action/Action";
-  import { set_Error } from "./Redux/Action/Action";
+  import { set_Error, set_Field_Error, getToken } from "./Redux/Action/Action";
  import Load_User from "./Helper/loadUser";
 
  const url = 'http://localhost:4200'
@@ -11,6 +12,19 @@ import {removeError, setAlert, loginSuccess, loginFail, loadUser
         'Content-Type' : 'application/json',
         'x-auth-token': localStorage.getItem('token')
     }
+}
+
+export const fetchDummyData = async (dispatch) => {
+  dispatch(setLoading(true));
+  try{
+    const res = await axios.get(`${url}/api/get/nfts`);
+    console.log('NFT Registration successful',res.data?.data);
+  
+    console.log(res);
+    return res;
+ } catch (err){
+       console.log(err)   
+ }finally{ dispatch(clearLoading(false))}
 }
 
 export const nftRegisterAction = async (value, error, dispatch)=>{
@@ -27,8 +41,7 @@ export const nftRegisterAction = async (value, error, dispatch)=>{
         console.log('NFT registration failed',err.response?.data.error)
            error.username = err.response?.data.error 
            dispatch(set_Error(error));          
-  }
-          
+  }     
     }
 }
 
@@ -46,6 +59,7 @@ export const nftLogin = async (value,error, dispatch, navigate, location)=>{
         const msg = res.data?.message;
         const from = location.state?.from?.pathname;
         localStorage.setItem('token', token);
+        localStorage.setItem('User', JSON.stringify(user));
         dispatch(loginSuccess(res.data?.data))
         dispatch(setAlert(msg, 'success'));
          dispatch(removeError());
@@ -75,58 +89,83 @@ export const nftLogin = async (value,error, dispatch, navigate, location)=>{
 }
 
 
-export const resetPassword = async (value, error, dispatch, navigate) => {
+export const resetPassword = async (value, dispatch, navigate) => {
   console.log('RESET_PASSWORD:', value)
   try{
-    const res = await axios.post(`${url}/api/auth/reset/password-reset`, value, Headers);
+    const res = await axios.post(`${url}/api/auth/resetPassword`, value, Headers);
       
       const msg = res.data.message
+      console.log('RESET_PASSWORD_SUCCESS:', res.data)
+      dispatch(getToken(res.data))
       dispatch(setAlert(msg, 'success'))
        dispatch(removeError());
-    
-      
+       navigate('/reset')
   } catch (err){
-    
+      console.log('RESET_PASSWORD_ERROR:', err)
       console.log('NFT Login failed',err.response?.data.error);
-         error.email = err.response?.data.error
-             dispatch(set_Error(error));
+             dispatch(set_Field_Error('email',err.response?.data.error));
   }
 
 }
 
-export const newPassword = async (value, error, dispatch, navigate) => {
+export const newPasswordPage = async (value, dispatch) => {
   console.log('NEWPASSWORD:', value);
   try{
-    const res = await axios.post(`${url}/api/auth/new-password`, value, Headers);
-      
+    const res = await axios.post(`${url}/api/auth/newPassword`, value, Headers);
+    console.log('NEW_PASSWORD_SUCCESS:', res)
     const msg = res.data.message
     dispatch(setAlert(msg, 'success'))
      dispatch(removeError());
-    navigate('/login');
+    // navigate('/login');
    
 
   } catch (err) {
-    console.log('NEW PASSWORD FAILED ',err.response?.data.error);
-    error.password = err.response?.data.error
-        dispatch(set_Error(error));
-  }
+    console.log('NEW PASSWORD FAILED ',err);
+    dispatch(setAlert(err.response?.data.error, 'danger'))
+    }
 }
 
-export const changePassword = async (value, error, dispatch, navigate) => {
-  console.log('NEWPASSWORD:', value);
+export const sendSubscribeEmail = async (value, dispatch) => {
+  console.log('SUBSCRIBE_EMAIL:', value);
   try{
-    const res = await axios.post(`${url}/api/auth/change-password`, value, Headers);
-      
+    const res = await axios.post(`${url}/api/user/subscribe`, value, Headers);
+    console.log('SUBSCRIBE_EMAIL_SUCCESS:', res)
     const msg = res.data.message
     dispatch(setAlert(msg, 'success'))
      dispatch(removeError());
-    navigate('/login');
-   
+  
+  } catch (err) {
+    console.log('SUBSCRIBE EMAIL FAILED ',err);
+    if (err.response?.data.error === 'Server error'){
+      dispatch(setAlert(err.response?.data.error, 'danger'))
+     } 
+     if (err.response?.data.error === 'Duplicate field value (email or username)') {
+      dispatch(set_Field_Error('email', 'Email already subscribed'))
 
+     }
+         }
+}
+
+
+export const changePassword = async (value, dispatch) => {
+  console.log('NEWPASSWORD:', value);
+  try{
+    const res = await axios.put(`${url}/api/auth/changePassword`, value, Headers);
+      
+    const msg = res.data?.message
+    dispatch(setAlert(msg, 'success'))
+     dispatch(removeError());
+    // navigate('/login');
+   
   } catch (err) {
     console.log('NEW PASSWORD FAILED ',err.response?.data.error);
-    error.password = err.response?.data.error
-        dispatch(set_Error(error));
+    if  (err.response?.data.error === 'User not found'){ 
+        dispatch(setAlert(err.response?.data.error, 'danger'))
+   } else if (err.response?.data.error === 'Old password is incorrect'){ 
+       dispatch(set_Field_Error('oldPassword', err.response?.data.error))
+ } else {
+       dispatch(setAlert(err.response?.data.error, 'danger'))
+ }
   }
 
 }

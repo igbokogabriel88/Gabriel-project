@@ -13,37 +13,38 @@ const transporter = nodemailer.createTransport(sendgrid({
   }
 }))
 
- router.post('/reset-password', async (req, res) =>{
-      
+ router.post('/resetPassword', async (req, res) =>{
+  const {email} = req.body;
+  console.log('RESET_EMAIL:', email)
        try{
-        const {email} = req.body;
-        console.log('RESET_EMAIL:', email)
-        const user = await User.findOne({ userEmail: email});
-
+       
+        const user = await User.findOne({email});
+        // console.log('NEW_PASSWORD_USER:', user)
           if (!user) {
             return res.status(400).json({error: 'User not found'});
           }
-          const token = crypto.randonBytes(32).toString('hex');
-          const tokenExpiry = Date.now + 3600000;
+          const token = crypto.randomBytes(32).toString('hex');
+          const tokenExpiry = new Date(Date.now() + 3600000);
 
           user.resetToken = token;
           user.expireToken = tokenExpiry;
           await user.save();
 
-          
-           const resetLink =`http://localhost:5173/reset/${token}`;
-            
-           await transporter.sendMail({
-            to: user.email,
-            from: 'igbokogabriel04@gmail.com',
-            subject: 'Password Reset',
-            html: `<p>You requested for password reset</p>
-            <p>Click this link to reset your password:</p>
-            <a href = "${resetLink}"> Link</a> to reset your password`
-           });
-            return res.status(200).json({message: 'Check your email'})
+           console.log('SAVED_PASSWORD_USER:', user)
 
-          //  res.json({message: 'Password reset email sent'});
+          //  const resetLink =`http://localhost:5173/reset/${token}`;
+           return res.status(200).json({data: {token: user.resetToken}});
+
+          //  await transporter.sendMail({
+          //   to: user.email,
+          //   from: 'igbokogabriel04@gmail.com',
+          //   subject: 'Password Reset',
+          //   html: `<p>You requested for password reset</p>
+          //   <p>Click this link to reset your password:</p>
+          //   <a href = "${resetLink}"> Link</a> to reset your password`
+          //  });
+          //   return res.status(200).json({message: 'Password reset email sent'})
+
 
        } catch(err) {
           console.log('PASSWORD RESET ERROR:', err);

@@ -8,7 +8,7 @@ const User = require('../Model/Auth.js')
 
 router.post('/login', (req, res)=>{
     const {email, password} = req.body;
-    User.findOne({userEmail: email})
+    User.findOne({email})
     .then(savedUser =>{
      if(!savedUser){
          return res.status(400).json({error: 'Invalid email'})

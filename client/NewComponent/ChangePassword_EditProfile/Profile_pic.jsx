@@ -4,11 +4,13 @@ import { faFile } from "@fortawesome/free-solid-svg-icons/faFile";
 import { handleProfile } from "./photoHelper";
 // import { setPhoto} from "../Redux/Action/Action";
 import { useDispatch, useSelector } from "react-redux";
+import { ProfileLoading } from "./NewPassword/Loading";
 import './Index.css'
 
 export const Profile_Pic = ({handleFile, profileSuccess, showPic})=> {
     const [avatar, setAvatar] = useState(null);
     const profile = useSelector(state => state.profile);
+    const loading = useSelector(state => state.Loading);
     const PF = 'http://localhost:4200/images/'
 
     console.log('FILENAME:', profile?.filename)
@@ -61,7 +63,10 @@ export const Profile_Pic = ({handleFile, profileSuccess, showPic})=> {
              onChange={handleFileChange}
              style={{display: 'none'}}
              />
-            </div>) : showPic ?
+            </div>) : loading === true ? (
+             <div className="image-profiles loading">
+                <ProfileLoading/> </div>
+            ) : showPic ?
             (<div className="image-profiles">
                 <span className="imageWrapProfile">
               <img key= 'image2'

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { MintProfilePic } from "./Mint_profille";
 import Mint_Select from "./Mint_Select";
 import './Mint.css'
@@ -11,7 +12,15 @@ export const Mint_Nft = () => {
     });
     const mintRef = useRef(null);
     const selectRef = useRef(null);
-    console.log('modalDisplay:', modalDisplay)
+    const location = useLocation();
+    console.log('modalDisplay:', modalDisplay);
+
+    useEffect(()=> {
+        if (location.state?.focusMintingPage){
+            mintRef.current?.scrollIntoView({behavior: 'smooth'})
+        }
+    },[location]);
+    
     useEffect(()=> {
         const modalPage = (e)=>{
             if(modalDisplay && mintRef.current &&

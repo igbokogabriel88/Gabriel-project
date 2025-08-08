@@ -9,6 +9,14 @@
   background-color: inherit;
   align-items: center;
   justify-content: center;
+  border-radius: 4px;
+}
+.page-wrapper.show{
+  background-color: transparent;
+}
+
+.page-wrapper.hide{
+  background-color: transparent;
 }
 .page-row{
   display: flex;
@@ -21,6 +29,12 @@
    align-items: center;
    justify-content: center;
    padding: 0px 2px;
+}
+.page-row.show{
+  background-color: transparent;
+}
+.page-row.hide{
+  background-color: transparent;
 }
 .page-wrapper .page-row span{
   width: 14%;

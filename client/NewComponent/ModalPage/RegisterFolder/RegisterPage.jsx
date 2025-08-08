@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { FaEnvelope, FaUser, FaLockOpen, FaLock, FaTimes } from "react-icons/fa";
 
-import { set_Error, removeError } from "../../Redux/Action/Action";
+import { set_Error, removeError, clearRegister } from "../../Redux/Action/Action";
 import { setAlert} from "../../Redux/Action/Action";
 import { useDispatch, useSelector } from "react-redux";
 import { registerAction } from "../../helperFunc2";
@@ -13,29 +13,31 @@ const RegisterPage = ({handleSignIn, handleClick, openModal}) => {
     const [password1Visible, setPassword1Visible] = useState(true);
     const [password2Visible, setPassword2Visible] = useState(true);
     const [data, setData] = useState({username : '', email: '', password: '',
-    confirm_password:''});
+    confirmPassword:''});
     // const db = getFirestore();
     const file = null;
     const dispatch = useDispatch();
     const errors = useSelector(state => state.Error);
     const alerts = useSelector(state => state.Alert);
+    const result = useSelector(state => state.addRegister)
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/
 
-    const error = {};
-     const Error = {};
-    
-    // useEffect(()=> {
-    //   if (result) {
-    //     handleSignIn
-    //   }
-    // },[result])
+    console.log('RESULT:',result)
+    useEffect(()=> {
+      if (result) {
+         setTimeout(() => {
+          handleSignIn();
+          dispatch(clearRegister());
+        }, 1000);
+        
+         }
+    },[result])
 
     const handleChange = (e) => {
     const {name, value} = e.target;
     setData({...data, [name]: value});
-    validateError(name, value, Error, emailRegex)
-          dispatch(set_Error(Error))
+    validateError(name, value, emailRegex, dispatch)
          }
 
     const handlePassword1Change = () => {
@@ -49,26 +51,30 @@ const RegisterPage = ({handleSignIn, handleClick, openModal}) => {
    
    const handleSubmit = async (e) =>{
     e.preventDefault();
-    dispatch(removeError());
-    const {username, email, password, confirm_password} = data;
+    // dispatch(removeError());
+    const {username, email, password, confirmPassword} = data;
+    const error = {};
       
-    await errorFunc(data, error, emailRegex, passwordRegex)
-    dispatch(set_Error(error))
- 
-    if (Object.keys(error).length > 0) {
-    return ;
+    await errorFunc(data, error, emailRegex, passwordRegex);
+    console.log('ERRORS:', error)
+
+    const hasErrors = Object.values(error).some(err => err !== '');
+    if (hasErrors) {
+        console.log('BLOCKING SUBMIT DUE TO ERRORS')
+        dispatch(set_Error(error))
+        return;
     }
 
    dispatch(removeError());
    console.log('ANOTHER LOGIN ERROR:', error)
+       const dataValue = { username, email, password};
+      
+     const value = await  registerAction(dataValue, dispatch);
 
-    let result;
-    result = await  registerAction({username, email, password}, error, dispatch);
-   console.log('Registration success')
-    console.log('RESULT:', result)
-   setData({
-   username: '', email: '', password: '', confirm_password: ''
-   })
+   setData({...data,
+   username: '', email: '', password: '', confirmPassword: ''
+   });
+console.log('ERRORS_ERROR:', errors)
     
    };
                                     
@@ -128,10 +134,10 @@ const RegisterPage = ({handleSignIn, handleClick, openModal}) => {
         <div className="formGroup">
         <label htmlFor="confirm">ConfirmPassword</label>
         <input type={password2Visible? 'password': 'text'}
-        id="confirm_password"
-        name="confirm_password"
+        id="confirmPassword"
+        name="confirmPassword"
         placeholder="Confirm your password"
-        value={data.confirm_password}
+        value={data.confirmPassword}
         onChange={handleChange}/>
         <span className="icon">{password2Visible ? 
             <FaLock onClick={handlePassword2Change}/> :

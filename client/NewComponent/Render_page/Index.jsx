@@ -23,6 +23,7 @@ import { useLocation } from "react-router-dom";
 import Load_User from "../Helper/loadUser";
 import { RouteLoadingPage } from "../RouteGuard/RouteLoading";
 import { AlertPage } from "../MainBodyPage/AlertsPage";
+import { setLoading, clearLoading, authError } from "../Redux/Action/Action";
 import { setAuthtoken } from "../Helper/setAuthToken";
 
 
@@ -31,7 +32,8 @@ const Main_Component = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
-    // const auth = useSelector(state => state.Auths)
+    const success = useSelector(state => state.Alert)
+    const loading = useSelector(state => state.Loading)
     const path = location.pathname;
     const showDashboard = path.includes('/overview') ||
     path.includes('/withdrawal') || path.includes('/deposit') ||
@@ -39,18 +41,29 @@ const Main_Component = () => {
      path.includes('/change-password') ||
       path.includes('/edit-profile');
    
-    // useEffect(() => {
-    
-    //   Load_User(dispatch, navigate);
-    //   },[dispatch, navigate])
-
-
-  
+    useEffect(() => {
+      dispatch(setLoading(true));
+     if(localStorage.token){
+      // const timer = setTimeout(() => {
+        dispatch(clearLoading(false));
+        
+        Load_User(dispatch, navigate);
+      // },0)
+      
+      // return () => clearTimeout(timer)
+          } else {
+            dispatch(clearLoading(false))
+            dispatch(authError());
+          }
+        },[dispatch, navigate])
+     
+         
     console.log('modalOpens:', sidebarOpen)
+    
     return (
         <div style={{display: 'flex', flexDirection: 'column',
             width: '340px', height: '615px', position: 'relative',
-            overflow: 'hidden'
+            padding: '0px'
         }}>
      <Fragment>
         { showDashboard && <Dashboard 
@@ -58,16 +71,30 @@ const Main_Component = () => {
          <SearchModal/>
         
         <section>
-         <AlertPage/> 
+         <AlertPage
+         alerts={success}
+         /> 
           <Routes>
           <Route exact path='/' 
           element={<RenderPage/>} />
+
+          <Route exact path='/home/:selected/:item' 
+          element={<RenderPage/>} />
+
           <Route path='/home/:selected'
            element={<RenderPage/>}/>
+
+          <Route path='/about/:selected'
+           element={<RenderPage/>}/>  
 
           <Route path='/login' 
           element={
             <ModalComponent/>
+          }/>
+
+          <Route path='/loading' 
+          element={
+            <RouteLoadingPage/>
           }/>
           
           <Route path='/mint'

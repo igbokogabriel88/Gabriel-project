@@ -76,9 +76,9 @@
         display: flex;
         flex-direction: column;
         position: relative;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         width: 78%;
-        margin-top: 24px;
+        margin-top: 42px;
         margin-left: 32px;
       }
      
@@ -109,7 +109,7 @@
         position: relative;
         margin-bottom: 20px;
         width: 78%;
-        margin-top: 24px;
+        margin-top: 20px;
         margin-left: 32px;
       }
      
@@ -135,7 +135,7 @@
         border: 1px solid blue;
       }
 
-      .passwordClass.change .submitClass{
+      .passwordsClass.change .submitClass{
         width: 78%;
         padding: 8px;
         background-color: blue;
@@ -235,7 +235,7 @@
          .image-profiles .imageWrapProfile{
           width: 60%;
           height: 96%;
-          border: 1px solid black;
+          border: 1px solid rgba(0, 0, 0, 0.3);
           background-color: white;
           margin-bottom: 6px;
           /* margin-top: -1px; */
@@ -246,6 +246,9 @@
           width: inherit;
           height: inherit;
           object-fit: cover;
+      }
+      .image-profiles.loading{
+        position: relative;
       }
       .icon-exhibits{
           color: white;

@@ -6,7 +6,7 @@ import './Category.css'
     return(
         <div key={itemValue.value} className="categoryArrayClass">
             {itemValue.map(item =>
-                <span key={item.value}>{item.label}</span>
+                <span key={item.value} onClick={item.onClick}>{item.label}</span>
             )}
            </div>
     )

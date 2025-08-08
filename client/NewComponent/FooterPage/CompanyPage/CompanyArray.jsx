@@ -5,7 +5,8 @@ import './Company.css'
     return(
         <div key={itemValue.value} className="companyArrayClass">
             {itemValue.map(item =>
-                <span key={item.value}>{item.label}</span>
+                <span key={item.value}
+                onClick={item.onClick}>{item.label}</span>
             )}
            </div>
     )
