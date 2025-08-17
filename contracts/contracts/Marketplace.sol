@@ -22,8 +22,7 @@ contract NFTMarketplace {
         uint256 commission;
     }
     mapping(unit => Listing) public listings;
-    mapping(string => uint256) public categorySaleVolume;
-    mapping(address => bool) public uniqueOwners;
+    
     unit256 public listingIdCounter;
     
     event NFTListed(
@@ -39,7 +38,7 @@ contract NFTMarketplace {
     event NFTSold(
         uint256 indexed listingId,
         address indexed buyer,
-        uint256 pice,
+        uint256 price,
         uint256 commission
         );
 
@@ -53,7 +52,7 @@ contract NFTMarketplace {
         IERC721(nftAddress).isApprovedForAll(msg.sender, address(this)),
         'Marketplace not approved');
         
-        uint256 commission = (price * feePercent)/100;
+        uint256 commission = (price * commissionPercent)/100;
         listings[listingIdCounter] = Listing({
             nftAddress,
             tokenId, 
@@ -83,23 +82,8 @@ contract NFTMarketplace {
         
     
         IERC721(listing.nftAddress).safeTransferFrom(listing.seller, msg.sender, listing.tokenId);
-        
-
-        if (!uniqueOwners[msg.sender]){
-            uniqueOwners[msg.sender] = true;
-        }
-
-        categorySaleVolume[category] += msg.value;
 
         emit NFTSold(listing, msg.sender, msg.value);
-
-        function isListed(uint256 tokenId) extrenal view returns (bool) {
-            return listings[tokenId].active;
-        }
-
-        function getCategorySaleVolume(string memory category) {
-            return categorySaleVolume[category]
-        }
     
     }
 }

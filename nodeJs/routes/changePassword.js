@@ -10,11 +10,11 @@ router.put('/changePassword', Auth, async (req, res)=>{
     console.log('REQUEST BODY:', req.body)
     const {oldPassword, newPassword} = req.body;
     const {_id} = req.user;
-    console.log('CHANGE PASSWORD USER ID:', _id)
+    // console.log('CHANGE PASSWORD USER ID:', _id)
    
     try{
         const user = await User.findById(_id);
-        console.log('REQUEST USER:', user)
+        // console.log('REQUEST USER:', user)
         if (!user) {
             return res.status(400).json({error: 'User not found'}); 
         }

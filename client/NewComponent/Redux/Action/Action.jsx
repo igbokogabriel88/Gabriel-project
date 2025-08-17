@@ -3,12 +3,13 @@ import { SET_ALERT, REMOVE_ALERT, GET_CATEGORY, OPEN_SEARCH, SET_ERROR, REMOVE_E
      USER_LOADED, AUTH_ERROR, LOGOUT, LOGIN_SUCCESS, LOGIN_FAIL,
     SET_PHOTO, CLEAR_PHOTO, SET_FIELD_ERROR, SET_REGISTER,CLOSE_SEARCH,
 CLEAR_REGISTER, SET_LOADING, CLEAR_LOADING, GET_TOKEN, CLEAR_TOKEN,
-SET_LOGIN_LOADING, CLEAR_LOGIN_LOADING, FETCH_DATA} 
-from "./ActionType"
+SET_LOGIN_LOADING, CLEAR_LOGIN_LOADING, FETCH_DATA, CURRENT_PAGE,
+ SET_INDEX, CLEAR_INDEX, SET_WALLET_ADDRESS, CLEAR_WALLET_ADDRESS} 
+ from "./ActionType"
 
  export const setAlert = (msg, alertType) => dispatch =>{
     // const id = Math.floor((Math.random() * 20) + 1)
-    console.log('ALERT ACTION IS TRIGGERED')
+    // console.log('ALERT ACTION IS TRIGGERED')
     dispatch({
         type : SET_ALERT,
         payload : { msg, alertType}
@@ -189,5 +190,40 @@ export const fetchData = (data) => async dispatch =>{
     dispatch({
         type: FETCH_DATA,
         payload: data
+    })
+}
+
+export const SetCurrentPage = (page) => async dispatch =>{
+      
+    dispatch({
+        type: CURRENT_PAGE,
+        payload: page
+    })
+}
+
+export const setIndex = (number) => async dispatch =>{
+      
+    dispatch({
+        type: SET_INDEX,
+        payload: number
+    })
+}
+
+export const clearIndex = () => async dispatch =>{
+    dispatch({
+        type: CLEAR_INDEX
+
+    })
+}
+export const setWalletAddress = (value) => async dispatch =>{
+    dispatch({
+        type: SET_WALLET_ADDRESS,
+        payload: value
+    })
+}
+
+export const clearWalletAddress = () => async dispatch =>{
+    dispatch({
+        type: CLEAR_WALLET_ADDRESS,
     })
 }

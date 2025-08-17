@@ -1,0 +1,141 @@
+.profile-wrappers{
+    width: 340px;
+    /* height: 340px; */
+    height: 615px; 
+    display: flex;
+     flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+    /* margin-top: 20px; */
+    -ms-overflow-style: none; 
+     -webkit-overflow-scrolling: touch;
+     background-color: white; 
+     opacity: 1;
+     align-items: center;
+     /* gap: 0.5rem; */
+     /* background-image: url('Upload/image1.jpg' );
+     object-fit: cover;   */
+}
+.profile-wrappers::-webkit-scrollbar{
+     display: none; 
+}
+.profile-tops{
+    width: 100%;
+    height: 180px;
+    position: relative;
+    margin-left: 0px;
+    background-color: white;
+}
+.profile-inputs{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.small-pics{
+    position: absolute;
+    left: 4%;
+    height: 130px;
+    width: 30%;
+    top: 20%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+.small-wrappers{
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.cat-bodys{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 100px;
+    background-color: white;
+}
+.cat-bodys div{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 16px;
+    padding: 6px 10px;
+    align-items: center;
+}
+.cat-bodys div:first-child{
+    padding-top: 16px;
+    margin-bottom: 24px;
+}
+.cat-bodys div:first-child .bold{
+    font-weight: bold;
+}
+.cat-bodys div:last-child{
+    margin-bottom: 24px;
+}
+.cat-bodys div span{
+    width: 16%;
+}
+.nft-wrappers{
+    display: flex;
+    position: relative; 
+    flex-direction: column;
+    width: 93%;
+    height: auto;
+    padding: 10px 12px;
+    margin-top: -2px;
+    margin-bottom: 14px;
+}
+.nft-wrappers span{
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-family: bold;
+}
+.nft-bodys{
+    width: 100%;
+    overflow-y: scroll;
+    height: 130px;
+    /* padding: 12px 12px; */
+    opacity: 0.3;
+    background-color: lightgrey;
+}
+.nft-bodys::-webkit-scrollbar{
+    display: none;
+}
+.nft-scrolls{
+    width: inherit;
+    height: auto;
+    padding: 6px 6px;
+}
+
+.exhibit-wrappers{
+    display: flex;
+    position: relative; 
+    flex-direction: column;
+    width: 93%;
+    height: auto;
+    padding: 10px 12px;
+    margin-top: -2px;
+    margin-bottom: 14px;
+}
+.exhibit-wrappers span{
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-family: bold;
+}
+.exhibit-bodys{
+    width: 100%;
+    overflow-y: scroll;
+    height: 130px;
+    background-color: lightgrey;
+    opacity: 0.3;
+}
+.exhibit-bodys::-webkit-scrollbar{
+    display: none;
+}
+.exhibit-scrolls{
+    width: inherit;
+    height: auto;
+    padding: 6px 6px;
+}

@@ -73,7 +73,7 @@ export const Account_Overview = () => {
           navigate('/withdrawal')
         }
 
-        console.log('handleExhibit:', addExhibit)
+        // console.log('handleExhibit:', addExhibit)
   return (
     <div style={{marginLeft: '10px'}} ref= {overviewRef}>
         <h2> Account Overview</h2>

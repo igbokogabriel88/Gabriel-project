@@ -26,7 +26,7 @@ export const ImageViewPage = () =>{
     const dispatch = useDispatch();
 
     const loading = useSelector(state => state.Loading);
-    console.log('LOADING_CATEGORY:', loading);
+
 
 
     const artImageGroup = nfts.filter(nft => nft.category === 'arts');
@@ -40,7 +40,6 @@ export const ImageViewPage = () =>{
         const fetchNFTsData = async () => {
             let result;
                result = await fetchDummyData(dispatch);
-              console.log('FETCHED DUMMY DATA:', result);
               setNfts(result?.data);
               dispatch(fetchData(result?.data))
            }
@@ -92,9 +91,10 @@ export const ImageViewPage = () =>{
               style={{transform: `translateY(${offset1}px)`, 
              transition: 'transform 0.3s'}}
              >{
-                selectedArtImage.map(art => (
-                    loading === true ? <div className="imageNone"></div> :
-                    <img src= {`/Upload/${art.image}`} className="imageClass"/> 
+                selectedArtImage.map((art, i) => (
+                    loading === true ? <div key={i} className="imageNone"></div> :
+                    <img src= {`/Upload/${art.image}`} 
+                    key ={i} className="imageClass"/> 
                 ))
              }
                 {/* <img src="/Upload/image1.jpg" className="imageClass"/>
@@ -112,8 +112,10 @@ export const ImageViewPage = () =>{
              transition: 'transform 0.3s' }}
                 >
             {
-                selectedGamingImage.map(gaming => (
-                <img src= {`/Upload/${gaming.image}`} className="imageClass"/> 
+                selectedGamingImage.map((gaming, i) => (      
+                loading === true ? <div key={i} className="imageNone"></div> :
+                <img src= {`/Upload/${gaming.image}`}
+                key={i} className="imageClass"/> 
                             
                  ))  
             }
@@ -131,8 +133,10 @@ export const ImageViewPage = () =>{
            transition: 'transform 0.3s' }}
                 >
             {
-               selectedPhotographyImage.map(photo => (
-                <img src= {`/Upload/${photo.image}`} className="imageClass"/> 
+               selectedPhotographyImage.map((photo, i) => (
+                loading === true ? <div key={i} className="imageNone"></div> :
+                <img src= {`/Upload/${photo.image}`} 
+                key={i} className="imageClass"/> 
                             
                  )) 
             }

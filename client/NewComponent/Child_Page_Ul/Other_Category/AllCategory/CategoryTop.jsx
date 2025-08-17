@@ -1,21 +1,35 @@
-import React from "react";
+
+import React, {useRef, useEffect} from "react";
 import './Category.css'
 
-export const CategoryBody = ({products, selected, loading, perPage, currentPage}) =>
+export const CategoryBody = ({products, selected, loading, perPage, currentPage, item}) =>
      {
     const filteredCategory = products.filter(product => product.category === selected);
-    const mappingCategory = filteredCategory.slice((currentPage - 1), perPage)
+    const startIndex = (currentPage - 1) * perPage;
+    const endIndex = startIndex +  perPage; 
+    const mappingCategory = filteredCategory.slice(startIndex, endIndex);
 
-    console.log('FILTERED CATEGORY:',filteredCategory)
-    console.log('DUMMY PRODUCT:',products)
-    console.log('SELECTED CATEGORY:',selected);
+    const pageRef = useRef(null);
+
+    // console.log('FILTERED CATEGORY:',filteredCategory)
+    // console.log('DUMMY PRODUCT:',products)
+    // console.log('SELECTED CATEGORY:',selected);
+
+    // useEffect(() => {
+    //     if (pageRef.current){
+    //      pageRef.current.scrollTo({
+    //         top: 0,
+    //         bebavior: 'smmoth'
+    //      })
+    //     }
+    //   },[currentPage])
 
     const convert =(value) => {
         return (value * 16).toFixed(2)
     }
    
     return (
-    <div className="categoryTop">
+    <div className={`categoryTop ${item ? 'hide': ''}`} ref={pageRef}>
         
     {mappingCategory.map((item, i) => (
      loading === true ? <div className="filtered yes"></div> :

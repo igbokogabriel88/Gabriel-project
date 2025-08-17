@@ -40,8 +40,8 @@ export const ErrorFunction = (userData) => {
 }
 
 export const ErrorLoginValidation = (name, value, emailRegex, dispatch) => {
-  console.log('ERROE_NAME:', name);
-  console.log('ERROR_VALUE:', value);
+  // console.log('ERROE_NAME:', name);
+  // console.log('ERROR_VALUE:', value);
   
      if(name === 'email'){
       if(value.trim() === '') {

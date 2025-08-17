@@ -5,9 +5,9 @@ import './LoadingSpinner.css'
     const [array, setArray] = useState([]);
     const [remainder, setRemainder] = useState(0)
     const [timer, setTimer] = useState(0);
-    console.log('timer:', timer)
-    console.log('remainder:', remainder)
-    console.log('array:', array)
+    // console.log('timer:', timer)
+    // console.log('remainder:', remainder)
+    // console.log('array:', array)
     const data = [
         {id: 1, color: 'blue'},
         {id: 2, color: 'green'},

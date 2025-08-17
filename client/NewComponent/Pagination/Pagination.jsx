@@ -1,6 +1,7 @@
 import React from "react";
 import { useMemo } from "react";
 import { getCurrentPage } from "./CurrentPage";
+import { useSelector } from "react-redux";
 import './Pagination.css'
 
 export const Pagination = (props) => {
@@ -14,20 +15,28 @@ export const Pagination = (props) => {
             handleNextPageGroupButtonClick,
       } = props;
 
+      const category = useSelector(state => state.Category);
+      
+      const chosenCat =
+       ['arts', 'gaming', 'pfps', 'photography', 'exhibition', 'membership'].includes(category);
+
       const currentPageGroup = useMemo(() => {
         return getCurrentPage(currentPage, totalPage, pagesPerPageGroup);
       },[currentPage, totalPage, pagesPerPageGroup]);
 
       const _handlePreviousButtonClick = (event) => {
-        handlePreviousButtonClick(event, currentPageGroup)
+        handlePreviousButtonClick(event, currentPageGroup);
+      
       };
 
       const _handleNextButtonClick = (event) => {
-        handleNextButtonClick(event, currentPageGroup)
+        handleNextButtonClick(event, currentPageGroup);
+        
       };
 
       const _handlePageChange = (event) => {
-        handlePageChangeButtonClick(event, currentPageGroup)
+        handlePageChangeButtonClick(event, currentPageGroup);
+       
       };
 
       const _handlePreviousPageGroupButtonClick = (event) => {
@@ -38,10 +47,10 @@ export const Pagination = (props) => {
         handleNextPageGroupButtonClick(event, currentPageGroup)
       };
 
-      console.log('CURRENTPAGE:', currentPage);
-      console.log('TOTAL_PAGE:', totalPage);
-      console.log('PAGES_PER_PAGE:', pagesPerPageGroup);
-      console.log('CURRENT_PAGE_GROUP:', currentPageGroup)
+      //  console.log('CURRENTPAGE:', currentPage);
+      //  console.log('TOTAL_PAGE:', totalPage);
+      //  console.log('PAGES_PER_PAGE:', pagesPerPageGroup);
+      //  console.log('CURRENT_PAGE_GROUP:', currentPageGroup)
       
       return(
         <div className={`page-wrapper ${totalPage === 0 ? 'show': 
@@ -50,7 +59,7 @@ export const Pagination = (props) => {
         <div className={`page-row ${totalPage === 0 ? 'show': 
           currentPageGroup.length < 5 ? 'hide' : ''
         }`}>
-          { totalPage === 0 ? '' :
+          { totalPage === 0 ? '':
             <span
             className="btn-span"
             onClick={_handlePreviousButtonClick}

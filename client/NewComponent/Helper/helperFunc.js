@@ -4,6 +4,8 @@ import { USER_LOADED, LOGOUT } from "../Redux/Action/ActionType";
 import { removeError } from "../Redux/Action/Action";
 // import { removeError, set_Error } from "./Redux/Action/Action";
 import Load_User from "./loadUser";
+import { NftsUser } from "./nftsuser";
+import { createNftsUser } from "./HelperNft"; 
 import { setAlert } from "../Redux/Action/Action";
 
  const url = 'http://localhost:4200'
@@ -19,7 +21,9 @@ export const nftRegisterAction = async (value, dispatch)=>{
     try{
        const res = await axios.post(`${url}/api/user/nft/register`, value, Headers);
        console.log('NFT Registration successful',res.data?.data);
+       console.log('NFT_USER_CREATED:', res.data?.data.user)
        dispatch(setAlert(res.data?.msg, 'success'));
+       await NftsUser(res.data?.data.user)
        dispatch(removeError());
     
     } catch (err){

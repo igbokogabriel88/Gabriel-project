@@ -18,14 +18,14 @@ router.get('/users', async(req, res)=>{
     res.json({data: users })
 })
 router.get('/user', Auth, async (req, res)=>{
-console.log('user:' , req.user)
+// console.log('user:' , req.user)
   const {_id} = req.user;
   
     const user = await  User.findById(_id)
     if (!user){
         return res.status(422).json({error: 'user not found...'})
     }
-    console.log('BACKEND_USER:', user )
+    // console.log('BACKEND_USER:', user )
     res.status(200).json({message: 'You are logged in', 
         User: user})
 })
@@ -34,7 +34,7 @@ router.get('/admin', isAdmin, async (req, res)=>{
     try{
         console.log('userData', user)
     const users = await User.findById(user._id)
-    console.log('userDetail', users)
+    // console.log('userDetail', users)
      res.status(200).json({msg: 'welcome admin', data: users})
     } catch(err){
         return res.status(422).json({error: 'user not found...'})

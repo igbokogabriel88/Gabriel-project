@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { USER_LOADED } from "../Redux/Action/ActionType";
  import { loadUser } from "../Redux/Action/Action"; 
+//  import { NftsUser } from "./nftsuser";
 import { setAuthtoken } from "./setAuthToken";
 import { setAlert, authError} from "../Redux/Action/Action";
 
@@ -17,14 +18,10 @@ import { setAlert, authError} from "../Redux/Action/Action";
       setAuthtoken(localStorage.token);
 
     const res = await axios.get('http://localhost:4200/api/auth/user');
-    console.log('AUTH_USER',res);
-    console.log('AUTH_USER',res.data?.User?.userName);
-  
-    
-   //  dispatch(setAlert(res.data?.message, 'success'));   
+    // console.log('AUTH_USER',res);
+    // console.log('AUTH_USER',res.data?.User?.userName);
 
        dispatch(loadUser(res.data?.User));
-      //  navigate('/overview');
        } catch (err) {
       // console.log(err)
       const error = err.response?.data.error;
@@ -33,7 +30,6 @@ import { setAlert, authError} from "../Redux/Action/Action";
       dispatch(setAlert(error, 'danger'))
     }
     }
-  
 
  export default Load_User
 

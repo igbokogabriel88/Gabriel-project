@@ -15,12 +15,14 @@ import {removeError, setAlert, loginSuccess, loginFail, loadUser,
 }
 
 export const fetchDummyData = async (dispatch) => {
-  dispatch(setLoading(true));
+ 
   try{
+    dispatch(setLoading(true));
+    
     const res = await axios.get(`${url}/api/get/nfts`);
-    console.log('NFT Registration successful',res.data?.data);
+    // console.log('NFT Registration successful',res.data?.data);
   
-    console.log(res);
+    // console.log(res);
     return res;
  } catch (err){
        console.log(err)   
@@ -46,11 +48,8 @@ export const nftRegisterAction = async (value, error, dispatch)=>{
 }
 
 
-
-
-
 export const nftLogin = async (value,error, dispatch, navigate, location)=>{
-    console.log('loginValues:', value)
+    // console.log('loginValues:', value)
     try{
         const res = await axios.post(`${url}/api/auth/nft/login`, value, Headers);
         console.log('LOGIN STATUS:', res)
@@ -63,6 +62,7 @@ export const nftLogin = async (value,error, dispatch, navigate, location)=>{
         dispatch(loginSuccess(res.data?.data))
         dispatch(setAlert(msg, 'success'));
          dispatch(removeError());
+         
          if (from === "/login" || !from) {
           navigate('/overview')
          } else {

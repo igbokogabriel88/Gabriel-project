@@ -12,6 +12,7 @@ const SidebarComponent = ({open, sidebarClose})=> {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loading = useSelector(state => state.loading)
+  const user = useSelector(state => state.Auths.user)
 
    const handleSignOut = () => {
     console.log('HANDLE LOGOUT CLICK');
@@ -37,9 +38,9 @@ const SidebarComponent = ({open, sidebarClose})=> {
         navigate('/')
 
    };
-    const handleNftProfile = () => {
+    const handleProfile = () => {
       sidebarClose()
-
+      navigate('/profile')
     };
     const handleNftTransaction = () => {
       sidebarClose();
@@ -57,7 +58,7 @@ const SidebarComponent = ({open, sidebarClose})=> {
    const SidebarData = [
     {label: 'Acount Overview', icon: FaTachometerAlt , onClick: handleAccountView},
     {label: 'Mint NFT', icon: FaEdit , onClick: handleMint},
-    {label: 'MY NFT profile', icon: FaUserCircle , onClick: handleNftProfile},
+    {label: 'MY NFT profile', icon: FaUserCircle , onClick: handleProfile},
     {label: 'Transaction', icon: FaExchangeAlt , onClick:  handleTransaction},
     {label: 'Market-place', icon: FaThLarge , onClick: handleMarketPlace},
     {label: 'NFT transaction', icon: FaMoneyCheckAlt , onClick: handleNftTransaction},

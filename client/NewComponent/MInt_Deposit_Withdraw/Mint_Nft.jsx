@@ -15,6 +15,9 @@ export const Mint_Nft = () => {
     const location = useLocation();
     console.log('modalDisplay:', modalDisplay);
 
+    const nftAddress = import.meta.env.VITE_NFT_CONTRACT_ADDRESS;
+    const marketAddress = import.meta.env.VITE_MARKETPLACE_ADDRESS;
+
     useEffect(()=> {
         if (location.state?.focusMintingPage){
             mintRef.current?.scrollIntoView({behavior: 'smooth'})

@@ -4,7 +4,8 @@ export const setAuthtoken = (token) => {
     //   console.log('i am token')
     //   console.log(axios.defaults.headers.common)
     if(token){
-    axios.defaults.headers.common['x-auth-token'] = `${token}`
+        console.log('AUTH_TOKEN:', token)
+    axios.defaults.headers.common['x-auth-token'] = token;
     } else {
         delete axios.defaults.headers.common['x-auth-token']
     }

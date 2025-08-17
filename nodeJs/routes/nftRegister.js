@@ -13,7 +13,7 @@ router.post('/register', async (req, res)=>{
 
     try{
      const existingUser = await User.findOne({email});
-          console.log('EXISTING_USER:', existingUser)
+         //  console.log('EXISTING_USER:', existingUser)
      if (existingUser) {
         return res.status(400).json({error: 'User already exists'});
      }
@@ -31,7 +31,7 @@ router.post('/register', async (req, res)=>{
                 data: newUser
               });
     } catch (err) {
-             console.log('Server error', err);
+            //  console.log('Server error', err);
              if (err.code === 11000){
                 return res.status(400).json({error: 'Duplicate field value (email or username)'})
              } 

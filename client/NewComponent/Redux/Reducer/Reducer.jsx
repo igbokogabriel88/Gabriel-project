@@ -1,8 +1,8 @@
 import { GET_CATEGORY, OPEN_SEARCH, SET_ERROR, REMOVE_ERROR,
 SET_PHOTO, CLEAR_PHOTO, SET_FIELD_ERROR, SET_REGISTER, CLEAR_REGISTER,
 CLOSE_SEARCH, SET_LOADING, CLEAR_LOADING, GET_TOKEN, CLEAR_TOKEN, FETCH_DATA,
-SET_LOGIN_LOADING, CLEAR_LOGIN_LOADING} 
-from "../Action/ActionType";
+SET_LOGIN_LOADING, CLEAR_LOGIN_LOADING, CURRENT_PAGE, SET_INDEX, CLEAR_INDEX,
+SET_WALLET_ADDRESS, CLEAR_WALLET_ADDRESS} from "../Action/ActionType";
 import { initialCategory} from "./InitialState";
 
 const authInitialstate = {
@@ -15,6 +15,14 @@ const authInitialstate = {
   const initialToken = {
     token: null
   }
+  const initialIndex = {
+    index: null
+  }
+
+  const initialPage = {
+    currentPage: 1
+  }
+
  const initialError = {
     username: '',
     email: '',
@@ -149,7 +157,7 @@ export const auth_Reducer = (state = authInitialstate, action) => {
                 return null;
             
             default: 
-            return null
+            return state
         };
             
         }
@@ -224,4 +232,47 @@ export const auth_Reducer = (state = authInitialstate, action) => {
                 default : 
                 return state
             }  
+         }
+
+         export const current_page_reducer = (state = initialPage, action) => {
+            const {type, payload} = action;
+            switch(type){
+                case 'CURRENT_PAGE':
+                return  {
+                    ...state,
+                    currentPage: payload
+                };
+                
+                default : 
+                return state
+            }  
+         }
+
+         export const index_reducer = (state = initialIndex, action) => {
+            const {type, payload} = action;
+            switch(type){
+                case 'SET_INDEX':
+                return  {
+                    ...state,
+                    index: payload
+                };
+                case 'CLEAR_INDEX':
+                return  {
+                    ...state,
+                    index: null
+                };
+                default : 
+                return state
+            }  
+         }
+         export const wallet_reducer = (state = null, action) => {
+            const {type, payload} = action;
+            switch(type){
+                case 'SET_WALLET_ADDRESS':
+                return  payload;
+                case 'CLEAR_WALLET_ADDRESS':
+                return  null;
+                default : 
+                return state
+            } 
          }

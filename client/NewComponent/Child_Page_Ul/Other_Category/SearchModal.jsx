@@ -17,7 +17,7 @@ export const SearchModal = () => {
     const handleCloseSearchBox =()=> {
            dispatch(closeSearchBox(false))
    }
-    console.log('searchInputModal:', searchModal)
+    // console.log('searchInputModal:', searchModal)
     return(
         <div className={`search ${searchModal === true ? 'open': ''}`}> 
         <div className="searchHeading">

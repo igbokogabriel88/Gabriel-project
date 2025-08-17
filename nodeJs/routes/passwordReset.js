@@ -17,13 +17,13 @@ const transporter = nodemailer.createTransport(sendgrid({
        console.log('RESET EMAIL:', email)
 
        if (!email) {
-        console.log('BACKEND ERROR: EMAIL IS REQUIRED');
+        // console.log('BACKEND ERROR: EMAIL IS REQUIRED');
         return res.status(400).json({error: 'Email is required'})
        }
 
        User.findOne({userEmail: email})
        .then(user => {
-        console.log('RESET USER:', user)
+        // console.log('RESET USER:', user)
         if (!user) {
             return res.status(401).json({error: 'User not found'});
         }

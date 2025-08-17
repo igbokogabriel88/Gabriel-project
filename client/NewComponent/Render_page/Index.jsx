@@ -1,3 +1,4 @@
+
 import React, {Fragment, useEffect, useState} from "react";
 import { Route, Routes } from 'react-router-dom';
 import RenderPage from "./Render_page";
@@ -8,6 +9,7 @@ import Exhibitions from "../PrivatePage/Add_Exhibition/Exhibition";
 import Withdrawal from "../MInt_Deposit_Withdraw/Withdrawal/Withdrawal";
 import DepositViewPage from "../PrivatePage/Deposit/Index";
 import { Dashboard } from "../Icons/Dashboard";
+import { Profile } from "./Profile";
 // import { Dashboard } from "../Icons/Dashboard";
 import NewPassword from "../ChangePassword_EditProfile/NewPassword/NewPassword";
 import EditProfile from "../ChangePassword_EditProfile/EditProfile";
@@ -25,6 +27,8 @@ import { RouteLoadingPage } from "../RouteGuard/RouteLoading";
 import { AlertPage } from "../MainBodyPage/AlertsPage";
 import { setLoading, clearLoading, authError } from "../Redux/Action/Action";
 import { setAuthtoken } from "../Helper/setAuthToken";
+import { connectwallet } from "../Helper/walletConnect";
+ import { NftUser } from "../Helper/nftUser";
 
 
 const Main_Component = () => {
@@ -34,6 +38,9 @@ const Main_Component = () => {
     const location = useLocation();
     const success = useSelector(state => state.Alert)
     const loading = useSelector(state => state.Loading)
+    const user = useSelector(state => state.Auths.user)
+    const walletAddress = useSelector(state => state.fetchWallet);
+    // console.log('ANOTHER_WALLET_ADDRESS:', walletAddress)
     const path = location.pathname;
     const showDashboard = path.includes('/overview') ||
     path.includes('/withdrawal') || path.includes('/deposit') ||
@@ -44,21 +51,36 @@ const Main_Component = () => {
     useEffect(() => {
       dispatch(setLoading(true));
      if(localStorage.token){
-      // const timer = setTimeout(() => {
+       const timer = setTimeout(() => {
         dispatch(clearLoading(false));
         
         Load_User(dispatch, navigate);
-      // },0)
+       },500)
       
-      // return () => clearTimeout(timer)
+       return () => clearTimeout(timer)
           } else {
             dispatch(clearLoading(false))
             dispatch(authError());
           }
-        },[dispatch, navigate])
+        },[dispatch, navigate]);
+
+        useEffect(() => {
+          if (walletAddress){
+              console.log('WALLET_ADDRESS:', walletAddress)
+            }
+          },[walletAddress])
+
+        useEffect(() => {
+           connectwallet(dispatch)
+        },[dispatch])
      
-         
-    console.log('modalOpens:', sidebarOpen)
+         useEffect(() => {
+          console.log('NEW NFTS USER CREATED:', user)
+          if (user){
+            NftUser(user, walletAddress)
+         }
+         },[user, walletAddress])
+
     
     return (
         <div style={{display: 'flex', flexDirection: 'column',
@@ -78,14 +100,15 @@ const Main_Component = () => {
           <Route exact path='/' 
           element={<RenderPage/>} />
 
-          <Route exact path='/home/:selected/:item' 
-          element={<RenderPage/>} />
-
           <Route path='/home/:selected'
            element={<RenderPage/>}/>
 
           <Route path='/about/:selected'
            element={<RenderPage/>}/>  
+
+         <Route path='/profile'
+           element={<Profile/>}/>  
+
 
           <Route path='/login' 
           element={
@@ -110,7 +133,7 @@ const Main_Component = () => {
                     <Withdrawal/>
                     </ProtectedRoute>
               } />
-               
+  
           <Route path='/overview'
           element = {
             <ProtectedRoute>

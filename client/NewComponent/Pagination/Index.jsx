@@ -1,27 +1,37 @@
 import React, { useState } from "react";
 import { Pagination } from "./Pagination";
-import { getCurrentPage } from "./CurrentPage";
-import { prefix } from "@fortawesome/free-solid-svg-icons";
+// import { getCurrentPage } from "./CurrentPage";
+import { SetCurrentPage } from "../Redux/Action/Action";
+import { useDispatch, useSelector } from "react-redux";
 
-export const PaginationView = ({currentPage, totalPage, selected,
+export const PaginationView = ({currentPage, totalPage, selected, item,
     setCurrentPage}) => {
-    
+      const dispatch = useDispatch();
+      const reduxPage = useSelector(state => state.fetchPage);
+      // console.log('REDUX_PAGES:', reduxPage);    
     const handlePreviousPage = (event, currentPageGroup) => {
       
-       if (currentPage > 1) setCurrentPage( currentPage - 1)
-         
+       if (currentPage > 1) {
+         setCurrentPage( currentPage - 1);
+         dispatch(SetCurrentPage(currentPage - 1))
+       } 
       };
 
      
     const handleNextPage = (event, currentPageGroup) => {
         
-         if (currentPage < totalPage) setCurrentPage(currentPage + 1)
-      };
+         if (currentPage < totalPage) {
+            setCurrentPage(currentPage + 1);
+            dispatch(SetCurrentPage(currentPage + 1));
+         } }
 
       const handleCurrentPage = (event, currentPageGroup) => {
          const newPage = Number(event.target.id);
-         if (newPage >= 1 && newPage <= totalPage)
-        setCurrentPage(newPage)
+         if (newPage >= 1 && newPage <= totalPage) {
+            setCurrentPage(newPage);
+            dispatch(SetCurrentPage(newPage))
+         } 
+
      };
 
 
@@ -42,8 +52,8 @@ export const PaginationView = ({currentPage, totalPage, selected,
      };
 
      return (
-        <div>
-          <Pagination
+        <div style={{display: item ? 'none': ''}}>
+        <Pagination
         currentPage = {currentPage}
         totalPage = {totalPage}
         pagesPerPageGroup = {5}

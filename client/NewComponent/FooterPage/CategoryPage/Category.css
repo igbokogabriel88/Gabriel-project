@@ -26,3 +26,307 @@
     font-size: 18px;
     margin-left: 16px;
 }
+.catItem{
+    width: 98%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    height: auto;
+    background-color: lightcyan;
+    border-top: 1px solid rgba(0, 0, 0, 0.7);
+    margin-bottom: 12px;
+
+}
+.catItem.show{
+    display: flex;
+}
+.cat-wrapper{
+    width: 100%;
+    height: auto;
+    background-color: white;
+    position: relative;
+    padding-left: 12px;
+    
+}
+
+ .itemIamge{
+    display: flex;
+    width: 50%;
+    height: 0px;
+}
+.cat-wrapper .min-span{
+    padding: 4px 10px;
+    position: absolute;
+    top: 1%;
+    left: 2%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    margin-top: 8px;
+    color: rgba(0, 0, 0, 0.6); 
+    cursor: pointer;
+}
+.label-group .child-one{
+    font-size: 24px;
+    margin-bottom: 5px;
+    position: relative;
+    display: flex;
+    margin-left: 6px;
+}
+.label-group p{
+    display: flex;
+    flex-direction: row;
+    margin-top: -1px; 
+    margin-left: 6px;
+
+}
+.label-group p span:first-child{
+    width: 24%;
+}
+.des-item{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+}
+.des-item span{
+    margin-bottom: 6px;
+    margin-left: 6px;
+}
+.des-item div{
+    width: 92%;
+    height: 100px;
+    overflow-y: scroll;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding-top: 4px;
+    padding-left: 2px;
+    margin-bottom: 34px;
+}
+.des-item div::-webkit-scrollbar{
+    display: none;
+}
+.des-item div span{
+    font-size: 24px;
+    width: inherit;
+    height: auto;
+    padding-left: 10px;
+}
+.des-item div .vertical-scrollbar{
+    position: absolute; 
+    top: 0%;
+    left: 96%;
+    width: 1px;
+    height: 70px;
+    display: block;
+     z-index: 1; 
+    margin-top: 2px;
+    background-color: green;
+    opacity: 0.6;
+
+}
+.des-wrapper{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    align-items: center;
+}
+.des-wrapper span:first-child{
+    width: 26%;
+    display: flex;
+    color: blue;
+    margin-top: -3px;
+}
+.des-wrapper span:last-child small{
+    margin-left: 10px;
+}
+.des-wrapper span:last-child {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.8);
+}
+.cat-wrapper .submit-item{
+    width: 88%;
+    cursor: pointer;
+    margin-top: 14px;
+    background-color: blue;
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-bottom: 20px;
+}
+.horizon-wrapper{
+    width: 100%;
+    height: auto;
+    background-color: rgba(50, 50, 50, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 4px 4px;
+    margin-bottom: 20px;
+    margin-left: -12px; 
+    padding-bottom: 50px;
+}
+.horizon-wrapper .row-mode{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    padding: 12px 14px;
+    width: 90%;
+    /* position: absolute; */
+    /* top: 0;
+    left: 0; */
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-left: 1px;
+}
+.scroll-area{
+    height: 300px;
+    overflow-x: auto;
+    background-color: rgba(80, 80, 80, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+.scroll-area::-webkit-scrollbar{
+    display: none;
+}
+.scrollGroup{
+    display: flex;
+    position: relative;
+    width: 60%;
+    height: inherit;
+    background-color: inherit;
+    align-items: center;
+    flex-direction: column;
+}
+.scroll-loading{
+        /* position: absolute;
+        top: 0;
+        left: 0; */
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(30,30,30,0.9), rgba(60,60,60, 0.8), rgba(90,90,90, 0.7));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 3s ease-in-out infinte;
+        z-index: 20;
+      }
+      @keyframes fadeIn {
+        0%, 100% {
+          background: linear-gradient(135deg, rgba(30,30,30, 0.9), rgba(60,60,60, 0.8), rgba(90,90,90, 0.7));
+        }
+        50% {
+          background: linear-gradient(135deg, rgba(30,30,30, 0.5), rgba(60,60,60, 0.4), rgba(90,90,90, 0.3));
+        }
+      }
+.image-load{
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+.categoryMain1{
+    display: flex;
+    width: 100%;
+    background-color: white;
+    position: relative;
+    margin-top: 0px;
+    flex-direction: column;
+    padding-left: 0px;
+     margin-bottom: 12px;
+     /* overflow: hidden; */
+}
+
+.categoryWrapper::-webkit-scrollbar{
+    display: none;
+}  
+
+.categoryScrolls{
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 275px;
+    background-color: white;
+    }
+    .categoryScrolls::-webkit-scrollbar{
+        display: none;
+    }  
+.categoryRows{
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    display: inline-flex;
+    /* flex-direction: row; */
+    border: 1px solid #ccc;
+    gap: 12px;
+    justify-content: center;
+}
+.categorySpans{
+    display: flex;
+    flex-direction: column;
+    min-width: 215px;
+    background-color: white;
+    padding: 0px;
+    padding-top: 0px;
+    overflow: hidden;
+    height: 245px;
+    border-radius: 12px;
+    /* height: 200px; */
+}
+.categorySpans.yes{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(30,30,30,0.9), rgba(60,60,60, 0.8), rgba(90,90,90, 0.7));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 3s ease-in-out infinte;
+    z-index: 20;
+  }
+  @keyframes fadeIn {
+    0%, 100% {
+      background: linear-gradient(135deg, rgba(30,30,30, 0.9), rgba(60,60,60, 0.8), rgba(90,90,90, 0.7));
+    }
+    50% {
+      background: linear-gradient(135deg, rgba(30,30,30, 0.5), rgba(60,60,60, 0.4), rgba(90,90,90, 0.3));
+    }
+  }
+
+.nftImage{
+   width: 100%;
+   min-height: 152px;
+   object-fit: cover;
+}
+.headers{
+    display: flex;
+    flex-direction: row;
+    padding: 6px 8px;
+    width: 100%;
+    /* background-color: skyblue; */
+    align-items: center;
+    justify-content: space-between;
+}
+.headers span{
+    padding: 6px;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-right: 16px;
+    border-radius: 4px;
+}
+.headers.inner{
+    margin-top: -26px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

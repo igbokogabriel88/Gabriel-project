@@ -20,6 +20,8 @@ const subscribeEmail = require('./routes/subscribe.js');
 const getDummyNFTs = require('./routes/dummyRoutes.js')
 const Connection = require('./MongoDB/Connection.js')
 const {upload} = require('./Multer/Multer.js')
+const createNftsUser = require('./routes/nftsUserRoutes.js')
+// 3const createNftUser = require('./routes/nftUserRoute.js')
 const bodyParser = require('body-parser')
 
 const app = express();
@@ -49,10 +51,10 @@ app.use(express.static('public'))
  app.use('/api/auth', changePassword)
  app.use('/api/user', subscribeEmail)
  app.use('/api/get', getDummyNFTs)
+ app.use('/api/auth', createNftsUser)
 //  app.use('/api, userBackend')
  app.use('/images', express.static(path.join(__dirname, "/wrapper")))
   
-
  
 app.get('/', (req, res)=>{
     console.log('hello world, am Gabriel')

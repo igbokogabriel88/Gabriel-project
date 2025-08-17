@@ -11,8 +11,7 @@ import { Spinner } from "../LoadingSpinner/CircularSpinner/Spinner";
 import Load_User from "../Helper/loadUser";
 import { RouteLoadingPage } from "../RouteGuard/RouteLoading";
 import { ErrorLoginValidation } from "./LoginErrors";
- 
-
+import { NftUser } from "../Helper/nftUser";
 import { FaEnvelope, FaUser, FaLockOpen, FaLock, FaTimes } from "react-icons/fa";
 import { nftLogin } from "../helperFunc";
 
@@ -30,13 +29,16 @@ const LoginPage = ({handleSignUp, forgot,
      const navigate = useNavigate();
      const location = useLocation();
      const errors = useSelector(state => state.Error);
+     const walletAddress = useSelector(state => state.fetchWallet);
+     
       console.log('reduxError:', errors)
      const alerts = useSelector(state => state.Alert);
      const {isAuthenticated, loading} = useSelector(state => state.Auths);
      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
      const Errors = {};     
      const Error = {};
-
+        
+       
          useEffect(()=> {
          if(!forgot && isLoad){
             setIsLoad(false)
@@ -44,6 +46,7 @@ const LoginPage = ({handleSignUp, forgot,
         console.log('loading&&forgot:', loading)
       },[forgot, isLoad]);
        
+      
       // useEffect(() => {
       //     if (loading){
       //       navigate('/loading')

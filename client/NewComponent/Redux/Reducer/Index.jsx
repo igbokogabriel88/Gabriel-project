@@ -2,8 +2,8 @@ import { combineReducers } from 'redux';
 import Alert from '../Alerts/Alert';
 import {Category, search_Reducer, error_Reducer, auth_Reducer,
 profile_Reducer, register_reducer, load_Reducer, token_Reducer,
-login_loading, fetch_reducer
-} from './Reducer.jsx'
+login_loading, fetch_reducer, current_page_reducer, index_reducer,
+wallet_reducer} from './Reducer.jsx'
 
 export default combineReducers({
         Alert,
@@ -16,6 +16,9 @@ export default combineReducers({
          Loading: load_Reducer,
          getToken: token_Reducer,
          loginLoading: login_loading,
-         fetchData: fetch_reducer
+         fetchData: fetch_reducer,
+         fetchPage: current_page_reducer,
+         Index: index_reducer,
+         fetchWallet: wallet_reducer
         //  policyTerm: policy_Term
 })

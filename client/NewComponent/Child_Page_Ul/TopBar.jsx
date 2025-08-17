@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Classic_Spinner, Classic_Loader } 
 from "../LoadingSpinner/CircularSpinner/ClassicSpinner";
 import { FaSearch } from "react-icons/fa";
-import { Logout, setLoading } from "../Redux/Action/Action";
+import { Logout, setLoading, clearLoading } from "../Redux/Action/Action";
 // import { SearchModal } from "./Other_Category/SearchModal"
 import { openSearchBox } from "../Redux/Action/Action";
 import './ChildPage.css'
@@ -25,18 +25,18 @@ export const TopBar = ({scrollValue}) =>{
     const isAuthenticated = auth.isAuthenticated;
     const PF = 'http://localhost:4200/images/'
     // const searchModal = searchInput.searchOpen;
-    console.log('AUTH_USER:', auth),
-    console.log('TOPBARPAGE:', user, loading)
-    console.log('TOPBARPAGE_ISAUTHENTIC:', isAuthenticated);
-    console.log('USERLOADING:', userLoading)
+    // console.log('AUTH_USER:', auth),
+    // console.log('TOPBARPAGE:', user, loading)
+    // console.log('TOPBARPAGE_ISAUTHENTIC:', isAuthenticated);
+    // console.log('USERLOADING:', userLoading)
 
     
      
         useEffect(()=> {
         if (userLoading === true){
-            setStatus('userLoading');    
-        } else if (isLoading){
-            setStatus('isLoading')
+            setStatus('loading');    
+        } else if (isLoading === true){
+            setStatus('loading')
         } else if (user != null){
             setStatus('logout')
         } else {
@@ -49,7 +49,7 @@ export const TopBar = ({scrollValue}) =>{
             setIsloading(true);
             setTimeout(()=> {
              navigate('/login')
-             setIsLoading(false)
+             setIsloading(false)
            }, 2000)
     }
                
@@ -80,10 +80,10 @@ export const TopBar = ({scrollValue}) =>{
         style={{marginTop: '2px'}}/></span>
         {status === 'login' ? <span className= {`span4 ${scrollValue ? 'yes' : ''}`}
         onClick={handleModal}>Login</span> :
-        status === 'isLoading' ? 
+        status === 'loading' ? 
         <span className="span5"><Classic_Spinner/></span> :
-        status === 'userLoading' ? 
-        <span className="span5"><Classic_Loader/></span> :
+        // status === 'userLoading' ? 
+        // <span className="span5"><Classic_Loader/></span> :
         <span className={`span6 ${scrollValue ? 'yes' : ''}
              ${user && user.userImage === null ? 'null' : ''}`}
         style={{ display: 'flex',

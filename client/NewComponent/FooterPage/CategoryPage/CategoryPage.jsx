@@ -2,7 +2,7 @@
   import { CategoryArray } from "./CategoryArray";
   import { useNavigate } from "react-router-dom";
   import { useDispatch, useSelector } from "react-redux";
-  import { getCategory } from "../../Redux/Action/Action";
+  import { getCategory, clearIndex } from "../../Redux/Action/Action";
   import './Category.css'
 
   export const Category_Page =()=>{
@@ -10,29 +10,35 @@
     const dispatch =  useDispatch();
     const category = useSelector(state => state.Category);
          const select = category.name;
-         console.log('CATEGORY_ITEM:', select)
+        //  console.log('CATEGORY_ITEM:', select)
 
     const handleArtView = (value) => {
+      dispatch(clearIndex());
       navigate(`/home/${value}`,  {state: {focusCategoryPage: true, scrollTo: 'top'}})
       dispatch(getCategory(value));
     };
     const handleGamingView = (value) => {
+      dispatch(clearIndex());
       navigate(`/home/${value}`, {state: {focusCategoryPage: true, scrollTo: 'top'}})
       dispatch(getCategory(value));
     };
     const handlePPFsView = (value) => {
+      dispatch(clearIndex());
       navigate(`/home/${value}`, {state: {focusCategoryPage: true, scrollTo: 'top'}})
       dispatch(getCategory(value));
     };
     const handlePhotographyView = (value) => {
+      dispatch(clearIndex());
       navigate(`/home/${value}`, {state: {focusCategoryPage: true, scrollTo: 'top'}})
       dispatch(getCategory(value));
     };
     const handleExhibitionView = (value) => {
+      dispatch(clearIndex());
       navigate(`/home/${value}`, {state: {focusCategoryPage: true, scrollTo: 'top'}})
       dispatch(getCategory(value));
     };
     const handleMembershipView =(value) => {
+      dispatch(clearIndex());
       navigate(`/home/${value}`, {state: {focusCategoryPage: true, scrollTo: 'top'}})
       dispatch(getCategory(value));
     };
@@ -47,7 +53,7 @@
               {label: 'Exhibition', value : 'exhibition', onClick: () => handleExhibitionView('exhibition')}]
 }
     
-    console.log('cate:',CategoryInitiation.items)
+    // console.log('cate:',CategoryInitiation.items)
     return (
         <div className="categoryClass"> 
            <span>{CategoryInitiation.title}</span>

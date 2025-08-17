@@ -13,15 +13,18 @@ import { CategoryItem } from "../FooterPage/CategoryPage/CategoryItem";
 import { useParams } from "react-router-dom";
 
 const FrontPage = ({scrollValue, closePage})=>{
-    const category = useSelector(state => state.Category);
+  const [reset, setReset] = useState(null);
+    const selected = useSelector(state => state.Category.name);
     const termAndPolicy = useSelector(state => state.policyTerm)
-    const selected = category.name;
-    const {item} = useParams();
+    const id = useSelector(state => state.Index.index)
+    
+    // console.log('PARAMS_ID:', id)
       
     return (
+      
     <div className={`front-page ${closePage ? 'close' : ''}`}>
         {/* <Triangle_Rectangle/> */}
-         <Categories/>
+         <Categories onReset={(value) => setReset(value)}/>
          <>
           {  selected === 'all' ?
             (<div style={{height: '200px', backgroundColor: 'inherit'}}
@@ -35,10 +38,11 @@ const FrontPage = ({scrollValue, closePage})=>{
             </div>
             </div>): ['arts', 'gaming', 'photography',
             'exhibition', 'pfps', 'membership'].includes(selected) ? 
-            <CategoryGroup selected={selected}/> :
+            <CategoryGroup selected={selected} reset={reset} item={id}/> :
             ['privacy-policy','terms-of-service'].includes(selected) ? 
-            <TermPolicyBody data={selected}/> : selected === item ? 
-            <CategoryItem/> : ''
+            <TermPolicyBody data={selected}/> :
+            //  Number(selected) === Number(item) ? <CategoryItem/> :
+              ''
            }
             </> 
          </div> 

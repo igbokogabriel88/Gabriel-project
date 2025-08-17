@@ -1,18 +1,22 @@
 
 .categoryTop{
-    width: 125%;
+    width: 105%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
+    gap: 4px;
     height: auto;
     margin-bottom: 20px;
-    padding-top: 0px;
+    padding-bottom: 4px;
+  
+}
+.categoryTop.hide{
+  display: none;
 }
 .filtered{
-    width: 90%;
+    width: 88%;
     padding: 8px;
     height: auto;
-    margin-bottom: 6px;
+    margin-bottom: 0px;
     margin-top: 6px;
     background-color: lavender;
 }
@@ -53,6 +57,9 @@
     gap: 6px;
     margin-left: 10px;
  }
+ .cat-label.hide{
+display: none;
+ }
  .cat-label div{
     position: relative;
     width: 100%;
@@ -63,5 +70,5 @@
  }
  .cat-label div .labelTitle{
     width: 50%;
-    margin-right: 120px;
+    margin-right: 95px;
  }

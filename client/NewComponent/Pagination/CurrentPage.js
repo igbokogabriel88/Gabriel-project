@@ -19,7 +19,9 @@ export const getCurrentPage = (currentPage, totalPage, pagesPerPageGroup) => {
        if (maxPageLimit > totalPage) {
         maxPageLimit = totalPage
        };
-
+//        console.log('MINIMUM_LIMIT:',minPageLimit);
+//        console.log('MAXIMUM_LIMIT:', maxPageLimit);
+//        console.log('PAGES_PER_PAGE:', pagesPerPageGroup)
        const currentPageGroup = [];
 
        for (let i = minPageLimit; i <= maxPageLimit; i++) {

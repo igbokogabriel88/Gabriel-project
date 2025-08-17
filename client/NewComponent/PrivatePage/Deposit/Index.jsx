@@ -19,6 +19,7 @@ const DepositViewPage = ()=> {
         }
     },[isClick])
     const handleCopyText =()=> {
+        navigator.clipboard.writeText(depositAddress)
         setCopyText(true);
         setIsClick(true)
     };

@@ -21,7 +21,7 @@ const ForgotPasswordPage = ({passwordFunc}) => {
       
       ErrorResetPassword(name, value, emailRegex, dispatch )
          };
-     console.log('RESET_DATA:', data)
+    //  console.log('RESET_DATA:', data)
     const handleReset = async (e) => {
       e.preventDefault();
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/

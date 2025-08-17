@@ -4,7 +4,7 @@
 
 export const AlertPage =({alerts})=>{
     // const alerts = useSelector(state => state.Alert)
-      console.log('ALERTS:',alerts)
+      // console.log('ALERTS:',alerts)
      return (
       
         <div className={`alert ${alerts.alertType}`}>{ alerts.message}

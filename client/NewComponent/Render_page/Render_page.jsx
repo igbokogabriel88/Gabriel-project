@@ -1,7 +1,7 @@
 import FrontPage from "../Child_Page_Ul/Front_page";
  import { useState, useEffect, useRef } from "react";
  import { useSelector } from "react-redux";
- import { useLocation, useNavigate } from "react-router-dom";
+ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { FooterPage } from "../FooterPage/FooterPage";
 import { TopBar } from "../Child_Page_Ul/TopBar";
 import { Triangle_Rectangle } from "../Icons/TriangleRectangle";
@@ -17,16 +17,31 @@ const RenderPage = () =>{
     const [showModal, setShowModal] = useState()
     const scrollRef = useRef();
     const location = useLocation();
+    const {item} = useParams();
     const timeoutRef = useRef(null);
     const navigate = useNavigate();
     const category = useSelector(state => state.Category);
     const searchInput = useSelector(state => state.search_Reducer);
     const selected = category.name;
     const searchModal = searchInput?.searchOpen;
-    console.log('showmodal:',showModal);
-    console.log('scrollPosition:',scrollPosition);
-    console.log('selected:',selected);
-    console.log('searchModal:',searchModal);
+    const currentPage = useSelector(state => state.fetchPage);
+    const user = useSelector(state => state.Auths.user);
+  
+    // console.log('scrollPosition:',scrollPosition);
+    // console.log('selected:',selected);
+    // console.log('searchModal:',searchModal);
+
+    const chosenCat = 
+    ['arts', 'gaming', 'membership', 'photography', 'pfps', 'exibition'].includes(selected);
+   
+    // useEffect(() => {
+    //    if (scrollRef.current){
+    //     scrollRef.current.scrollTo({
+    //       top: 0, behavior: "smooth"
+    //     })
+    //    }
+    // },[chosenCat])
+
     useEffect(()=>{
       if (!selected) return;
       if (selected === 'all'){
@@ -35,6 +50,25 @@ const RenderPage = () =>{
         navigate(`/home/${selected}`)
       }
     },[selected]);
+
+    useEffect(() => {
+      if (currentPage){
+        scrollRef.current?.scrollTo({top: 0, behavior: 'smooth'});
+      }
+    },[currentPage]);
+
+    // useEffect(() => {
+    //   if (item){
+    //     navigate(`/home/${item}`)
+    //   }
+    // },[item])
+    
+    useEffect(() => {
+      if (chosenCat){
+        scrollRef.current?.scrollTo({top: 0, behavior: 'smooth'});
+      }
+    },[selected])
+    
 
     useEffect(()=> {
       let didScroll = false;
@@ -62,17 +96,17 @@ const RenderPage = () =>{
             }
         },[location, navigate]);
 
-      useEffect(()=> {
-        let didScroll = false;
-        if (location.state?.scrollTo === 'top'){
-            scrollRef.current?.scrollTo({top: 0, behavior: 'smooth'});
-            didScroll = true;
-        }
-        if (didScroll){
-          navigate(location.pathname, {replace: true, state: {}});
-        }
+    //   useEffect(()=> {
+    //     let didScroll = false;
+    //     if (location.state?.scrollTo === 'top'){
+    //         scrollRef.current?.scrollTo({top: 0, behavior: 'smooth'});
+    //         didScroll = true;
+    //     }
+    //     if (didScroll){
+    //       navigate(location.pathname, {replace: true, state: {}});
+    //     }
 
-    },[location, navigate]);
+    // },[location, navigate]);
   
   
 

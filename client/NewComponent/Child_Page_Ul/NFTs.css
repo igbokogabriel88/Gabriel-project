@@ -57,6 +57,11 @@
     border-radius: 12px;
     /* height: 200px; */
 }
+.categorySpan.show{
+    background-color: blue;
+    opacity: 0.2;
+    z-index: 2;
+}
 .categorySpan.yes{
     position: absolute;
     top: 0;

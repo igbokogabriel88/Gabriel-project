@@ -7,14 +7,14 @@ const {Auth, IsAdmin, isAdmin} = require('../AuthLogin/AuthLogin.js')
 const User = require('../Model/Auth.js')
 
 router.post('/newPassword', (req, res)=>{
-  console.log('NEW_PASSWORD_REQ_BODY:', req.body)
+  // console.log('NEW_PASSWORD_REQ_BODY:', req.body)
     const {newPassword} = req.body;
     const sendToken = req.body.newToken;
     
   
     User.findOne({resetToken: sendToken, expireToken: {$gt: Date.now()}})
     .then(savedUser =>{
-      console.log('NEW_PASSWORD_SAVEDUSER:', savedUser)
+      // console.log('NEW_PASSWORD_SAVEDUSER:', savedUser)
      if(!savedUser){
          return res.status(400).json({error: 'Try again, session expired'})
      }
@@ -24,7 +24,7 @@ router.post('/newPassword', (req, res)=>{
       savedUser.resetToken = undefined
       savedUser.expireToken = undefined
       savedUser.save().then((user) =>{
-        console.log('NEW_PASSWORD_LATESTUSER:', user)
+        // console.log('NEW_PASSWORD_LATESTUSER:', user)
         res.json({message: 'Password updated successfully'})
       })
          

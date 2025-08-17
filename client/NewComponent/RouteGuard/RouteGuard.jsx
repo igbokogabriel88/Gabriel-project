@@ -8,7 +8,7 @@ import Load_User from "../Helper/loadUser";
 
 export const ProtectedRoute = ({children}) => {
   const [delay, setDelay] = useState(false);
-    console.log('ROUTE PAGE IS TRIGGERED')
+    // console.log('ROUTE PAGE IS TRIGGERED')
     const { isAuthenticated, loading, user} = useSelector(state => state.Auths);
     const dispatch = useDispatch();
     const navigate = useNavigate();

@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { groupByCategory } from "./nftsHelper";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategory } from "../Redux/Action/Action";
+import { getCategory, setIndex } from "../Redux/Action/Action";
 import { useNavigate } from "react-router-dom";
 import './NFTs.css'
 
 export const FilterByCategory = ({products}) => {
+
+    const [isClick, setIsClick] = useState(false);
     const groupedProducts =  groupByCategory(products);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const loading = useSelector(state => state.Loading);
-    console.log('LOADING_CATEGORY:', loading);
+    // console.log('LOADING_CATEGORY:', loading);
 
     const rate = 18;
-    console.log('GROUP BY CATEGORY:', groupedProducts);
+    // console.log('GROUP BY CATEGORY:', groupedProducts);
 
     const handleViewAll = (value) => {
             console.log('FRONT_PAGE_CATEGORY:', value)
@@ -31,11 +33,17 @@ export const FilterByCategory = ({products}) => {
         return value.charAt(0).toUpperCase() + value.slice(1);
       };
       const handleSelect = (item, value) => {
-        console.log('CATEGORY_ITEM', item, value)
-             navigate(`/home/${item}/${value}`,
+         setIsClick(true);
+         const timer = setTimeout(() => {
+            setIsClick(false);
+            console.log('CATEGORY_ITEM', item, value)
+             navigate(`/home/${item}`,
                 {state: {focusCategory: true, scrollTo: 'top'}}
              );
-             dispatch(getCategory(value))
+             dispatch(getCategory(item));
+             dispatch(setIndex(value))
+         },300);
+        return () => clearTimeout(timer)
       }
 
     return (
@@ -50,7 +58,7 @@ export const FilterByCategory = ({products}) => {
            <div className="categoryRow"> 
             {items.map((product, i) => (
                 loading === true ? <div className="categorySpan yes"></div> :
-                <div key={i} className="categorySpan" onClick={() => handleSelect(category,i)}>
+                <div key={i} className={`categorySpan ${isClick === true ? 'show': ''}`} onClick={() => handleSelect(category,product.index)}>
                     <img src={`/Upload/${product.image}`} 
                     alt="product.name"
                     className="nftImage"/>
@@ -75,6 +83,7 @@ export const FilterByCategory = ({products}) => {
                       </div>
            
      </div>
+     
       ))}
         </div>
     )

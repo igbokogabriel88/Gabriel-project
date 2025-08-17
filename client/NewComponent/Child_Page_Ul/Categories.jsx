@@ -3,12 +3,14 @@ import { TopPageData } from "../DataCollection/data";
 import { IndicatorTracker } from "./IndicatorTracker";
 import { getCategory } from "../Redux/Action/Action";
 import { useSelector, useDispatch } from "react-redux";
+import { CategoryItem } from "../FooterPage/CategoryPage/CategoryItem";
 import { TermPolicyHeader } from "./Other_Category/TermAndPolicy/termsHeader";
 import { useLocation, useParams } from "react-router-dom";
+import { SetCurrentPage, clearIndex } from "../Redux/Action/Action";
 import { fetchDummyData } from "../helperFunc";
 
 
-const Categories = ()=> {
+const Categories = ({onReset})=> {
 const [indicatorPosition, setIndicatorPosition]= useState(0);
 const [highlight, setHighlight] = useState(false);
 const [nfts, setNfts] = useState([]);
@@ -20,18 +22,20 @@ const category = useSelector(state => state.Category);
 const fetched = useSelector(state => state.fetchData);
 const selected = category.name;
 
-const {item} = useParams();
+const id = useSelector(state => state.Index.index)
+   //  console.log('PARAMS_ID:', id);
+
 const mainCategory = 
   ['arts', 'gaming', 'photography', 'membership', 'pfps', 'exhibition'].includes(selected);
-  console.log('MAIN_CATEGORY:', mainCategory)
+  //  console.log('SELECTED_CATEGORY:', selected)
   const privacyCategory =  
   ['privacy-policy', 'terms-of-service'].includes(selected);
 
   const filtered = nfts.filter(nft => nft.category === selected);
 
-  const selectedIamge = filtered[0]?.image;
+  const selectedImage = filtered[0]?.image;
   const minImage = filtered[1]?.image;
-  console.log('SELECTED_IMAGE:',selectedIamge)
+  // console.log('SELECTED_IMAGE:',selectedIamge)
   
   const fetchNFTsData = async () => {
     let result;
@@ -44,7 +48,7 @@ const mainCategory =
        fetchNFTsData()
    },[]);
   
- console.log('FETCHED_DATA:',filtered);
+//  console.log('FETCHED_DATA:',filtered);
 
 // useEffect(()=> {
 // if (location.state?.focusTermAndPolicyPage){
@@ -59,11 +63,12 @@ const maxScroll = container.scrollWidth - container.clientWidth;
 const scrollRatio = container.scrollLeft/ maxScroll;
 setIndicatorPosition(scrollRatio * (container.clientWidth - 70))
  }
-container.addEventListener('scroll', handleScroll);
+container?.addEventListener('scroll', handleScroll);
 return () => {
-container.removeEventListener('scroll', handleScroll)
+container?.removeEventListener('scroll', handleScroll)
 };
 },[]);
+
 useEffect(()=>{
 if ( selected){
  setHighlight(true);
@@ -73,19 +78,22 @@ setHighlight(false)
 return ()=> clearTimeout(timeId)
  }
 },[selected])
+
 const handleCategory =(value)=>{
-console.log('categoryz:', value);
+dispatch(clearIndex());
 dispatch(getCategory(value));
+   onReset(1)
 };
-console.log('highlight:', highlight)
+// console.log('highlight:', highlight)
 return (<>{ ['privacy-policy', 'terms-of-service'].includes(selected) ?
 <TermPolicyHeader/> :
 <div style={{display: 'flex', flexDirection: 'column'}} >
 <div className={`category ${ mainCategory ? 'select': ''}
-${['privacy-policy', 'terms-of-service'].includes(selected) ? 'hide' : ''}`} ref={scrollRef}
-style={{backgroundImage: `url(/Upload/${selectedIamge})`}}>
+${['privacy-policy', 'terms-of-service'].includes(selected) ? 'hide' : ''}
+${Number(id) ? 'YES' : ''} ${selected === 'all' ? 'All' : ''}`} ref={scrollRef}
+style={{backgroundImage: `url(/Upload/${selectedImage})`}}>
 {TopPageData.map(data => (
-<span className={`span-class ${selected === data.value  ? 'chose': ''}`}
+<span className={`span-class ${selected === data.value  ? 'chose' : ''}`}
 style={{backgroundColor: highlight && 
 selected === data.value? 'red':
 selected === data.value ? 'rgba(0, 0, 0, 0.2)': ''
@@ -94,8 +102,8 @@ key={data.value}
 onClick={()=> handleCategory(data.value)}>
 {data.label}</span>
 ))}
-{mainCategory && <div className="small-image"
-style={{backgroundImage: `url(/Upload/${minImage})`}}> </div>}
+<div className={`small-image ${mainCategory ? 'show' : ''}`}
+style={{backgroundImage: `url(/Upload/${minImage})`}}> </div>
 </div>
 
 <IndicatorTracker 

@@ -11,11 +11,11 @@
     /* margin-top: 20px; */
     -ms-overflow-style: none; 
      -webkit-overflow-scrolling: touch;
-     background-color: blueviolet;
+     /* background-color: blueviolet; */
      opacity: 1;
      /* gap: 0.5rem; */
-     /* background-image: url('Upload/image1.jpg' );
-     object-fit: cover; */
+      background-image: url('Upload/image1.jpg' );
+     object-fit: cover; 
      justify-content: space-between ;
 }
 .renderPage::-webkit-scrollbar{
@@ -41,5 +41,9 @@ padding-bottom: 2px;
  top: 0;
  position: sticky;
  z-index: 25;
- margin-bottom: 12px
+ margin-bottom: 12
+ 
+ 
+ 
+ px
 }

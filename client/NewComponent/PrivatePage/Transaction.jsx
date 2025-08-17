@@ -7,7 +7,7 @@ import React, {useEffect, useState, useRef} from 'react';
         {label: 'Status', value: 'status'} ]
         const [position, setPosition]= useState(0);
          const scrollRefTax = useRef();
-         console.log('transaction;',position)
+        //  console.log('transaction;',position)
          useEffect(()=>{
             const container = scrollRefTax.current;
             const handleScroll = () => {
