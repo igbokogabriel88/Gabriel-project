@@ -77,7 +77,7 @@ export const Profile_Pic = ({handleFile, profileSuccess, showPic})=> {
             </div>) : (<div className="image-profiles">
                 <span className="imageWrapProfile">
                     <img key = 'image3'
-                    src="/Upload/image_1.jpg" 
+                    src="/Upload/avatar2.jpg" 
                     alt="Default"
                     style={{width: '100%', height: '100%', objectFit: 'cover'}}/>
                 </span>

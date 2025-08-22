@@ -165,6 +165,7 @@
 
 .span2.loading{
     margin-left: -16px;
+    gap: 12px;
 }
 .span2.yes{
     background-color: white;
@@ -211,11 +212,12 @@
     border: 1px solid rgba(0, 0, 0, 0.5);
 }
 .span2.loading .span3{
-    margin-left: 20%;
+    margin-left: 6.9%;
+    width: 20%;
 }
 
-.span2 .span3.user{
-    margin-left: 0;
+.span2 .span3.non{
+    margin-right: 20px;
 
 }
 .span2 .span4{
@@ -251,6 +253,7 @@
     justify-content: center;
     box-shadow: none;
 }
+
 .span2.loading .span6{
     margin-left: 0px;
 }

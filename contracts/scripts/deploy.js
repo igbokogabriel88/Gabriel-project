@@ -1,6 +1,5 @@
-const { ethers } = require("hardhat");
+const  ethers = require("hardhat");
 const fs = require("fs");
-const { mainModule } = require("process");
 
 const mmain = async  () => {
     const NFT = await ethers.getContractFactory("MyNFT");

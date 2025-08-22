@@ -83,19 +83,27 @@
         margin-top: 12px;
         background-color: white;
     }
+    image-mint.yes{
+        background-color: grey;
+    }
     .image-mint .imageWrapMint{
+        position: relative;
         width: inherit;
         height: 96%;
-        border: 1px solid black;
+        /* border: 1px solid black; */
         margin-bottom: 6px;
+        display: flex;
         /* margin-top: -1px; */
+        top: 0%;
+        left: 0%;
+    }
+    .imageWrapMint .image{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
         top: 0;
         left: 0;
-    }
-    .imageWrapMint image{
-        width: inherit;
-        height: inherit;
-        object-fit: cover;
     }
     .icon-exhibits{
         color: white;
@@ -168,7 +176,7 @@
     }
     .mint-price input{
         outline: none;
-        width: 85%;
+        width: 90%;
         padding: 8px;
         font-size: 16px;
         /* padding-bottom: 10px; */

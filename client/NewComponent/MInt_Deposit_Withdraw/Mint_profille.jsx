@@ -1,27 +1,53 @@
  import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile } from "@fortawesome/free-solid-svg-icons/faFile";
+import { handleProfile } from "../ChangePassword_EditProfile/photoHelper";
+import { useSelector, useDispatch } from "react-redux";
 import './Mint.css'
 
 export const MintProfilePic = ({handleFile})=> {
     const [image, setImage] = useState(null);
     const fileInputRef = useRef(null);
+
+    const dispatch = useDispatch();
+     const profile = useSelector(state => state.profile);
+    const loading = useSelector(state => state.Loading)
+    console.log('PROFILE && LOADING:', profile, loading)
+    const PF = 'http://localhost:4200/images/'
+
     const handleClick =()=>{
         fileInputRef.current.click();
     }
-        const handleFileChange =(e)=>{
-            const file = e.target?.files[0];
-             if (file){
-                console.log('selected file:', file.name);
-                setImage(file);
-                handleFile(file)
-             }
+        const handleFileChange = async (e)=>{
+            // const file = e.target?.files[0];
+            //  if (file){
+            //     console.log('selected file:', file.name);
+            //     setImage(file);
+            //     handleFile(file)
+            //  }
         
+             const file = fileInputRef.current.files[0];
+                         console.log('REDUX PROFILE:',profile)
+                        // dispatch(setPhoto(file?.name));
+                        // console.log(file);
+            
+                    if (!file||file.length === 0 ||
+                    !file.type.startsWith("image/")){
+                       console.log('INVALID FILE TYPE')
+                    return;
+                 } else {
+            
+                    let value;
+            
+                    value =   await handleProfile(file, 'avatar', dispatch);
+                      return handleFile(file);
+                            
+                 }
     }
     return (
         <div onClick={handleClick}
         className={`mint-profile-wrapper ${image ? 'yes': ''}`} >
-            {!image ? (<div className="mint-group">
+            {!profile ? (<div className="mint-group">
             <span>Upload file</span>
              <FontAwesomeIcon icon={faFile}
              className="icon-exhibits"
@@ -32,11 +58,11 @@ export const MintProfilePic = ({handleFile})=> {
              onChange={handleFileChange}
              style={{display: 'none'}}
              />
-            </div>) :
+            </div>) : loading === true ? <div className="image.mint yes"></div> :
             (<div className="image-mint">
                 <span className="imageWrapMint">
-              <img src={image?.name} className="image"/> </span>
-            <span>{image.name}</span></div>)}
+              <img src={PF + profile?.filename} className="image"/> </span>
+            <span>{profile.originalname}</span></div>)}
         </div>
     )
 }

@@ -75,13 +75,13 @@ export const TopBar = ({scrollValue}) =>{
         <div className= {`span2 ${status === 'loading' ? 'loading': ''}
         ${selected != 'all'? 'select': ''}`}> 
         <span className={`span3 ${scrollValue ? 'yes' : ''}
-        ${user != null ? 'user' : ''}`}>
+        ${user != null ? 'user' : 'non'}`}>
         <FaSearch onClick={openSearchModal}
         style={{marginTop: '2px'}}/></span>
         {status === 'login' ? <span className= {`span4 ${scrollValue ? 'yes' : ''}`}
         onClick={handleModal}>Login</span> :
         status === 'loading' ? 
-        <span className="span5"><Classic_Spinner/></span> :
+        <span className={`span5 ${status === 'loading' ? 'shift' : ''}`}><Classic_Spinner/></span> :
         // status === 'userLoading' ? 
         // <span className="span5"><Classic_Loader/></span> :
         <span className={`span6 ${scrollValue ? 'yes' : ''}
@@ -106,7 +106,7 @@ export const TopBar = ({scrollValue}) =>{
                 backgroundColor: 'transparent', marginLeft: '-1px'
              }}>
                 <img key= "image2"
-                src="/Upload/image_1.jpg" 
+                src="/Upload/avatar1.jpg" 
                 alt="Default"
                 style={{width: '80%', objectFit: 'cover',
                     borderRadius: '50%',  marginTop: '-14px',

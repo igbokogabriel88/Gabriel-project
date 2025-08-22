@@ -32,7 +32,7 @@ const chainIdNetwork = async (value) => {
                                 ],
                             });
                         } catch (addError) {
-                            console.error('Failed to add Sepolia network', addError)
+                            console.error('Failed to add Mainnet network', addError)
                         }
                     }  else { 
                         console.error('Failed to switch Network:', switchError)

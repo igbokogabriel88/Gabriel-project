@@ -55,7 +55,7 @@ const Main_Component = () => {
         dispatch(clearLoading(false));
         
         Load_User(dispatch, navigate);
-       },500)
+       },0)
       
        return () => clearTimeout(timer)
           } else {

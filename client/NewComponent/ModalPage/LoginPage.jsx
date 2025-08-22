@@ -127,7 +127,7 @@ const LoginPage = ({handleSignUp, forgot,
             
        await nftLogin({email, password}, Error, dispatch, navigate, location )      
        }; 
-      // if (loading) return <RouteLoadingPage/>
+       if (loading) return <RouteLoadingPage/>
                    
     return (
      <div className="containerReg signIn">
