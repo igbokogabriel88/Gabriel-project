@@ -30,7 +30,7 @@ router.post('/nfts', async (req, res) => {
             message: 'NftUser created successfully',
             data: nftUser
         })
-    } catch (err) {2
+    } catch (err) {
         console.error('BACKEND_ERROR:', err)
            }
 } 

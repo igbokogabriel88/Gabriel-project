@@ -1,9 +1,5 @@
 import React from "react";
 import axios from "axios";
-// import {removeError, setAlert, loginSuccess, loginFail, loadUser,
-//   setLoading, clearLoading} from "./Redux/Action/Action";
-//   import { set_Error, set_Field_Error, getToken } from "./Redux/Action/Action";
-//  import Load_User from "./Helper/loadUser";
 
  const url = 'http://localhost:4200'
  const Headers = {
