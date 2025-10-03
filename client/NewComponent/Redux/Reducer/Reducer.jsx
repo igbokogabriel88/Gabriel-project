@@ -2,7 +2,10 @@ import { GET_CATEGORY, OPEN_SEARCH, SET_ERROR, REMOVE_ERROR,
 SET_PHOTO, CLEAR_PHOTO, SET_FIELD_ERROR, SET_REGISTER, CLEAR_REGISTER,
 CLOSE_SEARCH, SET_LOADING, CLEAR_LOADING, GET_TOKEN, CLEAR_TOKEN, FETCH_DATA,
 SET_LOGIN_LOADING, CLEAR_LOGIN_LOADING, CURRENT_PAGE, SET_INDEX, CLEAR_INDEX,
-SET_WALLET_ADDRESS, CLEAR_WALLET_ADDRESS} from "../Action/ActionType";
+SET_WALLET_ADDRESS, CLEAR_WALLET_ADDRESS, SET_FIELD_MINT_ERROR, SET_MINT_ERROR, CLEAR_MINT_ERROR,
+REFRESH_START, REFRESH_STOP, SET_FIELD_WITHDRAWAL_ERROR, SET_WITHDRAWAL_ERROR, CLEAR_WITHDRAWAL_ERROR,
+SET_EXHIBITION_ERROR, SET_FIELD_EXHIBITION_ERROR, CLEAR_EXHIBITION_ERROR, FETCH_NFT_USER, CLEAR_NFT_USER}
+ from "../Action/ActionType";
 import { initialCategory} from "./InitialState";
 
 const authInitialstate = {
@@ -31,8 +34,26 @@ const authInitialstate = {
     oldPassword: '',
     newPassword: '',
     confirmNewPassword: ''
- }
+ };
+  const initialMintError = {
+    name: '',
+    photo: null,
+    price: ''
+ };
+ const initialExhibitionError = {
+    name: '',
+    photo: null,
+    joinFee: '',
+    saleBonus: ''
+ };
+ const initialWithdrawalError = {
+    address: '',
+    amount: '',
+ };
  const initialLoad = {
+    loading: false
+ };
+ const initialRefresh = {
     loading: false
  };
  const addRegister = {
@@ -132,8 +153,6 @@ export const auth_Reducer = (state = authInitialstate, action) => {
         return state
     }
 }  
-
-
 
      export const profile_Reducer = (state = null, action)=>{
         const {type, payload} = action;
@@ -276,3 +295,106 @@ export const auth_Reducer = (state = authInitialstate, action) => {
                 return state
             } 
          }
+
+
+    export const error_mint_Reducer = (state = initialMintError, action)=>{
+    const {type, payload} = action;
+    switch(type){
+        case 'SET_FIELD_MINT_ERROR':
+           return {
+            ...state,
+            [payload.field]: payload.message
+           };
+
+        case 'SET_MINT_ERROR': 
+            // console.log('Error reducer is triggered:', payload) 
+        return   { ...state,
+                   ...payload  
+        };
+
+        case 'REMOVE_MINT_ERROR':
+            return {
+                ...initialMintError
+            }
+        default : 
+        return state
+    }
+}
+
+export const refresh_reducer = (state = initialRefresh, action)=>{
+            const {type, payload} = action;
+            switch(type){
+                case 'REFRESH_START':
+                    // console.log('Search reducer is triggered:')
+                return { ...state, loading : true
+                };
+                case 'REFRESH_STOP':
+                    return {
+                        ...state, loading: false
+                    };
+                default : 
+                return state
+            }
+        }
+
+    export const error_Withdrawal_Reducer = (state = initialWithdrawalError, action)=>{
+    const {type, payload} = action;
+    switch(type){
+        case 'SET_FIELD_WITHDRAWAL_ERROR':
+           return {
+            ...state,
+            [payload.field]: payload.message
+           };
+
+        case 'SET_WITHDRAWAL_ERROR': 
+            // console.log('Error reducer is triggered:', payload) 
+        return   { ...state,
+                   ...payload  
+        };
+
+        case 'CLEAR_WITHDRAWAL_ERROR':
+            return {
+                ...initialWithdrawalError
+            }
+        default : 
+        return state
+    }
+}
+
+
+export const error_Exhibition = (state = initialExhibitionError, action)=>{
+    const {type, payload} = action;
+    switch(type){
+        case 'SET_FIELD_EXHIBITION_ERROR':
+           return {
+            ...state,
+            [payload.field]: payload.message
+           };
+
+        case 'SET_EXHIBITION_ERROR': 
+            // console.log('Error reducer is triggered:', payload) 
+        return   { ...state,
+                   ...payload  
+        };
+
+        case 'CLEAR_EXHIBITION_ERROR':
+            return {
+                ...initialExhibitionError
+            }
+        default : 
+        return state
+    }
+}
+
+export const nftUser_reducer = (state = null, action) => {
+            const {type, payload} = action;
+            switch(type){
+                case 'FETCH_NFT_USER':
+                return  payload;
+                case 'CLEAR_NFT_USER':
+                return  null;
+                default : 
+                return state
+            } 
+         }
+

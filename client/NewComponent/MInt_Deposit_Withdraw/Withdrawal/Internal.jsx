@@ -1,26 +1,40 @@
 import React, {useEffect, useState} from "react";
+import { errorFieldWithdrawal, errorWithdrawalFunc } from "../../HelperNft";
+import { useDispatch, useSelector } from "react-redux";
 import { FaPaste, FaEnvelope, FaChevronDown } from "react-icons/fa";
 
-export const Internal_Withdrawal = ()=> {
+export const Internal_Withdrawal = ({onSelect, onAddress, onNetwork, type, email, address})=> {
     const [select, setSelect] = useState('address');
     const [userAddress, setUserAddress]= useState('');
     const [network, setNetwork] = useState('weth');
     const [modalOpen, setModalOpen] = useState(false);
     const [buttonClick, setButtonClick] = useState(null)
     const networkData = ['weth', 'eth'];
+
+    const dispatch = useDispatch();
+    const withdrawalError = useSelector(state => state.withdrawalError);
+
+
     useEffect(()=>{
       if(buttonClick != null){
         setTimeout(() =>setButtonClick(null), 200)
       }
-    },[buttonClick])
+    },[buttonClick]);
+
+    useEffect(() => {
+        onSelect(select);
+        onAddress(userAddress);
+        onNetwork(network);
+    })
     const handleInternalClick = (value)=> {
       setUserAddress('');
         setSelect(value);
         setButtonClick(value);
     };
-    const handleChange = (event)=> {
-      const {value} = event.target;
-      setUserAddress(value)
+    const handleChange = async (event) => {
+      const {name, value} = event.target;
+            setUserAddress(value);
+            await errorFieldWithdrawal(name, value, dispatch);
     };
     const convert =(value)=> {
       return value.toUpperCase();
@@ -63,29 +77,39 @@ export const Internal_Withdrawal = ()=> {
               <span onClick={()=> handleInternalClick('email')}>
                 Email</span></div>  */}
                 {select === 'address' ? 
-                <div className="internal-class">
+                <><div className="internal-class">
                   <label htmlFor="withdrawal-address">User deposit Address</label>
                 <div className="internal-input">
                 <input
                 type="text"
                 id="withdrawal-address"
-                 value={userAddress}
+                name="withdrawal-address"
+                value={userAddress}
                 onChange={(e)=>setUserAddress(e.target.value)}
                 className="style-exhibit"
                 />
                 <span>Paste <FaPaste/></span></div>
-                </div> :
-                <div className="internal-class">
+                </div> 
+                {withdrawalError?.address && 
+        <span style={{color: 'red', marginTop: '2px', marginLeft: '2px', position: 'relative'}}>
+        {withdrawalError.address}</span>}</>
+        :
+                <><div className="internal-class">
                   <label htmlFor="email">Email Address</label>
                 <div className="internal-input yes">
                 <input
                 type="email"
                 id="email"
+                name="withdrawalAddress"
                 value={userAddress}
                 onChange={(e)=>setUserAddress(e.target.value)}
                 className="style-exhibit"
                 />
-                <span><FaEnvelope/></span></div></div>}
+                <span><FaEnvelope/></span></div></div>
+                 {withdrawalError?.address && 
+        <span style={{color: 'red', marginTop: '0px', marginLeft: '16px', position: 'relative'}}>
+        {withdrawalError.address}</span>}
+                </>}
                 <div className="internal-networks">
                 <label htmlFor="internal-network">
                     Network</label>

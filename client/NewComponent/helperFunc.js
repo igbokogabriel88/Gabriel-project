@@ -1,9 +1,8 @@
 import React from "react";
 import axios from "axios";
-import {removeError, setAlert, loginSuccess, loginFail, loadUser,
-  setLoading, clearLoading
-  } from "./Redux/Action/Action";
-  import { set_Error, set_Field_Error, getToken } from "./Redux/Action/Action";
+import { fetchNftData } from "./Redux/Action/Action";
+import {removeError, setAlert, loginSuccess, loginFail, loadUser, setLoading, clearLoading,
+   set_Error, set_Field_Error, getToken} from "./Redux/Action/Action";
  import Load_User from "./Helper/loadUser";
 
  const url = 'http://localhost:4200'
@@ -12,6 +11,26 @@ import {removeError, setAlert, loginSuccess, loginFail, loadUser,
         'Content-Type' : 'application/json',
         'x-auth-token': localStorage.getItem('token')
     }
+}
+
+export const fetchData = async (dispatch) => {
+ 
+  try{
+    console.log('Fetch started...')
+    dispatch(setLoading(true));
+    
+    const res = await axios.get(`${url}/api/fetch/nftData`);
+     console.log('NFT fetched successfully',res.data);
+     const result = res.data?.data;
+     console.log('HELPER_RESULT:', result)
+     dispatch(fetchNftData(result))
+    // console.log(res);
+    return result;
+ } catch (err){
+       console.log('Error fetching data:', err.message);
+       return null;   
+ }finally{ 
+  dispatch(clearLoading(false))}
 }
 
 export const fetchDummyData = async (dispatch) => {
@@ -26,7 +45,8 @@ export const fetchDummyData = async (dispatch) => {
     return res;
  } catch (err){
        console.log(err)   
- }finally{ dispatch(clearLoading(false))}
+ }finally{ 
+  dispatch(clearLoading(false))}
 }
 
 export const nftRegisterAction = async (value, error, dispatch)=>{

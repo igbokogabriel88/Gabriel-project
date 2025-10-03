@@ -9,7 +9,7 @@ export const ScrollViewPage = ({products}) => {
             products.map(product =>(
                 <div className="scrollGroup" key={product.index}>{loading === true ? 
                     <span className="scroll-loading"></span> : 
-                    <span className="image-load"><img src= {`/Upload/${product.image}`}
+                    <span className="image-load"><img src= {product.imageUrl}
                      alt="" style={{width: '100%', height: '60%', objectFit: 'cover3'}}/></span>
                 }</div>
             ))

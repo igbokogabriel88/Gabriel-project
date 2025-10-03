@@ -1,20 +1,29 @@
 import React, { useRef, useState } from "react";
+import { handleProfile } from "../../ChangePassword_EditProfile/photoHelper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile } from "@fortawesome/free-solid-svg-icons/faFile";
 
-export const ProfilePic = ({handleFile})=> {
-    const [image, setImage] = useState(null);
+export const ProfilePic = ({handleFile, image})=> {
     const fileInputRef = useRef(null);
     const handleClick =()=>{
         fileInputRef.current.click();
     }
-        const handleFileChange =(e)=>{
-            const file = e.target?.files[0];
-             if (file){
-                console.log('selected file:', file.name);
-                setImage(file);
-                handleFileChange(file)
-             }
+        const handleFileChange = async (e) => {
+        const file = fileInputRef.current.files[0];
+                                
+        if (!file||file.length === 0 ||
+        !file.type.startsWith("image/")){
+        console.log('INVALID FILE TYPE')
+            return;
+            } else {
+                    
+        let value;
+                    
+        value =   await handleProfile(file, 'avatar', dispatch);
+        console.log('Exhibition_pic:', value);
+                   handleFile(value);
+                                    
+      }
         
     }
     return (
@@ -28,6 +37,7 @@ export const ProfilePic = ({handleFile})=> {
              />
              <input
              type="file"
+             name= "photo"
              ref={fileInputRef}
              onChange={handleFileChange}
              style={{display: 'none'}}

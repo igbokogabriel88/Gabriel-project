@@ -25,7 +25,7 @@ export const ProtectedRoute = ({children}) => {
       if (!loading && isAuthenticated) {
         const timer = setTimeout(() => {
           setDelay(true);
-        }, 2000);
+        }, 1000);
 
         return () => clearTimeout(timer);
       }

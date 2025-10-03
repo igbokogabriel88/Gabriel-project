@@ -1,19 +1,18 @@
-import React from "react"
-import { useState } from "react";
+import React , {useState} from "react";
 import { ErrorSubscribeEmail } from "../../../ModalPage/LoginErrors";
 import { removeError, set_Error } from "../../../Redux/Action/Action";
 import { sendSubscribeEmail } from "../../../helperFunc";
 import { useSelector, useDispatch } from "react-redux";
 import './StayInTouch.css'
 
-export const StayInTouch = ()=>{
+export const StayInTouch = ({displayRef})=>{
     const [data, setData]= useState({
         email: ''
     });
     const dispatch = useDispatch();
     const errors = useSelector(state => state.Error)
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-
+    
     const handleChange = async (e)=>{
     const {name, value} = e.target;
     setData({...data, [name]: value});
@@ -70,6 +69,7 @@ export const StayInTouch = ()=>{
             placeholder="Email address"
             className="inputClass"
             onChange={handleChange}
+            ref={displayRef}
             />
             {errors?.email && 
         <span style={{color: 'red', marginTop: '41%', 

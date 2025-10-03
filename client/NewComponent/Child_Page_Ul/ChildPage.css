@@ -1,8 +1,11 @@
 
 .front-page{
     width: 340px;
-    /* height: 1500px; */
+    height: auto;
     background-color: transparent;
+    position: relative;
+    display: flex;
+    flex-direction: column;
     
     /* background-image: url('Upload/image1.jpg' );
     object-fit: cover; */
@@ -43,9 +46,13 @@
     flex-direction: row;
     margin-bottom: -11px;
     z-index: 1; 
+    background-color: transparent;
 }
 .category.All{
     padding-bottom: 16px;
+}
+.category.view{
+    background-color: transparent;
 }
 .category.hide{
     display: none;
@@ -130,6 +137,12 @@
     background-color: white;
     padding-top: 10px;
     margin-top: -1px;
+}
+.top-bar.YES{
+    margin-bottom: -12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+
 }
 .top-bar span:last-child{
     margin-right: 10px;
@@ -281,8 +294,11 @@
 }
 .main-body-home{
     display: flex;
+    position: relative;
     flex-direction: column;
-    min-height: 2400px; 
+    height: auto; 
+    margin-bottom: -35px;
+    /* min-height: 2000px; */
     margin-top: -5px;
     padding-bottom: 20px;
     overflow: hidden;

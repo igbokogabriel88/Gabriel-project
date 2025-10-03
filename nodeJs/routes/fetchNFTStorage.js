@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {NFTStorage, File} = require("nft.storage");
+// const {NFTStorage, File} = require("nft.storage");
 const pinataSDK = require('@pinata/sdk');
 const path = require('path');
 const fs = require('fs');
@@ -15,12 +15,12 @@ router.post('/nftStorage', async (req, res)=>{
         console.log('PINATA_SECRET_KEY_LENGTH:', (pinata_secret_key)?.length);
       
       
-         const {name, description, category, filename, floorPrice} = req.body;
-         console.log('REQ_BODY:', req.body);
-         console.log('TYPE_OF_REQ_BODY:', typeof req.body)
-         console.log('NFT-PROFILE:', filename); 
+         const {name, description, category, image, price} = req.body;
+        //  console.log('REQ_BODY:', req.body);
+        //  console.log('TYPE_OF_REQ_BODY:', typeof req.body)
+        //  console.log('NFT-PROFILE:', image); 
         
-         if (!filename) {
+         if (!image) {
           return res.status(400).json({error: 'File reference is required'})
          }
               // const client = new NFTStorage({token: IPFS_KEY});
@@ -29,23 +29,24 @@ router.post('/nftStorage', async (req, res)=>{
                 process.env.PINATA_SECRET_KEY
               );
 
-               console.log('NFT_STORAGE_PINATA:', pinata);
-               const fileName = filename?.fileName;
-               console.log('FILENAME:',fileName)
-               console.log('TYPEOF_FILENAME:', typeof fileName);
+              //  console.log('NFT_STORAGE_PINATA:', pinata);
+               const fileName = image?.fileName;
+              //  console.log('FILENAME:',fileName)
+              //  console.log('TYPEOF_FILENAME:', typeof fileName);
+              //  console.log('Profile_originalName:', image?.originalName);
               // const  filePath = path.join(__dirname,'..','Multer', 'wrapper',fileName);
-              const filePath = filename?.pathName
+              const filePath = image?.pathName
               
               console.log('Starting to read file with callback...:', filePath);
               try{
-                 fs.writeFileSync(filePath, 'This simulate an NFT image file');
+                //  fs.writeFileSync(filePath, 'This simulate an NFT image file');
                 // const fileBuffer = await fs.promises.readFile(filePath);
                 // console.log('File buffer size:', fileBuffer.length, 'bytes')
 
                  const imageStream = fs.createReadStream(filePath);
-                 console.log('IMAGE_STREAM:', imageStream);
+                //  console.log('IMAGE_STREAM:', imageStream);
                  imageStream.on('open', () => {
-                  console.log('Stream opened successfully');
+                   console.log('Stream opened successfully');
                  });
                  imageStream.on('ready', () => {
                   console.log('Stream ready');
@@ -53,7 +54,7 @@ router.post('/nftStorage', async (req, res)=>{
  
                  const imageResult = await pinata.pinFileToIPFS(imageStream, {
                   pinataMetadata : {
-                    name: `NFT-Image-${Date.now()}-${filename?.originalName}`
+                    name: `image-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`
                   }
                  });
                  console.log('IMAGE_RESULT:', imageResult)
@@ -66,11 +67,11 @@ router.post('/nftStorage', async (req, res)=>{
                   description,
                   category,
                   image: imageHash,
-                  price: floorPrice.toString()
+                  price: price.toString()
                  };
                   const metadataResult = await pinata.pinJSONToIPFS(nftMetadata, {
                   pinataMetadata: {
-                    name: `NFT-Metadata-${Date.now()}-{name}`
+                    name: `Metadata-${Date.now()}-${name.replace(/[^a-zA-Z0-0]/g, '-')}`
                   }
                   });
                   

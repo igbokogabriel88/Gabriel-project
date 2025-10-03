@@ -2,13 +2,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import './ImageShow.css'
 import { fetchDummyData } from "../../helperFunc";
-import { fetchData } from "../../Redux/Action/Action";
+import { fetchData } from "../../helperFunc"; 
+// import { fetchData } from "../../Redux/Action/Action";
 import { useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AboutCompany } from "./AboutCompany";
 
 export const ImageViewPage = () =>{
-   const [nfts, setNfts] = useState([]);
 
     const [offset1, setOffset1] = useState(0);
     const [offset2, setOffset2] = useState(0);
@@ -24,29 +24,26 @@ export const ImageViewPage = () =>{
     const dir3Ref = useRef(direction3)
     const step = 50;
     const dispatch = useDispatch();
-
-    const loading = useSelector(state => state.Loading);
-
-
-
-    const artImageGroup = nfts.filter(nft => nft.category === 'arts');
-        const gamingImageGroup = nfts.filter(nft => nft.category === 'gaming');
-        const photographyImageGroup = nfts.filter(nft => nft.category === 'photography');
-        
-        const selectedArtImage = artImageGroup.slice(0,7);
-        const selectedPhotographyImage = photographyImageGroup.slice(0,7);
-        const selectedGamingImage = gamingImageGroup.slice(0,7);
-
-        const fetchNFTsData = async () => {
-            let result;
-               result = await fetchDummyData(dispatch);
-              setNfts(result?.data);
-              dispatch(fetchData(result?.data))
-           }
-           useEffect(() => {
-            fetchNFTsData()
-        },[dispatch]);
+    const refreshLoading = useSelector(state => state.refreshLoading.loading);
     
+    const nfts = useSelector(state => state.fetchData);
+      console.log('IMAGE_PAGE_NFTS:', nfts)
+       
+    const filterByNFT = nfts?.map(item => item.nft);
+    console.log('Image_view:', nfts);
+    console.log('Image_filter:', filterByNFT)
+    const artImageGroup = filterByNFT?.filter(nft => nft?.category === 'arts');
+       const gamingImageGroup = filterByNFT?.filter(nft => nft?.category === 'gaming');
+        const photographyImageGroup = filterByNFT?.filter(nft => nft?.category === 'photography');
+      
+    console.log('Art_image:', artImageGroup);
+    console.log('gaming_image:', gamingImageGroup);
+    console.log('photo_image:', photographyImageGroup)
+       
+        const selectedArtImage = artImageGroup?.slice(0,7);
+        const selectedPhotographyImage = photographyImageGroup?.slice(0,7);
+        const selectedGamingImage = gamingImageGroup?.slice(0,7);
+
            
              useEffect(()=>{
             
@@ -78,32 +75,61 @@ export const ImageViewPage = () =>{
                 return () => {
                     clearInterval(interval1);
                  }
-    },[direction1, direction2, direction3]);
+    },[]
+    // [direction1, direction2, direction3]
+);
 
+    //      const loadImage = (ipfsUrl) => {
+    //     let imageHash;
+    //     if ( ipfsUrl.startsWith('ipfs://')) {
+    //         imageHash = ipfsUrl.replace('ipfs://', '')
+    //     }
+    //     if (ipfsUrl.startsWith('Qm')) {
+    //         imageHash = ipfsUrl;
+    //     }
+    //     imageHash = `https://ipfs.io/ipfs/${imageHash}`;
+    //     console.log('Image_Hash:', imageHash)
+    //     return imageHash
+    // }
+
+    const convertIpfsUrl = (ipfsUrlData) => {
+        let gatewayUrl;
+        console.log('IPFS_GATEWAY:', ipfsUrlData);
+        const ipfsUrl = ipfsUrlData.trim();
+        if (!ipfsUrl) return;
+        if ( ipfsUrl.startsWith('ipfs://')) {
+            gatewayUrl = ipfsUrl.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/')
+        }
+        if (ipfsUrl.startsWith('https://')) {
+            gatewayurl = ipfsUrl;
+        }
+         if (ipfsUrl.startsWith('Qm')) {
+            gatewayUrl = `https://gateway.pinata.cloud/ipfs/${ipfsUrl}`
+         }
+         console.log('Modified_ipfs:', gatewayUrl);
+         return   gatewayUrl;
+      }
     
      return (
-        
-        <div className="image-view">
+        <>
+         {/* {nfts.length === 0 ? 
+            <div className="zero-wrapper">
+                <div className="zero-data"><span></span>
+                   <span></span>
+                   <span></span></div></div> : ''} */}
+        <div className={`image-view ${refreshLoading === true ? 'view' : nfts?.length === 0 ? 'hide' : '' }`}>
             <AboutCompany/>
             <div style={{width: '100%', display: 'flex', flexDirection: 'row'}}>
-            <div className="imageGroups">
+            <div className={`imageGroups ${refreshLoading === true ? 'view' : '' }`}>
             <div className="image-group one"
               style={{transform: `translateY(${offset1}px)`, 
              transition: 'transform 0.3s'}}
-             >{
-                selectedArtImage.map((art, i) => (
-                    loading === true ? <div key={i} className="imageNone"></div> :
-                    <img src= {`/Upload/${art.image}`} 
-                    key ={i} className="imageClass"/> 
+             >
+                { selectedArtImage?.map((art, i) => (
+                    <img src= {convertIpfsUrl(art.imageUrl)} 
+                     key={i} className={`imageClass ${refreshLoading === true ? 'accept' : 'reject'}`}/> 
                 ))
              }
-                {/* <img src="/Upload/image1.jpg" className="imageClass"/>
-                <img src="/Upload/image2.jpg" className="imageClass"/>
-                <img src="/Upload/image3.jpg" className="imageClass"/>
-                <img src="/Upload/image_7.jpg" className="imageClass"/>
-             6   <img src="/Upload/image21.jpg" className="imageClass"/>
-                <img src="/Upload/image20.jpg" className="imageClass"/>
-                <img src="/Upload/image24.jpg" className="imageClass"/>  */}
             </div>
             </div> 
              <div className="imageGroups">
@@ -112,19 +138,12 @@ export const ImageViewPage = () =>{
              transition: 'transform 0.3s' }}
                 >
             {
-                selectedGamingImage.map((gaming, i) => (      
-                loading === true ? <div key={i} className="imageNone"></div> :
-                <img src= {`/Upload/${gaming.image}`}
-                key={i} className="imageClass"/> 
+                selectedGamingImage?.map((gaming, i) => (      
+                <img src= {convertIpfsUrl(gaming.imageUrl)}
+                 key={i} className={`imageClass ${refreshLoading === true ? 'accept' : 'reject'}`}/> 
                             
                  ))  
             }
-            {/* <img src="/Upload/image4.jpg" className="imageClass"/>
-            <img src="/Upload/image5.jpg" className="imageClass"/>
-            <img src="/Upload/image_9.jpg" className="imageClass"/>
-            <img src="/Upload/image_8.jpg" className="imageClass"/>
-            <img src="/Upload/image17.jpg" className="imageClass"/>
-            <img src="/Upload/image18.jpg" className="imageClass"/>  */}
             </div>
             </div>
              <div className="imageGroups">
@@ -133,26 +152,19 @@ export const ImageViewPage = () =>{
            transition: 'transform 0.3s' }}
                 >
             {
-               selectedPhotographyImage.map((photo, i) => (
-                loading === true ? <div key={i} className="imageNone"></div> :
-                <img src= {`/Upload/${photo.image}`} 
-                key={i} className="imageClass"/> 
+               selectedPhotographyImage?.map((photo, i) => (
+                <img src= {convertIpfsUrl(photo.imageUrl)} 
+                key={i} className={`imageClass ${refreshLoading === true ? 'accept' : 'reject'}`}/> 
                             
                  )) 
             }
-             {/* <img src="/Upload/image_10.jpg" className="imageClass"/>
-            <img src="/Upload/image11.jpg" className="imageClass"/>
-            <img src="/Upload/image6.jpg" className="imageClass"/>
-            <img src="/Upload/img-7.jpg" className="imageClass"/>
-            <img src="/Upload/image23.jpg" className="imageClass"/>
-            <img src="/Upload/image19.jpg" className="imageClass"/>  */}
             </div>
             </div>  
             </div>
-                    </div>
+                    </div> </>
     
     )
 }
-
+     // <img src= {`/Upload/${photo.image}`}
 
 

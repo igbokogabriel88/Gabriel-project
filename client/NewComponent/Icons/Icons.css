@@ -106,3 +106,115 @@
 .timesClass span:last-child{
     transform: translate(-50%, -50%) rotate(-45deg);
 }
+
+ .nftListing{
+    width: 340px;
+    height: 600px;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+ .listing-wrapper{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    position: relative; 
+    /* position: absolute; */
+    top: 5%;
+    left: 0; 
+    overflow-y: auto;
+    overflow-x: hidden; 
+    height: auto;
+    padding: 8px;
+    
+}
+ .listing-wrapper::-webkit-scrollbar{
+    display: none;
+}  
+
+.list-wrapper{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 102%;
+    height: 110px;
+    margin-bottom: 5px;
+    padding-left: 2px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.list-wrapper div{
+    width: 42%;
+    height: 78%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 12px;
+    background-color: white;
+    text-align: left;
+}
+.list-wrapper div:first-child{
+    padding-left: 14px;
+    /* background-color: green; */
+}
+
+.list-wrapper h3{
+    margin-top: 0px;
+}
+.list-wrapper .list-cat{
+    margin-top: -20px;
+    margin-left: 0px;
+}
+ .card{
+    width: 90%;
+    height: 75%;
+    margin-top: -2px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+}
+.list-card{
+    padding: 4px 12px;
+    background-color: blue;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    margin-top: 2px;
+    display: flex;
+    width: 30%;
+    align-items: center;
+    justify-content: center;
+    margin-left: 40%;
+}
+.list-cards{
+    margin-left: -5px;
+    margin-top: 4px;
+    padding: 4px 12px;
+    background-color: blue;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    /* margin-top: 2px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-left: 40%; */
+}
+.list-cards.yes{
+    width: 50%;
+}
+.list-cards.no{
+    width: 52%;
+}
+.card-input{
+    width: 65%;
+}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button{
+      -webkit-appearance: none;
+      margin: 0;
+    }

@@ -26,6 +26,7 @@ const RenderPage = () =>{
     const searchModal = searchInput?.searchOpen;
     const currentPage = useSelector(state => state.fetchPage);
     const user = useSelector(state => state.Auths.user);
+    const refreshLoading = useSelector(state => state.refreshLoading.loading);
   
     // console.log('scrollPosition:',scrollPosition);
     // console.log('selected:',selected);
@@ -69,11 +70,35 @@ const RenderPage = () =>{
       }
     },[selected])
     
+    useEffect(()=> {
+      let didScroll = false;
+       if (location.state?.scrollTo === 'Top'){
+        scrollRef.current?.scrollTo({top: 0, behavior: 'smooth'});
+        didScroll = true;
+         if (didScroll){
+          navigate(location.pathname, {replace: true, state: {}});
+          }
+          }
+      },[location, navigate]);
+        
 
     useEffect(()=> {
       let didScroll = false;
 
       if (location.state?.scrollTo === 'terms'){
+          // window.scrollTo({top: 0, behavior: 'smooth'})
+          scrollRef.current?.scrollTo({top: 0, behavior: 'smooth'});
+          didScroll = true;
+          }
+          if (didScroll){
+            navigate(location.pathname, {replace: true, state: {}});
+          }
+      },[location, navigate]);
+
+      useEffect(()=> {
+      let didScroll = false;
+
+      if (location.state?.scrollTo === 'Tops'){
           // window.scrollTo({top: 0, behavior: 'smooth'})
           scrollRef.current?.scrollTo({top: 0, behavior: 'smooth'});
           didScroll = true;
@@ -152,7 +177,8 @@ const RenderPage = () =>{
     // }
     return (
         <div className={`renderPage ${showModal ? 'show': ''}
-        ${searchModal ? 'yes': ''}`} ref={scrollRef} >
+        ${searchModal ? 'yes': ''}
+        ${refreshLoading === true ? 'view' : ''}`} ref={scrollRef} >
         <div> 
             <span className="topBar">
          <TopBar scrollValue={scrolled} 

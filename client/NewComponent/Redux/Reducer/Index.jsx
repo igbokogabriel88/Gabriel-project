@@ -2,8 +2,9 @@ import { combineReducers } from 'redux';
 import Alert from '../Alerts/Alert';
 import {Category, search_Reducer, error_Reducer, auth_Reducer,
 profile_Reducer, register_reducer, load_Reducer, token_Reducer,
-login_loading, fetch_reducer, current_page_reducer, index_reducer,
-wallet_reducer} from './Reducer.jsx'
+login_loading, fetch_reducer, current_page_reducer, index_reducer, nftUser_reducer,
+wallet_reducer, error_mint_Reducer, refresh_reducer, error_Withdrawal_Reducer, error_Exhibition}
+ from './Reducer.jsx'
 
 export default combineReducers({
         Alert,
@@ -19,6 +20,11 @@ export default combineReducers({
          fetchData: fetch_reducer,
          fetchPage: current_page_reducer,
          Index: index_reducer,
-         fetchWallet: wallet_reducer
+         fetchWallet: wallet_reducer,
+         mintError: error_mint_Reducer,
+         refreshLoading: refresh_reducer,
+         withdrawalError: error_Withdrawal_Reducer,
+         exhibitionError: error_Exhibition,
+         fetchNftUser: nftUser_reducer
         //  policyTerm: policy_Term
 })

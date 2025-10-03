@@ -25,14 +25,17 @@ import { useLocation } from "react-router-dom";
 import Load_User from "../Helper/loadUser";
 import { RouteLoadingPage } from "../RouteGuard/RouteLoading";
 import { AlertPage } from "../MainBodyPage/AlertsPage";
-import { setLoading, clearLoading, authError } from "../Redux/Action/Action";
+import { setLoading, clearLoading, authError, startRefresh, clearRefresh } 
+from "../Redux/Action/Action";
 import { setAuthtoken } from "../Helper/setAuthToken";
-import { connectwallet } from "../Helper/walletConnect";
- import { NftUser } from "../Helper/nftUser";
-
+import { connectWallet } from "../Helper/walletConnect";
+import { MyListing } from "../Icons/MyListing";
+import { NftUser } from "../Helper/nftUser";
+import './Render_Page.css'
 
 const Main_Component = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [address, setAddress] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
@@ -40,29 +43,45 @@ const Main_Component = () => {
     const loading = useSelector(state => state.Loading)
     const user = useSelector(state => state.Auths.user)
     const walletAddress = useSelector(state => state.fetchWallet);
-    // console.log('ANOTHER_WALLET_ADDRESS:', walletAddress)
+    const id = useSelector(state => state.Index.index)
+
+    const nftAddress = import.meta.env.VITE_NFT_CONTRACT_ADDRESS;
+    const marketAddress = import.meta.env.VITE_MARKETPLACE_ADDRESS;
+
+    console.log('SELECTED_ID:', id)
+    console.log('Address:', address)
     const path = location.pathname;
     const showDashboard = path.includes('/overview') ||
     path.includes('/withdrawal') || path.includes('/deposit') ||
     path.includes('/overview/:mint') ||
      path.includes('/change-password') ||
       path.includes('/edit-profile');
-   
+
     useEffect(() => {
       dispatch(setLoading(true));
      if(localStorage.token){
-       const timer = setTimeout(() => {
+      //  const timer = setTimeout(() => {
         dispatch(clearLoading(false));
         
         Load_User(dispatch, navigate);
-       },0)
+      //  },0)
       
-       return () => clearTimeout(timer)
+      //  return () => clearTimeout(timer)
           } else {
             dispatch(clearLoading(false))
             dispatch(authError());
           }
         },[dispatch, navigate]);
+
+         useEffect(() => {
+           dispatch(startRefresh(true));
+           const timer = setTimeout(() => {
+            dispatch(clearRefresh(false))
+           }, 2000);
+           return () => {
+            clearTimeout(timer)
+           }
+         },[])
 
         useEffect(() => {
           if (walletAddress){
@@ -71,13 +90,13 @@ const Main_Component = () => {
           },[walletAddress])
 
         useEffect(() => {
-           connectwallet(dispatch)
+           connectWallet(dispatch)
         },[dispatch])
      
          useEffect(() => {
-          console.log('NEW NFTS USER CREATED:', user)
-          if (user){
-            NftUser(user, walletAddress)
+          // console.log('NEW NFTS USER CREATED:', user)
+          if (localStorage.token && user){
+            NftUser(user, walletAddress, dispatch)
          }
          },[user, walletAddress])
 
@@ -93,9 +112,8 @@ const Main_Component = () => {
          <SearchModal/>
         
         <section>
-         <AlertPage
-         alerts={success}
-         /> 
+          <div className={`alertWrapper ${success.alertType === 'success' || success.alertType === 'danger' ? 'true': ''}`}>
+            <AlertPage alerts={success}/></div> 
           <Routes>
           <Route exact path='/' 
           element={<RenderPage/>} />
@@ -172,6 +190,13 @@ const Main_Component = () => {
           element = {
                 <NewPassword/>
           } />
+          <Route path='/listing'
+            element = {
+                <ProtectedRoute>
+                    <MyListing/>
+                    </ProtectedRoute>
+              } />
+           
            {/* <Route path='/loading'
           element = {
                 <RouteLoadingPage/>

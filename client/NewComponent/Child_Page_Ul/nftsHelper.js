@@ -1,8 +1,8 @@
 import React from "react";
 
 export const groupByCategory = (products, limit = true) => {
-    const grouped = products.reduce((groups, product) => {
-        const category = product.category;
+    const grouped = products?.reduce((groups, product) => {
+        const category = product?.category;
         if (!groups[category]){
             groups[category] = [];
         }

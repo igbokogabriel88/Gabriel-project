@@ -1,33 +1,27 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState, useCallback} from "react";
 import { PaginationView } from "../Pagination/Index";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDummyData } from "../helperFunc";
-import { fetchData, SetCurrentPage } from "../Redux/Action/Action"; 
+import { fetchData } from "../helperFunc";
+import { fetchNftData, SetCurrentPage } from "../Redux/Action/Action"; 
 import { CategoryLabel } from "./Other_Category/AllCategory/CatLabel";
 import { CategoryBody } from "./Other_Category/AllCategory/CategoryTop";
 
 export const NFTContractGallery = ({selectedCategory, reset, item}) => {
- const [nfts, setNfts] = useState([]);
  const [currentPage, setCurrentPage] = useState(1);
  const [totalPage, setTotalPage] = useState(null);
-
+  
+  const nfts = useSelector(state => state.fetchData);
+  console.log('CAT_PAGE_NFTS:', nfts)
+        
   const perPage = 10;
-  const filteredcategory = nfts.filter(nft => nft.category === selectedCategory);
-  // console.log('FILTERED_CATEGORY_LENGTH:', filteredcategory.length);
+  const filterByNFT = nfts?.map(item => item.nft)
+  const filteredcategory = filterByNFT?.filter(nft => nft?.category === selectedCategory);
 
  const dispatch = useDispatch();
 
  const loading = useSelector(state => state.Loading);
-//  const currentPage = useSelector(state => state.fetchPage);
-   // console.log('REDUX_CURRENT_PAGE:', currentPage);
-      
- const fetchNFTsData = async () => {
-  let result;
-     result = await fetchDummyData(dispatch);
-    // console.log('FETCHED DUMMY DATA:', result);
-    setNfts(result?.data);
-    dispatch(fetchData(result?.data))
- };
+    
     useEffect(() => {
        if (reset){
         setCurrentPage(reset);
@@ -51,11 +45,7 @@ export const NFTContractGallery = ({selectedCategory, reset, item}) => {
 }
 },[totalPage]);
 
- useEffect(() => {
-     fetchNFTsData()
- },[dispatch]);
-//  console.log('FETCH NFTs SUCCESSFUL:', nfts);
-
+ 
 return (
  <div>
   <CategoryLabel 
@@ -74,6 +64,7 @@ return (
     item={item}
    currentPage={currentPage}
    totalPage={totalPage}
+   products={nfts}
    setCurrentPage={(value) => setCurrentPage(value)}
    />     
  </div>

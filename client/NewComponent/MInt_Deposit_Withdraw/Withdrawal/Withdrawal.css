@@ -1,4 +1,6 @@
 
+
+
 .withdrawalClass{
     width: 340px;
     height: 595px;
@@ -199,6 +201,11 @@ font-weight: bold;
     border: none;
     background-color: rgba(0, 0, 0, 0.1); 
 }
+.withdrawal-amount input::-webkit-outer-spin-button,
+    .withdrawal-amount input::-webkit-inner-spin-button{
+      -webkit-appearance: none;
+      margin: 0;
+    }
 
 .withdrawal-amount small{
     margin-top: 20px;

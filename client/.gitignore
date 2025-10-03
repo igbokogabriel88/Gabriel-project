@@ -26,6 +26,17 @@ dist-ssr
 Component/
 Component1/
 Component3/
+NewComponent/Wallet/
+NewComponent/NFTPage/
+NewComponent/Helper/
+NewComponent/EventHelper/
+NewComponent/FirebaseStore/
+NewComponent/helperFunc.js
+NewComponent/helperFunc2.js
+NewComponent/helperIPFS.js
+NewComponent/helperNfts.js
+NewComponent/TransferFund.js
+
 
 NewComponent/Wallet/
 NewComponenet/FirebaseStore/

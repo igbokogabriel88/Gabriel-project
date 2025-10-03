@@ -16,9 +16,10 @@ const FrontPage = ({scrollValue, closePage})=>{
   const [reset, setReset] = useState(null);
     const selected = useSelector(state => state.Category.name);
     const termAndPolicy = useSelector(state => state.policyTerm)
-    const id = useSelector(state => state.Index.index)
+    const id = useSelector(state => state.Index.index);
+    // const fetchData = useSelector(state => state.fetchData);
     
-    // console.log('PARAMS_ID:', id)
+    // console.log('HOME_PAGE_NFTS:', nfts)
       
     return (
       
@@ -26,8 +27,9 @@ const FrontPage = ({scrollValue, closePage})=>{
         {/* <Triangle_Rectangle/> */}
          <Categories onReset={(value) => setReset(value)}/>
          <>
+         
           {  selected === 'all' ?
-            (<div style={{height: '200px', backgroundColor: 'inherit'}}
+            (<div style={{height: 'auto', backgroundColor: 'inherit'}}
           className={`main-body-home ${closePage ? 'close': ''}`}>
             <ImageViewPage/>
             <div style={{ width: '100%'}}

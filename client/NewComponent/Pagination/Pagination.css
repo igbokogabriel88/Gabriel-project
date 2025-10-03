@@ -51,3 +51,9 @@
 width: 22%;
 background-color: rgba(0, 0, 0, 0.7);
 }
+.page-wrapper.none {
+  display: none;
+}
+.page-wrapper.hide {
+  display: none;
+}

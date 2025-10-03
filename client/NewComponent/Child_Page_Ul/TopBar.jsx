@@ -16,33 +16,36 @@ export const TopBar = ({scrollValue}) =>{
     const dispatch = useDispatch();
     
     const category = useSelector(state => state.Category);
+    const id = useSelector(state => state.Index.index)
     // const searchInput = useSelector(state => state.search_Reducer);
     const auth = useSelector(state => state.Auths);
     const userLoading = useSelector(state => state.Loading);
+    const refreshLoading = useSelector(state => state.refreshLoading);
     const user = auth.user;
     const loading = auth.loading;
     const selected = category.name
     const isAuthenticated = auth.isAuthenticated;
     const PF = 'http://localhost:4200/images/'
     // const searchModal = searchInput.searchOpen;
-    // console.log('AUTH_USER:', auth),
+    console.log('STATUS:', status),
     // console.log('TOPBARPAGE:', user, loading)
     // console.log('TOPBARPAGE_ISAUTHENTIC:', isAuthenticated);
-    // console.log('USERLOADING:', userLoading)
+    console.log('REFRESHLOADING:', refreshLoading.loading)
 
     
      
         useEffect(()=> {
-        if (userLoading === true){
-            setStatus('loading');    
-        } else if (isLoading === true){
+         if (refreshLoading.loading === true){
+            setStatus('loading')
+        }
+         else if (isLoading === true){
             setStatus('loading')
         } else if (user != null){
             setStatus('logout')
         } else {
             setStatus('login')
         }
-    },[userLoading, user, isLoading]);
+    },[refreshLoading, user, isLoading]);
 
      
        const handleModal = ()=> {
@@ -68,6 +71,7 @@ export const TopBar = ({scrollValue}) =>{
     return (
         <div className={`top-bar ${scrollValue ? 'yes': ''}
         ${selected != 'all'? 'select': ''}
+        ${Number(id) ? 'YES' : ''}
         ${['privacy-policy', 'terms-of-service'].includes(selected) ? 'hide' : ''}`}>
         <div className={`logo ${scrollValue ?  'yes' : ''}
         ${selected != 'all'? 'select': ''}`}> 
@@ -95,7 +99,7 @@ export const TopBar = ({scrollValue}) =>{
             <img key="image1"
             src={PF + user.userImage}
             alt=""
-            style={{width: '120%', height: '150%', 
+            style={{width: '70%', height: '80%', position: 'absolute',
                 borderRadius: '50%', objectFit: 'cover'
             }}
             />}
@@ -103,17 +107,17 @@ export const TopBar = ({scrollValue}) =>{
              <span style={{width: '100%', height: '100%',
                 display: 'flex', flexDirection: 'column', position: 'relative',
                 alignItems: 'center', justifyContent: 'center', gap: '1',
-                backgroundColor: 'transparent', marginLeft: '-1px'
+                backgroundColor: 'transparent', marginLeft: '-1px', border: 'none'
              }}>
                 <img key= "image2"
                 src="/Upload/avatar1.jpg" 
                 alt="Default"
                 style={{width: '80%', objectFit: 'cover',
                     borderRadius: '50%',  marginTop: '-14px',
-                    marginLeft: '6px', position: 'relative'
+                    marginLeft: '6px', position: 'relative', border: '1px solid rgba(0,0,0,0.3)'
                 }} className="h-image"/>
                 <span style={{fontSize: '10px', backgroundColor: 'transparent',
-                  top: '40%', position: 'absolute'
+                  top: '40%', position: 'absolute', border: 'none'
                 }}>
                     {handleUsername(user.username)}
                 </span>

@@ -3,7 +3,7 @@ const router = express.Router();
 const dummyNFTs = require('../dummy.js');
 
 router.get('/nfts', (req, res) => {
-    console.log('DUMMY DATA IS FETCHED')
+    // -3console.log('DUMMY DATA IS FETCHED')
     res.json(dummyNFTs)
 })
 

@@ -12,25 +12,18 @@ export const MintProfilePic = ({handleFile})=> {
     const dispatch = useDispatch();
      const profile = useSelector(state => state.profile);
     const loading = useSelector(state => state.Loading)
-    console.log('PROFILE && LOADING:', profile, loading)
+    // console.log('PROFILE && LOADING:', profile, loading)
     const PF = 'http://localhost:4200/images/'
+    // console.log('PF:', PF);
+    // console.log('PROFILE:', profile)
 
     const handleClick =()=>{
         fileInputRef.current.click();
     }
         const handleFileChange = async (e)=>{
-            // const file = e.target?.files[0];
-            //  if (file){
-            //     console.log('selected file:', file.name);
-            //     setImage(file);
-            //     handleFile(file)
-            //  }
-        
-             const file = fileInputRef.current.files[0];
-                         console.log('REDUX PROFILE:',profile)
-                        // dispatch(setPhoto(file?.name));
-                        // console.log(file);
             
+             const file = fileInputRef.current.files[0];
+                        
                     if (!file||file.length === 0 ||
                     !file.type.startsWith("image/")){
                        console.log('INVALID FILE TYPE')
@@ -61,7 +54,7 @@ export const MintProfilePic = ({handleFile})=> {
             </div>) : loading === true ? <div className="image.mint yes"></div> :
             (<div className="image-mint">
                 <span className="imageWrapMint">
-              <img src={PF + profile?.filename} className="image"/> </span>
+              <img src={PF + profile.filename} className="image"/> </span>
             <span>{profile.originalname}</span></div>)}
         </div>
     )

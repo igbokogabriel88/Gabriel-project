@@ -1,4 +1,9 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+
+// if (mongoose.connection.models['NftsUser']) {
+//     delete mongoose.connection.models['NftsUser']
+// }
+
 const userNftSchema = new mongoose.Schema({
     username : { 
         type: String,
@@ -11,9 +16,8 @@ const userNftSchema = new mongoose.Schema({
          unique: true
          },
      walletAddress: {
-        type: String,
-        required: true,
-        default: ''
+        type: [String],
+    default: []
      },
      userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -21,14 +25,16 @@ const userNftSchema = new mongoose.Schema({
         required: true,
         unique: true
          },
-    createdAt: {
-        type: Date,
-        default: Date.now
-      },
     balance : {
         type: Number,
         default: 0
-    }    
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+      }  
     
 })
-module.exports = mongoose.model('Nft_user', userNftSchema)
+userNftSchema.index({userId: 1});
+userNftSchema.index({walletAddress: 1})
+module.exports = mongoose.model('NftsUser', userNftSchema)

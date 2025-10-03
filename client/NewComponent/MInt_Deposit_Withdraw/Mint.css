@@ -183,6 +183,11 @@
         border: none;
         background-color: rgba(0, 0, 0, 0.1);
     }
+    .mint-price input::-webkit-outer-spin-button,
+    .mint-price input::-webkit-inner-spin-button{
+      -webkit-appearance: none;
+      margin: 0;
+    }
     .mint-input{
         display: flex;
         flex-direction: row;
@@ -243,6 +248,10 @@
     width: 35%;
     justify-content: space-between;
 }
+.mint-select span.true{
+    width: 45%;
+    white-space: nowrap;
+}
 .modal-show{
     display: flex;
     flex-direction: column;
@@ -273,6 +282,9 @@
     width: 20%;
     margin-right: 20px;
     opacity: 0.8;
+}
+.modal-show .label-title{
+   width: 60%;
 }
 .modal-show span input[type= 'radio']{
     transform: scale(1.6);

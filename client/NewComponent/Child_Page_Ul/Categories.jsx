@@ -8,18 +8,22 @@ import { TermPolicyHeader } from "./Other_Category/TermAndPolicy/termsHeader";
 import { useLocation, useParams } from "react-router-dom";
 import { SetCurrentPage, clearIndex } from "../Redux/Action/Action";
 import { fetchDummyData } from "../helperFunc";
+import { fetchData } from "../helperFunc";
 
 
 const Categories = ({onReset})=> {
 const [indicatorPosition, setIndicatorPosition]= useState(0);
 const [highlight, setHighlight] = useState(false);
-const [nfts, setNfts] = useState([]);
+
 const scrollRef = useRef(null);
 // const termAndPolicyRef = useRef(null);
+const nfts = useSelector(state => state.fetchData);
+  console.log('CATEGORIES_NFTS:', nfts)
+   
 
 const dispatch = useDispatch();
 const category = useSelector(state => state.Category);
-const fetched = useSelector(state => state.fetchData);
+
 const selected = category.name;
 
 const id = useSelector(state => state.Index.index)
@@ -30,26 +34,20 @@ const mainCategory =
   //  console.log('SELECTED_CATEGORY:', selected)
   const privacyCategory =  
   ['privacy-policy', 'terms-of-service'].includes(selected);
-
-  const filtered = nfts.filter(nft => nft.category === selected);
-
-  const selectedImage = filtered[0]?.image;
-  const minImage = filtered[1]?.image;
-  // console.log('SELECTED_IMAGE:',selectedIamge)
   
-  const fetchNFTsData = async () => {
-    let result;
-       result = await fetchDummyData(dispatch);
-      console.log('FETCHED DUMMY DATA:', result);
-      setNfts(result?.data);
-  
-   }
-   useEffect(() => {
-       fetchNFTsData()
-   },[]);
-  
-//  console.log('FETCHED_DATA:',filtered);
+  const filterByNFT = nfts?.map(item => item.nft);
+  console.log('FilteedByNFT:', filterByNFT)
+  const filtered = filterByNFT.filter(nft => nft?.category === selected);
+  console.log('Categories_Nfts:', nfts);
+  console.log('Categories_filtered:', filtered);
+  console.log('Categories_select:', selected);
 
+  const selectedImage = filtered[0]?.imageUrl;
+  const minImage = filtered[1]?.imageUrl;
+  console.log('SELECTED_IMAGE:', selectedImage);
+  console.log('MIN_IMAGE:', minImage)
+  
+   
 // useEffect(()=> {
 // if (location.state?.focusTermAndPolicyPage){
 // termAndPolicyRef.current?.scrollIntoView({behavior: 'smooth'})
@@ -84,6 +82,32 @@ dispatch(clearIndex());
 dispatch(getCategory(value));
    onReset(1)
 };
+const loadImages = (ipfsUrl) => {
+        let imageHash;
+        if ( ipfsUrl?.startsWith('ipfs://')) {
+            imageHash = ipfsUrl.replace('ipfs://', '')
+        }
+        if (ipfsUrl?.startsWith('Qm')) {
+            imageHash = ipfsUrl;
+        }
+        imageHash = `https://ipfs.io/ipfs/${imageHash}`;
+        console.log('Image_Hash:', imageHash)
+        return imageHash
+    }
+
+    const loadImage = (ipfsUrl) => {
+        let imageHash;
+        if ( ipfsUrl?.startsWith('ipfs://')) {
+            imageHash = ipfsUrl.replace('ipfs://', '')
+        }
+        if (ipfsUrl?.startsWith('Qm')) {
+            imageHash = ipfsUrl;
+        }
+        imageHash = `https://ipfs.io/ipfs/${imageHash}`;
+        console.log('Image_Hash:', imageHash)
+        return imageHash
+    }
+
 // console.log('highlight:', highlight)
 return (<>{ ['privacy-policy', 'terms-of-service'].includes(selected) ?
 <TermPolicyHeader/> :
@@ -91,7 +115,8 @@ return (<>{ ['privacy-policy', 'terms-of-service'].includes(selected) ?
 <div className={`category ${ mainCategory ? 'select': ''}
 ${['privacy-policy', 'terms-of-service'].includes(selected) ? 'hide' : ''}
 ${Number(id) ? 'YES' : ''} ${selected === 'all' ? 'All' : ''}`} ref={scrollRef}
-style={{backgroundImage: `url(/Upload/${selectedImage})`}}>
+style={{backgroundImage: `url(${loadImage(selectedImage)})`}}
+>
 {TopPageData.map(data => (
 <span className={`span-class ${selected === data.value  ? 'chose' : ''}`}
 style={{backgroundColor: highlight && 
@@ -103,7 +128,7 @@ onClick={()=> handleCategory(data.value)}>
 {data.label}</span>
 ))}
 <div className={`small-image ${mainCategory ? 'show' : ''}`}
-style={{backgroundImage: `url(/Upload/${minImage})`}}> </div>
+style={{backgroundImage: `url(${loadImage(minImage)})`}}> </div>
 </div>
 
 <IndicatorTracker 

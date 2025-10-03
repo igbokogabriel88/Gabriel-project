@@ -14,9 +14,14 @@
      /* background-color: blueviolet; */
      opacity: 1;
      /* gap: 0.5rem; */
-      background-image: url('Upload/image1.jpg' );
+      background-image: url('Upload/image1.jpg');
      object-fit: cover; 
-     justify-content: space-between ;
+     justify-content: space-between;
+}
+.renderPage.view{
+     /* background-color: blueviolet; */
+     background-image: url('Upload/image1.jpg');
+     z-index: 20;
 }
 .renderPage::-webkit-scrollbar{
      display: none; 
@@ -41,9 +46,18 @@ padding-bottom: 2px;
  top: 0;
  position: sticky;
  z-index: 25;
- margin-bottom: 12
- 
- 
- 
- px
+ margin-bottom: 12px;
+}
+.alertWrapper{
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     display: flex;
+     justify-content: center;
+}
+.alertWrapper.true{
+      height: 40px;
+     background-color: white; 
+     z-index: 20; 
 }

@@ -12,14 +12,14 @@ const url = 'http://localhost:4200'
 }
 export const uploadTOIPFS = async (data, profile)=>{
     const {name, category, description, floorPrice} = data;
-       
+        console.log('IPFS_Image:', profile)
     // profile?.filename;
   const payload = {
     name,
     category,
     description,
-    floorPrice,
-     filename: {
+    price: floorPrice,
+     image: {
         fileName: profile?.filename,
         pathName: profile?.path,
         originalName: profile?.originalname

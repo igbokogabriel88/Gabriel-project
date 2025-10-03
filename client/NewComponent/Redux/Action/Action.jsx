@@ -4,7 +4,10 @@ import { SET_ALERT, REMOVE_ALERT, GET_CATEGORY, OPEN_SEARCH, SET_ERROR, REMOVE_E
     SET_PHOTO, CLEAR_PHOTO, SET_FIELD_ERROR, SET_REGISTER,CLOSE_SEARCH,
 CLEAR_REGISTER, SET_LOADING, CLEAR_LOADING, GET_TOKEN, CLEAR_TOKEN,
 SET_LOGIN_LOADING, CLEAR_LOGIN_LOADING, FETCH_DATA, CURRENT_PAGE,
- SET_INDEX, CLEAR_INDEX, SET_WALLET_ADDRESS, CLEAR_WALLET_ADDRESS} 
+ SET_INDEX, CLEAR_INDEX, SET_WALLET_ADDRESS, CLEAR_WALLET_ADDRESS, SET_FIELD_MINT_ERROR, SET_MINT_ERROR,
+CLEAR_MINT_ERROR, REFRESH_START, REFRESH_STOP, SET_FIELD_WITHDRAWAL_ERROR, SET_WITHDRAWAL_ERROR,
+CLEAR_WITHDRAWAL_ERROR, SET_EXHIBITION_ERROR, SET_FIELD_EXHIBITION_ERROR, CLEAR_EXHIBITION_ERROR,
+FETCH_NFT_USER, CLEAR_NFT_USER} 
  from "./ActionType"
 
  export const setAlert = (msg, alertType) => dispatch =>{
@@ -185,7 +188,7 @@ export const clearLoginLoading = (data) => async dispatch =>{
         payload: data
     })
 }
-export const fetchData = (data) => async dispatch =>{
+export const fetchNftData = (data) => async dispatch =>{
       
     dispatch({
         type: FETCH_DATA,
@@ -227,3 +230,89 @@ export const clearWalletAddress = () => async dispatch =>{
         type: CLEAR_WALLET_ADDRESS,
     })
 }
+
+export const setMintError = (errors) => dispatch => {
+    dispatch({
+        type : SET_MINT_ERROR,
+        payload : errors})
+ };
+
+ export const setFieldMintError = (field, message) => dispatch => {
+    dispatch({
+        type: SET_FIELD_MINT_ERROR,
+        payload: { field, message}
+    })
+ }
+
+ export const clearMintError = () => dispatch => {
+    dispatch({
+            type : CLEAR_MINT_ERROR,
+            
+    })
+ }
+ export const startRefresh = () => dispatch => {
+    dispatch({
+            type : REFRESH_START,
+            
+    })
+ }
+ export const clearRefresh = () => dispatch => {
+    dispatch({
+            type : REFRESH_STOP,
+            
+    })
+ }
+
+ export const setWithdrawalError = (errors) => dispatch => {
+    dispatch({
+        type : SET_WITHDRAWAL_ERROR,
+        payload : errors})
+ };
+
+ export const setFieldWithdrawalError = (field, message) => dispatch => {
+    dispatch({
+        type: SET_FIELD_WITHDRAWAL_ERROR,
+        payload: { field, message}
+    })
+ }
+
+ export const clearWithdrawalError = () => dispatch => {
+    dispatch({
+            type : CLEAR_WITHDRAWAL_ERROR,
+            
+    })
+ }
+
+ export const setExhibitionError = (errors) => dispatch => {
+    dispatch({
+        type : SET_EXHIBITION_ERROR,
+        payload : errors})
+ };
+
+ export const setFieldExhibitionError = (field, message) => dispatch => {
+    dispatch({
+        type: SET_FIELD_EXHIBITION_ERROR,
+        payload: { field, message}
+    })
+ }
+
+ export const clearExhibitionError = () => dispatch => {
+    dispatch({
+            type : CLEAR_EXHIBITION_ERROR,
+            
+    })
+ }
+
+ export const fetchNftUser = (data) => dispatch => {
+    dispatch({
+        type: FETCH_NFT_USER,
+        payload: {data}
+    })
+ }
+
+ export const clearNftUser = () => dispatch => {
+    dispatch({
+            type : CLEAR_NFT_USER,
+            
+    })
+ }

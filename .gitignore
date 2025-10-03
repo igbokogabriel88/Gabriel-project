@@ -9,8 +9,11 @@ env.production.local
 .env.development
 .env.production
 
+
 contracts/
 my-hardhat/
+hardhat-fresh/
+nodeJs/
 
 dist/
 build/

@@ -38,7 +38,9 @@ export const HorizontalScroll = () => {
                     borderRadius: '6px'
                 }}>View all</span></div>
                 <ScrollViewPage
-                products={selectedCategory} />
+                products={selectedCategory}
+                exhibition = {exhibition}
+                 />
         </div>
     )
 }

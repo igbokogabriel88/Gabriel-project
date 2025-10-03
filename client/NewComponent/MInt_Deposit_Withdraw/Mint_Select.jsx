@@ -2,47 +2,57 @@ import React, { useEffect, useRef, useState } from 'react';
 import {FaChevronDown} from 'react-icons/fa';
 import './Mint.css';
 
-const Mint_Select = ({onChangeFunc, onModalShow, show, selectRef})=> {
+const Mint_Select = ({onChangeFunc, onModalShow, data, show, selectRef})=> {
     const [modal, setModal] = useState(false);
-    const [selected, setSelected] = useState('gaming');
-    const selectData = [{label: 'Gaming', value: 'gaming'},
+    const [selected, setSelected] = useState('Select category');
+    const selectData = [
+        {label: 'Gaming', value: 'gaming'},
         {label: 'Membership', value: 'membership'},
         {label: 'Arts', value: 'arts'},
         {label: 'Photography', value: 'photography'},
         {label: 'PFPS', value: 'pfps'},
-    ]
-    console.log('selected:',selected)
+    ];
+        //  console.log('selected:',selected)
     useEffect(()=>{
         onModalShow(modal)
-    },[modal])
+    },[modal]);
+
+    useEffect(() => {
+        onChangeFunc(selected);
+    },[selected])
+     
     const displayModal = () => {
         setModal(!modal)
     }
     const toUpperCase = () => {
-         return selected.charAt(0).toUpperCase() + selected.slice(1);
+         return data.charAt(0).toUpperCase() + data.slice(1);
     }
     const handleChange = (value)=> {
             setSelected(value);
-            onChangeFunc(value)
+            // onChangeFunc(value);6
+            setModal(!modal);
+
     }
     return (
         <div className='mint-select' ref={selectRef}>
-            <span onClick={displayModal}>
+            <span onClick={displayModal} 
+            className={`selectvalue ${data === 'Select category' ? 'true' : ''}`}>
                 {toUpperCase()} 
                 <FaChevronDown/></span>
+               
                 {show && <div className='modal-show'>
                     {selectData.map(data =>(
                       <span key={data.value}>
-                        <label htmlFor={data.value}>{data.label}</label>
+                       <label htmlFor={data.value}>{data.label}</label>
                         <input
                         type='radio'
                         id={data.value}
                         value={data.value}
                         checked = {selected === data.value}
-                        onChange={() => handleChange(data.value)}
+                        onChange={() => handleChange( data.value)}
                         className='check'
-                        />
-                      </span>  
+                        /> 
+                      </span>
                     ))}</div>}
         </div>
     )

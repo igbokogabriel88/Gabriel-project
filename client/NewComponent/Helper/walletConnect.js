@@ -1,4 +1,5 @@
 import React from "react";
+import { ethers } from "ethers"
 import { setWalletAddress, clearWalletAddress } from "../Redux/Action/Action";
 
 const chainIdNetwork = async (value) => {
@@ -47,18 +48,41 @@ const chainIdNetwork = async (value) => {
       }
    
 
-export const connectwallet = async (dispatch) => {
-    if (!window.ethereum){
-        throw new Error('MetaMask is not installed')
-    }
-    try{
+export const connectWallet = async (dispatch) => {
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        const directProvider = new ethers.JsonRpcProvider('http://127.0.0.1:8545');
+        await directProvider.getBlockNumber();
+        console.log('connected directl to hardhat');
+        const accounts = await directProvider.listAccounts();
+        console.log('GLOBAL_ACCOUNT:', accounts)
+        const signer = await directProvider.getSigner(accounts[5].address);
+        console.log('SIGNER_LOCAL:', signer)
+        const address = await signer.address;
+        console.log('ADDRESS_LOCAL:', address)
+        dispatch(setWalletAddress(address));
+    } else if (!window.ethereum){
+        throw new Error('MetaMask is not installed');
+        console.error('METAMASK IS NOT INSTALLED')
+    } else {
+       try{
+        console.log('METAMASK IS INSTALLED')
         const accounts = await window.ethereum.request({
             method: "eth_requestAccounts"
         });
         const account = accounts[0];
+     
         dispatch(setWalletAddress(account));
-
-        window.ethereum.on("accountsChanged", (newAccounts) => {
+        console.log('METAMASK ACCOUNT')
+    }   
+    // return account
+     catch (err) {
+        throw new Error(err.message || 'Failed to connect wallet')
+    }
+    }
+}        
+    
+        if (window.location.hostname !== 'localhost' && typeof window.ethereum !== 'undefined' && window.ethreum.on) {
+             window.ethereum.on("accountsChanged", (newAccounts) => {
             if (newAccounts.length > 0){
                 console.log('ACCOUNT_CHANGED:', newAccounts[0]);
                 dispatch(setWalletAddress(newAccounts[0]))
@@ -68,13 +92,13 @@ export const connectwallet = async (dispatch) => {
             }
         });
 
-        window.ethereum.on("chainChanged:", () => {
+        window.ethereum.on("chainChanged", () => {
           console.log('NETWORK_CHANGED:', chainId);
-          const targetChainId = '0x1';
+          const targetChainId = '0x1'
                 chainIdNetwork(targetChainId)
         });
-        return account
-    } catch (err) {
-        throw new Error(err.message || 'Failed to connect wallet')
-    }
-} 
+        } else {
+            console.warn('Ethereum wallet not available')
+        }
+        
+    

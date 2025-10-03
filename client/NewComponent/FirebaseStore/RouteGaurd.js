@@ -15,7 +15,7 @@ export const ProtectedRoute = ({children}) => {
     );
     return () => unsubscribe();
     },[]);
-    if (loading){5
+    if (loading){
         return <div>loading...</div>
     }
     if (!userLoggedIn){

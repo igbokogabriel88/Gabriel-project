@@ -3,8 +3,9 @@ import { Pagination } from "./Pagination";
 // import { getCurrentPage } from "./CurrentPage";
 import { SetCurrentPage } from "../Redux/Action/Action";
 import { useDispatch, useSelector } from "react-redux";
+import './Pagination.css'
 
-export const PaginationView = ({currentPage, totalPage, selected, item,
+export const PaginationView = ({currentPage, totalPage, selected, item, products,
     setCurrentPage}) => {
       const dispatch = useDispatch();
       const reduxPage = useSelector(state => state.fetchPage);
@@ -52,7 +53,7 @@ export const PaginationView = ({currentPage, totalPage, selected, item,
      };
 
      return (
-        <div style={{display: item ? 'none': ''}}>
+        <div className={`page-wrapper ${item ? 'none': products.length === 0 ? 'hide' : ''}`}>
         <Pagination
         currentPage = {currentPage}
         totalPage = {totalPage}
